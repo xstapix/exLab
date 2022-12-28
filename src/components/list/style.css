@@ -1,0 +1,32 @@
+.postsBody {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post {
+    width: 400px;
+    padding: 15px;
+    margin: 5px;
+    font-family: 'Lato', sans-serif;
+    background-color: rgb(70, 107, 207);
+    border-radius: 15px;
+    color: white;
+}
+
+.post_title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+}
+
+.post_previewText {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.post_tags {
+    font-size: 12px;
+    font-weight: 700;
+    margin: 10px 0 0;
+}
