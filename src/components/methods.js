@@ -7,11 +7,15 @@ export const getMethods = () => {
     async function getTags() {
         const tags = await axios.get('https://63385f16937ea77bfdbf1257.mockapi.io/kronaTags')
         postsStore.changeTagsList(tags.data)
+        
+        return tags.data
     }
 
     async function getPosts() {
         const posts = await axios.get('https://63385f16937ea77bfdbf1257.mockapi.io/kronaPostsList')
         postsStore.changePostsList(posts.data)
+
+        return posts.data
     }
 
     return {
@@ -19,5 +23,3 @@ export const getMethods = () => {
         getPosts
     }
 }
-
-//поменять useGet и getData
