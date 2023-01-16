@@ -1,15 +1,23 @@
 import { defineStore } from 'pinia'
+import { reactive, ref } from 'vue';
 
-export const usePostStore = defineStore('titleStore', {
-    state: () => ({
-        posts: null,
+export const useStore = defineStore('postsStore', () => {
+    const data = reactive({
+        posts: [],
         tags: []
-    }),
-    actions: {
-        overwritePostsList(postslist) {
-            console.log('postslist');
-            console.log(postslist);
-            this.posts = postslist
-        },
-    },
+    })
+
+    const changePostsList = (newList) => {
+        data.posts = newList
+    }
+
+    const changeTagsList = (newList) => {
+        data.tags = newList
+    }
+
+    return {
+        data,
+        changePostsList,
+        changeTagsList
+    }
 })

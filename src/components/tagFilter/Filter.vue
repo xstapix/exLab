@@ -1,91 +1,88 @@
 <script setup>
-  import axios from 'axios';
-  
-  import {ref, reactive} from 'vue'
-  import {usePostStore} from '@/stores/postStore'
+  import {getMethods} from '@/components/methods.js'
+  import {reactive,onBeforeMount, ref} from 'vue'
+  import {useStore} from '@/stores/postStore'
   
   import './style.css'
 
-  const postsStore = usePostStore()
-  const activeTags = ref([])
-  const arrTags = ref([])
-  const arrPosts = ref([])
-  const arrTest = reactive({
-    posts: []
+  const useMethod = getMethods()
+
+  const ret = ref([]);
+
+  console.log(await useMethod.getTags());
+    // await useMethod.getPosts()
+
+
+
+  const postsStore = useStore()
+  
+  const state = reactive({
+    activeTags: [],
+    arrTags: postsStore.data.tags,
+    arrPosts: postsStore.data.posts
   })
 
-  getData()
+  // changeTags()
   
-  const handlerTag = (tagId, index) => {
-    if (index === 0) {
-      for (let item in arrTags.value) {
-        if (arrTags.value[item].active) {
-          arrTags.value[item].active = false
-        }
-        activeTags.value = []
-      }
-      arrTags.value[0].active = true
+  // const handlerTag = (tagId, index) => {
+  //   if (index === 0) {
+  //     for (let item in state.arrTags) {
+  //       if (state.arrTags[item].active) {
+  //         state.arrTags[item].active = false
+  //       }
+  //       state.activeTags = []
+  //     }
+  //     state.arrTags[0].active = true
     
-      postsStore.overwritePostsList(arrPosts.value)
-      console.log(postsStore.posts);
-    } else {
-      arrTags.value[index].active = !arrTags.value[index].active
+  //     postsStore.changePostsList(state.arrPosts)
+  //   } else {
+  //     state.arrTags[index].active = !state.arrTags[index].active
 
-      if (!arrTags.value[index].active) {
-        activeTags.value = activeTags.value.filter(e => e !== tagId)
-      } else {
-        activeTags.value.push(tagId)
-        arrTags.value[0].active = false
-      }
+  //     if (! state.arrTags[index].active) {
+  //       state.activeTags = state.activeTags.value.filter(e => e !== tagId)
+  //     } else {
+  //       state.activeTags.push(tagId)
+  //       state.arrTags[0].active = false
+  //     }
 
-      let filteredPosts = []
+  //     let filteredPosts = []
   
-      for (let item in arrPosts.value) {
-        for (let tag in activeTags.value) {
-          if (arrPosts.value[item].tags.includes(activeTags.value[tag])) {
-            filteredPosts.push(arrPosts.value[item]);
-          }
-        }
-      }
+  //     for (let item in state.arrPosts) {
+  //       for (let tag in state.activeTags) {
+  //         if (state.arrPosts[item].tags.includes(state.activeTags[tag])) {
+  //           filteredPosts.push(state.arrPosts[item]);
+  //         }
+  //       }
+  //     }
 
-      let r = new Set(filteredPosts);
-      console.log(r);
-      postsStore.overwritePostsList(r)
-      // console.log( new Set(filteredPosts))
-    } 
+  //     postsStore.changePostsList(new Set(filteredPosts))
+  //   }
+  // }
+  
+  console.log(ret)
+  console.log(state.arrTags)
 
-    
-    
-  }
-
-  async function getData() {
-    await axios.get('https://63385f16937ea77bfdbf1257.mockapi.io/kronaTags')
-      .then((res) => arrTags.value = res.data)
-      .catch((err) => console.error('Get Error', err))
-
-    await axios.get('https://63385f16937ea77bfdbf1257.mockapi.io/kronaPostsList')
-      .then((res) => arrPosts.value = res.data)
-      .catch((err) => console.error('Get Error', err))
-
-    for (let item in arrTags.value) {
-      arrTags.value[item].active = false
+  function changeTags() {
+    for (let item in state.arrTags) {
+      state.arrTags[item].active = false
     }
 
-    arrTags.value.unshift({id: 30, tag: 'Все', active: true})
-    console.log(arrPosts);
-    console.log(arrPosts.value);
-    console.log(arrTest);
-    postsStore.overwritePostsList(arrPosts.value)
+    state.arrTags.unshift({ id: 30, tag: 'Все', active: true })
   }
 </script>
 
 <template>
   <div class="filterBody">
+
+    sdfsdfdsf
     <p 
       class="tag" 
-      v-for="(tag, index) in arrTags"
+      v-for="(tag, index) in state.arrTags"
       :class="{active: tag.active}"
-      :key="tag.tag"
+      :key="tag.id"
       @click="handlerTag(tag.id, index)">{{tag.tag}}</p>
   </div>
+  gf
+  gf
+  g
 </template>
