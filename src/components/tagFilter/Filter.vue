@@ -1,6 +1,6 @@
 <script setup>
   import {getMethods} from '@/components/methods.js'
-  import {reactive, onBeforeMount, ref} from 'vue'
+  import {reactive} from 'vue'
   import {useStore} from '@/stores/postStore'
   
   import './style.css'
@@ -8,19 +8,19 @@
   const useMethod = getMethods()
   const postsStore = useStore()
 
-  xx()
-  
   const state = reactive({
     activeTags: [],
     arrTags: [],
-    arrPosts: []
+    arrPosts: [],
+    valueInput: null
   })
 
+  setState()
   
-  async function xx() {
+  async function setState() {
     const allTags = await useMethod.getTags()
     state.arrTags = allTags
-
+    
     const allPosts = await useMethod.getPosts()
     state.arrPosts = allPosts
 
@@ -41,24 +41,27 @@
     } else {
       state.arrTags[index].active = !state.arrTags[index].active
 
-      if (! state.arrTags[index].active) {
-        state.activeTags = state.activeTags.value.filter(e => e !== tagId)
+      if (!state.arrTags[index].active) {
+        state.activeTags = state.activeTags.filter(e => e !== tagId)
       } else {
         state.activeTags.push(tagId)
         state.arrTags[0].active = false
       }
 
       let filteredPosts = []
+      let idСontributedPosts = []
   
       for (let item in state.arrPosts) {
         for (let tag in state.activeTags) {
-          if (state.arrPosts[item].tags.includes(state.activeTags[tag])) {
+          if (state.arrPosts[item].tags.includes(state.activeTags[tag]) 
+            && !idСontributedPosts.includes(state.arrPosts[item].id)) {
             filteredPosts.push(state.arrPosts[item]);
+            idСontributedPosts.push(state.arrPosts[item].id)
           }
         }
       }
 
-      postsStore.changePostsList(new Set(filteredPosts))
+      postsStore.changePostsList(filteredPosts)
     }
   }
 
@@ -69,10 +72,29 @@
 
     state.arrTags.unshift({ id: 30, tag: 'Все', active: true })
   }
+
+  const handlerEnter = (e) => {
+    let filteredPosts = postsStore.data.posts
+
+    if (e.code == 'Enter') {
+      for (let item in state.arrPosts) {
+        if(state.arrPosts[item].title.split(' ').includes(state.valueInput)){
+          filteredPosts.push(state.arrPosts[item])
+        }
+      }
+      console.log(filteredPosts[0]);
+    }
+
+  }
 </script>
 
 <template>
   <div class="filterBody">
+    <input class="search" 
+      type="text" 
+      placeholder="UX" 
+      :onkeydown="handlerEnter"
+      v-model="state.valueInput">
     <p class="tag" 
       v-for="(tag, index) in state.arrTags"
       :class="{active: tag.active}"
