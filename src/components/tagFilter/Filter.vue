@@ -48,20 +48,26 @@
         state.arrTags[0].active = false
       }
 
-      let filteredPosts = []
-      let idСontributedPosts = []
-  
-      for (let item in state.arrPosts) {
-        for (let tag in state.activeTags) {
-          if (state.arrPosts[item].tags.includes(state.activeTags[tag]) 
-            && !idСontributedPosts.includes(state.arrPosts[item].id)) {
-            filteredPosts.push(state.arrPosts[item]);
-            idСontributedPosts.push(state.arrPosts[item].id)
+      if (state.activeTags.length == 0) {
+        state.arrTags[0].active = true
+        postsStore.changePostsList(state.arrPosts)
+      } else {
+        let filteredPosts = []
+        let idСontributedPosts = []
+    
+        for (let item in state.arrPosts) {
+          for (let tag in state.activeTags) {
+            if (state.arrPosts[item].tags.includes(state.activeTags[tag]) 
+              && !idСontributedPosts.includes(state.arrPosts[item].id)) {
+              filteredPosts.push(state.arrPosts[item]);
+              idСontributedPosts.push(state.arrPosts[item].id)
+            }
           }
         }
-      }
+  
+        postsStore.changePostsList(filteredPosts)
 
-      postsStore.changePostsList(filteredPosts)
+      }
     }
   }
 
@@ -74,16 +80,34 @@
   }
 
   const handlerEnter = (e) => {
-    let filteredPosts = postsStore.data.posts
-
+    let filteredPosts = []
+    let idСontributedPosts = []
+    
     if (e.code == 'Enter') {
       for (let item in state.arrPosts) {
-        if(state.arrPosts[item].title.split(' ').includes(state.valueInput)){
-          filteredPosts.push(state.arrPosts[item])
+        for (let tag in state.activeTags) {
+          if (state.arrPosts[item].tags.includes(state.activeTags[tag]) 
+            && !idСontributedPosts.includes(state.arrPosts[item].id)) {
+            filteredPosts.push(state.arrPosts[item]);
+            idСontributedPosts.push(state.arrPosts[item].id)
+          }
         }
       }
-      console.log(filteredPosts[0]);
+
+      for (let item in state.arrPosts) {
+        if (!idСontributedPosts.includes(state.arrPosts[item].id)) {
+          let postTitle = state.arrPosts[item].title.toLowerCase().split(' ')
+          let postPreviewText = state.arrPosts[item].previewText.toLowerCase().split(' ')
+
+          if(postTitle.includes(state.valueInput) || postPreviewText.includes(state.valueInput)){
+            filteredPosts.push(state.arrPosts[item])
+          }
+        }
+      }
+
+      postsStore.changePostsList(filteredPosts)
     }
+    
 
   }
 </script>
