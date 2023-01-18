@@ -104,25 +104,34 @@
           }
         }
       }
-
       postsStore.changePostsList(filteredPosts)
     }
-    
-
   }
 </script>
 
 <template>
-  <div class="filterBody">
-    <input class="search" 
-      type="text" 
-      placeholder="UX" 
-      :onkeydown="handlerEnter"
-      v-model="state.valueInput">
-    <p class="tag" 
-      v-for="(tag, index) in state.arrTags"
-      :class="{active: tag.active}"
-      :key="tag.id"
-      @click="handlerTag(tag.id, index)">{{tag.tag}}</p>
+  <div class="filter">
+    <div class="filter-body">
+      <div class="filter_search DF AIC">
+        <div class="filter_search-img">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.25 11.25L14.25 14.25" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7.5 12.25C10.1234 12.25 12.25 10.1234 12.25 7.5C12.25 4.87665 10.1234 2.75 7.5 2.75C4.87665 2.75 2.75 4.87665 2.75 7.5C2.75 10.1234 4.87665 12.25 7.5 12.25Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <input class="filter_search-input" 
+        type="text" 
+        :onkeydown="handlerEnter"
+        v-model="state.valueInput">
+      </div>
+      <div class="tag" 
+        v-for="(tag, index) in state.arrTags"
+        :class="{active: tag.active}"
+        :key="tag.id"
+        @click="handlerTag(tag.id, index)">
+        {{tag.tag}}
+        <div class="tag_close_off" :class="{tag_close_on: tag.active}">
+          <div class="tag_close-line line_first"></div>
+          <div class="tag_close-line line_second"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

@@ -9,8 +9,3 @@ export default createRouter({
         { path: '/:not_page(.*)*', component: NotFound },
     ]
 })
-
-// что будет есди поставить регулярку не в конец 
-// что такое pathMatch
-
-// https://club.krona.studio/materials/ сделать вывод листа и фильтр для листа
