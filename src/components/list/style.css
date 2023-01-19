@@ -1,15 +1,15 @@
 .postsBody {
     width: 100%;
     padding: 8px;
-    flex-wrap: wrap;
-    align-content: start;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(335px, 1fr));
+    grid-gap: 10px 10px;
     gap: 10px;
 }
 
 .post {
     flex-direction: column;
     justify-content: space-between;
-    max-width: 478px;
     height: 200px;
     padding: 15px;
     font-family: 'Lato', sans-serif;
@@ -49,7 +49,7 @@
 
 .post_previewText {
     margin: 0;
-    height: 55px;
+    height: 36px;
     overflow: hidden;
     font-size: 14px;
     font-weight: 400;

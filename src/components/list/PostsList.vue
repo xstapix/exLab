@@ -6,7 +6,7 @@
 </script>
 
 <template>
-  <div v-if="postsStore.data.posts" class="postsBody DF">
+  <div v-if="postsStore.data.posts" class="postsBody">
     <div v-for="post in postsStore.data.posts" class="post DF">
         <div class="post_info DF JCSB">
           <div class="DF">
