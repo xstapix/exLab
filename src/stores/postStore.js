@@ -4,7 +4,8 @@ import { reactive, ref } from 'vue';
 export const useStore = defineStore('postsStore', () => {
     const data = reactive({
         posts: [],
-        tags: []
+        tags: [],
+        users: []
     })
 
     const changePostsList = (newList) => {
@@ -15,9 +16,14 @@ export const useStore = defineStore('postsStore', () => {
         data.tags = newList
     }
 
+    const changeUsersList = (newList) => {
+        data.users = newList
+    }
+
     return {
         data,
         changePostsList,
-        changeTagsList
+        changeTagsList,
+        changeUsersList
     }
 })

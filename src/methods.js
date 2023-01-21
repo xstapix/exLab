@@ -17,9 +17,17 @@ export const getMethods = () => {
 
         return posts.data
     }
+    
+    async function getUsers() {
+        const users = await axios.get('https://6392fd90ab513e12c5ff47f0.mockapi.io/peopleVSU')
+        postsStore.changeUsersList(users.data)
+
+        return users.data
+    }
 
     return {
         getTags,
-        getPosts
+        getPosts,
+        getUsers
     }
 }

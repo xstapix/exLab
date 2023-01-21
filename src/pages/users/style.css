@@ -18,6 +18,7 @@
   font-weight: 600;
 }
 .stark_rating-select{
+  position: relative;
   margin: 0;
   padding: 5px 15px;
   border-radius: 50px;
@@ -34,6 +35,10 @@
   display: inline-block;
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+}
+.stark_rating-select_options{
+  position: absolute;
+
 }
 .users_body-table{
   width: 100%;

@@ -28,7 +28,12 @@
 }
 
 .post_info_type{
+    height: 40px;
     margin: 0 16px 0 0;
+}
+
+.post_info_type svg{
+    max-height: 100%;
 }
 
 .post_info_date{
@@ -41,10 +46,24 @@
     margin: 0;
 }
 
+.post_info_blocked{
+    height: 15px;
+}
+
+.post_info_blocked svg {
+    max-height: 100%;
+}
+
+.post_text{
+    margin: 16px 0 0;
+}
+
 .post_title {
+    height: 63px;
+    overflow: hidden;
+    margin: 0 0 16px;
     font-size: 18px;
     font-weight: 700;
-    margin: 16px 0 16px;
 }
 
 .post_previewText {
@@ -59,4 +78,17 @@
     font-size: 12px;
     font-weight: 700;
     margin: 10px 0 0;
+}
+
+.post_actions-circle{
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 11px;
+}
+
+.circle_margin-fix{
+    margin: 0 0 0 4px;
 }

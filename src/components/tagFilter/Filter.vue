@@ -1,5 +1,5 @@
 <script setup>
-  import {getMethods} from '@/components/methods.js'
+  import {getMethods} from '@/methods.js'
   import {reactive} from 'vue'
   import {useStore} from '@/stores/postStore'
   
