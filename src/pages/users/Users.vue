@@ -14,6 +14,8 @@
 
   setState()
 
+  document.body.style.backgroundColor = '#000'
+
   async function setState() {
     const allUsers = await useMethod.getUsers()
     state.users = allUsers

@@ -6,7 +6,6 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: black;
 }
 a{
     text-decoration: none;
@@ -19,4 +18,7 @@ a{
 }
 .AIC{
     align-items: center;
+}
+.color-000{
+    background-color: black;
 }

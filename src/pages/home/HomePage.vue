@@ -4,6 +4,8 @@
   import Filter from '@/components/tagFilter/Filter.vue'
   import SideBar from '@/components/sideBar/SideBar.vue'
 
+  document.body.style.backgroundColor = '#000'
+
 </script>
 <template lang="">
   <div class="DF">
