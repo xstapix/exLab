@@ -27,9 +27,10 @@
         <p class="stark_rating-text">Pейтинг старков</p>
         <div class="stark_rating-select DF AIC" @click="state.activeSelect = !state.activeSelect">
           <p class="stark_rating-select_text">За месяц</p>
-          <div class="stark_rating-select_arrow_down"></div>
-          <div  class="stark_rating-select_options">
-            fd
+          <div :class="state.activeSelect ? 'stark_rating-select_arrowActive_down' :  'stark_rating-select_arrow_down'"></div>
+          <div :class="state.activeSelect ? 'stark_rating-selectActive_options' : 'stark_rating-select_options'">
+            <p class="stark_rating-select_text">За месяц</p>
+            <p class="text_options_margin">За все время</p>
           </div>
         </div>
       </div>
