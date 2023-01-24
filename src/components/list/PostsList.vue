@@ -1,6 +1,5 @@
 <script setup>
   import {useStore} from '@/stores/postStore'
-  import {reactive} from 'vue'
 
   import './style.css'
 
