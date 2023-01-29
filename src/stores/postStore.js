@@ -1,11 +1,10 @@
 import { defineStore } from 'pinia'
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
 
 export const useStore = defineStore('postsStore', () => {
     const data = reactive({
         posts: [],
-        tags: [],
-        users: []
+        tags: []
     })
 
     const changePostsList = (newList) => {
@@ -23,7 +22,6 @@ export const useStore = defineStore('postsStore', () => {
     return {
         data,
         changePostsList,
-        changeTagsList,
-        changeUsersList
+        changeTagsList
     }
 })

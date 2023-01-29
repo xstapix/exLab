@@ -1,16 +1,19 @@
 <script setup>
   import {reactive} from 'vue'
-  import { useRoute } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
   import {getMethods} from '@/methods.js'
 
   import SideBar from '@/components/sideBar/SideBar.vue'
   import Carousel from '@/components/swiper/Carousel.vue'
+  import { useAuthStore } from '@/stores/authStore' 
 
   import './style.css'
   import './media-style.css'
   
   const route = useRoute()
+  const router = useRouter()
   const useMethod = getMethods()
+  const authStore = useAuthStore()
 
   document.body.style.backgroundColor = '#E5E5E5'
   
@@ -19,6 +22,10 @@
     renderKey: 1,
     amountPost: 0
   })
+
+  if (!authStore.data.auth) {
+    router.push('/login')
+  }
 
   setState()
 

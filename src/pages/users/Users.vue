@@ -1,11 +1,22 @@
 <script setup>
   import SideBar from '@/components/sideBar/SideBar.vue'
   import {getMethods} from '@/methods.js'
+  import { useAuthStore } from '@/stores/authStore' 
+  
   import {reactive} from 'vue'
+  import { useRouter } from 'vue-router'
 
   import './style.css'
 
   const useMethod = getMethods()
+  const authStore = useAuthStore()
+  const router = useRouter()
+
+  document.body.style.backgroundColor = '#000'
+
+  if (!authStore.data.auth) {
+    router.push('/login')
+  }
 
   const state = reactive({
     users: [],
@@ -14,7 +25,6 @@
 
   setState()
 
-  document.body.style.backgroundColor = '#000'
 
   async function setState() {
     const allUsers = await useMethod.getUsers()
@@ -55,7 +65,7 @@
                   <img class="table_account_avatar-img" src="/yyhqfinwoon1yvcb6hm7jam67nnus0ec.png" alt="" srcset="">
                 </div>
                 <div class="table_account_text">
-                  <p class="table_account_text-name">{{item.name}}</p>
+                  <p class="table_account_text-name">{{item.account.name}}</p>
                   <p class="table_account_text-which_stark">{{ item.stark }}</p>
                 </div>
               </div>

@@ -1,9 +1,11 @@
 <script setup>
   import {useStore} from '@/stores/postStore'
+  import { useAuthStore } from '@/stores/authStore' 
 
   import './style.css'
 
   const postsStore = useStore()
+  const authStore = useAuthStore()
 
   const handlerFavorite = (e) => {
     document.querySelector(`.${e.target.classList[1]}`).classList.toggle('post_favorite_active')
@@ -38,7 +40,7 @@
           <p class="post_previewText">{{post.previewText}}</p>
         </div>
       </router-link>
-      <div class="post_actions DF">
+      <div v-if="authStore.data.auth" class="post_actions DF">
         <div class="post_actions-favorite" :class="`paf${post.id}`" @click="handlerFavorite" :id="post.id">
         </div>
         <div class="post_actions-check" :class="`pac${post.id}`" @click="handlerCheck" :id="post.id">
