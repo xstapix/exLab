@@ -1,16 +1,16 @@
 <script setup>
   import {getMethods} from '@/components/methods.js'
-  import {reactive,onBeforeMount, ref} from 'vue'
+  import {reactive,onBeforeMount, ref, watch} from 'vue'
   import {useStore} from '@/stores/postStore'
   
   import './style.css'
 
   const useMethod = getMethods()
 
-  const ret = ref([]);
+useMethod.getTags();
 
-  console.log(await useMethod.getTags());
     // await useMethod.getPosts()
+
 
 
 
@@ -21,6 +21,10 @@
     arrTags: postsStore.data.tags,
     arrPosts: postsStore.data.posts
   })
+
+  watch(state.arrTags, (newValue, oldValue) => {
+  console.log(state)
+})
 
   // changeTags()
   
@@ -59,7 +63,6 @@
   //   }
   // }
   
-  console.log(ret)
   console.log(state.arrTags)
 
   function changeTags() {
