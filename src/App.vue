@@ -10,16 +10,17 @@
 
     async function setUser() {
       const user = await useMethod.getAuth()
+      
       authStore.changeUser(user[0])
+      authStore.changeAuth(true)
     }
 
     for (let index in cookies) {
       let line = cookies[index].split('=')
       let lineCopy = line[0].split('')
-      lineCopy.shift()
+      // lineCopy.shift()
 
       if(lineCopy.join('') === 'cronaClubUserEmail'){
-        authStore.changeAuth(true)
         setUser()
       }
     }

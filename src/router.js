@@ -4,6 +4,7 @@ import NotFound from '@/pages/404/NotFound.vue'
 import Users from '@/pages/users/Users.vue'
 import Post from '@/pages/post/Post.vue'
 import Login from '@/pages/login/Login.vue'
+import Works from '@/pages/works/Works.vue'
 
 export default createRouter({
     history: createWebHashHistory(),
@@ -13,7 +14,7 @@ export default createRouter({
         { path: '/payclub', component: NotFound },
         { path: '/personalarea', component: NotFound },
         { path: '/login', component: Login },
-        { path: '/works', component: NotFound },
+        { path: '/works', component: Works },
         { path: '/user/:userId', component: NotFound },
         { path: '/post/:id', component: Post },
         { path: '/:not_page(.*)*', component: NotFound },

@@ -3,19 +3,28 @@
     box-sizing: border-box;
     font-family: Inter;
 }
-body{
+
+body {
     margin: 0;
     padding: 0;
 }
-a{
+
+a {
     text-decoration: none;
 }
+
 .DF {
     display: flex;
 }
-.JCSB{
+
+.JCSB {
     justify-content: space-between;
 }
-.AIC{
+
+.JCC {
+    justify-content: center;
+}
+
+.AIC {
     align-items: center;
 }

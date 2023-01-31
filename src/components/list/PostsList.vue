@@ -9,7 +9,9 @@
   const postsStore = useStore()
   const authStore = useAuthStore()
 
-  const state = reactive({})
+  const state = reactive({
+    user: authStore.data.user
+  })
 
   watch(authStore.data, (newUser) => {
     state.user = newUser.user;
@@ -40,8 +42,9 @@
  </script>
 
 <template>
-  <div v-if="postsStore.data.posts && state.user" class="postsBody"> 
-    <div v-for="post in postsStore.data.posts" class="post DF" :class="state.user.account.viewed.includes(post.id) ? 'post_checked' : ''">
+  <div v-if="postsStore.data.posts" class="postsBody"> 
+    <div v-for="post in postsStore.data.posts" class="post DF" 
+      :class="state.user ? state.user.account.viewed.includes(post.id) ? 'post_checked' :  '' : ''">
       <router-link :to="`/post/${post.id}`">
         <div class="post_info DF JCSB">
           <div class="DF AIC">
@@ -63,12 +66,12 @@
         </div>
       </router-link>
       <div v-if="authStore.data.auth" class="post_actions DF">
-        <div class="post_actions-favorite" 
-          :class="state.user.account.favorites.includes(post.id) ? 'post_favorite_active' : ''" 
+        <div class="post_actions-favorite"
+          :class="state.user ? state.user.account.favorites.includes(post.id) ? 'post_favorite_active' :  '' : ''"
           @click="handlerFavorite" :id="post.id">
         </div>
         <div class="post_actions-check" 
-          :class="state.user.account.viewed.includes(post.id) ? 'post_favorite_check' : ''" 
+          :class="state.user ? state.user.account.viewed.includes(post.id) ? 'post_favorite_check' :  '' : ''"
           @click="handlerCheck" :id="post.id">
         </div>
       </div>
