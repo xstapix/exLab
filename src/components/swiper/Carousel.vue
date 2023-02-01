@@ -49,7 +49,7 @@
         slidesPerView: 1,
         centeredSlides: true 
       },
-      '1700': {
+      '2700': {
         slidesPerView: 2,
         centeredSlides: true
       },
@@ -80,7 +80,7 @@
         </router-link>
       </div>
     </swiper-slide>
-    <div class="swiper_navigation DF AIC JCC">
+    <div class="swiper_navigation DF AIC">
       <div class="DF">
         <div class="swiper_navigation_arrows-body">
           <div class="prevArrow"></div>
