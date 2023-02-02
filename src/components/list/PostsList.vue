@@ -25,7 +25,7 @@
           break
         }
       }
-    } else state.user.account.favorites.push(Number(e.target.id))
+    } else state.user.account.favorites.push(e.target.id)
   } 
 
   const handlerCheck = (e) => {
@@ -36,7 +36,7 @@
           break
         }
       }
-    } else state.user.account.viewed.push(Number(e.target.id))
+    } else state.user.account.viewed.push(e.target.id)
   }
 
  </script>

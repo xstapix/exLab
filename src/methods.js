@@ -22,6 +22,13 @@ export const getMethods = () => {
         return posts.data
     }
 
+    async function getPost(currentPostId) {
+        const post = await axios.get(`https://63385f16937ea77bfdbf1257.mockapi.io/kronaPostsList/${currentPostId}`)
+        console.log('axios from method:' + currentPostId);
+
+        return post.data
+    }
+
     async function getUsers() {
         const users = await axios.get('https://6392fd90ab513e12c5ff47f0.mockapi.io/peopleVSU')
         userStore.changeUsersList(users.data)
@@ -42,11 +49,24 @@ export const getMethods = () => {
         return works.data
     }
 
+    async function postWork(formData) {
+        const answer = await axios({
+            method: "post",
+            url: "https://kronadev.ru/api_2/",
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" },
+        })
+
+        return answer
+    }
+
     return {
         getTags,
         getPosts,
+        getPost,
         getUsers,
         getAuth,
-        getWorks
+        getWorks,
+        postWork
     }
 }

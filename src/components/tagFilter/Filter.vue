@@ -112,7 +112,7 @@
 
     if (toggleActive.length === 2) {
       for (let id in state.arrPosts) {
-        if (!authStore.data.user.account.viewed.includes(Number(id))) {
+        if (!authStore.data.user.account.viewed.includes(id)) {
           filteredPosts.push(state.arrPosts[id])
         }
       }
@@ -131,7 +131,7 @@
     
     if (toggleActive.length === 2) {
       for (let id in state.arrPosts) {
-        if (authStore.data.user.account.favorites.includes(Number(id))) {
+        if (authStore.data.user.account.favorites.includes(id)) {
           filteredPosts.push(state.arrPosts[id])
         }
       }
