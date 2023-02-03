@@ -1,5 +1,5 @@
 <script setup>
-  import SideBar from '@/components/sideBar/SideBar.vue'
+  import TheSideBar from '@/components/sideBar/TheSideBar.vue'
   import {getMethods} from '@/methods.js'
   import { useAuthStore } from '@/stores/authStore' 
   
@@ -33,7 +33,7 @@
 </script>
 <template>
   <div class="DF">
-    <SideBar/>
+    <TheSideBar/>
     <section class="users_body">
       <div class="stark_rating DF AIC">
         <p class="stark_rating-text">Pейтинг старков</p>
@@ -58,7 +58,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in state.users">
+          <tr v-for="item in state.users" :key="item.id">
             <td>
               <div class="DF AIC">
                 <div class="table_account_avatar">

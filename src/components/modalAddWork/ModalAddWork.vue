@@ -23,7 +23,7 @@
   })
 
   const handlerAddWork = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     
     if (objModal.nextButton) {
       objModal.newWork.preview = file;
@@ -57,12 +57,8 @@
     
     formData.append('method', 'sendWorkImgs')
     formData.append('image', objModal.newWork.img)
-
-    for(let [name, value] of formData) {
-      alert(`${name} = ${value}`); // key1=value1, потом key2=value2
-    }
     
-    // sendWork()
+    sendWork()
 
     objModal.addWorkModal = false
     objModal.loadedImg = null
@@ -73,16 +69,18 @@
     objModal.newWork.preview = null
 
     async function sendWork() {
-      await useMethod.postWork(form)
+      await useMethod.postWork(formData)
         .then((res) => console.log(res))
         .catch((rej) => console.log(rej))
     }
+
+    emit('closeModal', false)
   }
 
 </script>
 
 <template>
-  <section :class="props.activeModal ? 'add_work-modal_active' : 'add_work-modal' ">
+  <section :class="props.activeModal ? 'add_work-modal_active' : 'DN' ">
     <div class="work-modal_body">
       <div class="DF">
         <div>

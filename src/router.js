@@ -5,6 +5,7 @@ import Users from '@/pages/users/Users.vue'
 import Post from '@/pages/post/Post.vue'
 import Login from '@/pages/login/Login.vue'
 import Works from '@/pages/works/Works.vue'
+import PersonalArea from '@/pages/lk/PersonalArea.vue'
 
 export default createRouter({
     history: createWebHashHistory(),
@@ -12,7 +13,7 @@ export default createRouter({
         { path: '/', component: HomePage, alias: '/' },
         { path: '/users', component: Users },
         { path: '/payclub', component: NotFound },
-        { path: '/personalarea', component: NotFound },
+        { path: '/lk', component: PersonalArea },
         { path: '/login', component: Login },
         { path: '/works', component: Works },
         { path: '/user/:userId', component: NotFound },

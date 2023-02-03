@@ -2,6 +2,8 @@
   import {useStore} from '@/stores/postStore'
   import { useAuthStore } from '@/stores/authStore'
 
+  import ModalAddPost from '@/components/modalAddPost/ModalAddPost.vue'
+
   import {watch, reactive} from 'vue'
 
   import './style.css'
@@ -9,42 +11,57 @@
   const postsStore = useStore()
   const authStore = useAuthStore()
 
-  const state = reactive({
+  const objCurrentUser = reactive({
     user: authStore.data.user
   })
 
+  const objModal = reactive({
+    activeModal: false
+  })
+
   watch(authStore.data, (newUser) => {
-    state.user = newUser.user;
+    objCurrentUser.user = newUser.user;
   })
 
   const handlerFavorite = (e) => {
     if (e.target.classList.length === 2) {
-      for (let index = 0; index < state.user.account.favorites.length; index++) {
-        if (state.user.account.favorites[index] == e.target.id) {
-          state.user.account.favorites.splice(index, 1)
+      for (let index = 0; index < objCurrentUser.user.account.favorites.length; index++) {
+        if (objCurrentUser.user.account.favorites[index] == e.target.id) {
+          objCurrentUser.user.account.favorites.splice(index, 1)
           break
         }
       }
-    } else state.user.account.favorites.push(e.target.id)
+    } else objCurrentUser.user.account.favorites.push(e.target.id)
   } 
 
   const handlerCheck = (e) => {
     if (e.target.classList.length === 2) {
-      for (let index = 0; index < state.user.account.viewed.length; index++) {
-        if (state.user.account.viewed[index] == e.target.id) {
-          state.user.account.viewed.splice(index, 1)
+      for (let index = 0; index < objCurrentUser.user.account.viewed.length; index++) {
+        if (objCurrentUser.user.account.viewed[index] == e.target.id) {
+          objCurrentUser.user.account.viewed.splice(index, 1)
           break
         }
       }
-    } else state.user.account.viewed.push(e.target.id)
+    } else objCurrentUser.user.account.viewed.push(e.target.id)
   }
 
  </script>
 
 <template>
   <div v-if="postsStore.data.posts" class="postsBody"> 
-    <div v-for="post in postsStore.data.posts" class="post DF" 
-      :class="state.user ? state.user.account.viewed.includes(post.id) ? 'post_checked' :  '' : ''">
+    <div class="add_post">
+      <div class="add_post-tip DF">
+        +3
+        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.15129 1.0843C6.54247 0.454335 7.45918 0.454335 7.85036 1.0843L9.25806 3.35128C9.39565 3.57286 9.61437 3.73191 9.86756 3.79452L12.4578 4.43498C13.1768 4.61276 13.4597 5.48318 12.9828 6.04977L11.2619 8.09385C11.0942 8.29311 11.0108 8.54997 11.0295 8.80977L11.2217 11.475C11.275 12.2143 10.5336 12.7526 9.84717 12.4731L7.37793 11.4677C7.13616 11.3692 6.86549 11.3692 6.62372 11.4677L4.15448 12.4731C3.46801 12.7526 2.72667 12.2143 2.77997 11.475L2.97211 8.80977C2.99084 8.54997 2.90745 8.29311 2.7397 8.09385L1.01889 6.04977C0.541904 5.48318 0.824883 4.61276 1.54386 4.43498L4.13408 3.79452C4.38728 3.73191 4.606 3.57286 4.74359 3.35128L6.15129 1.0843Z" fill="#7000FF"></path></svg>
+        за материал
+      </div>
+      <p class="add_post-text">Вы можете опубликовать свой материал! Опубликуем?</p>
+      <div @click="objModal.activeModal = true" class="add_post-img">
+        <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20.5" cy="20.3966" r="20" fill="white"></circle><circle cx="20.6562" cy="20.2921" r="20" fill="white"></circle><path d="M20.6562 15.2921V25.2921M15.6562 20.2921H25.6562" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+    <div v-for="post in postsStore.data.posts" :key="post.id" class="post DF" 
+      :class="objCurrentUser.user ? objCurrentUser.user.account.viewed.includes(post.id) ? 'post_checked' :  '' : ''">
       <router-link :to="`/post/${post.id}`">
         <div class="post_info DF JCSB">
           <div class="DF AIC">
@@ -56,7 +73,7 @@
             </div>
             <div class="post_info_date">
               <p>{{ post.date }}</p>
-              <p>{{ post.minutes }}</p>
+              <p>{{ post.time }}</p>
             </div>
           </div>
         </div>
@@ -67,15 +84,18 @@
       </router-link>
       <div v-if="authStore.data.auth" class="post_actions DF">
         <div class="post_actions-favorite"
-          :class="state.user ? state.user.account.favorites.includes(post.id) ? 'post_favorite_active' :  '' : ''"
+          :class="objCurrentUser.user ? objCurrentUser.user.account.favorites.includes(post.id) ? 'post_favorite_active' :  '' : ''"
           @click="handlerFavorite" :id="post.id">
         </div>
         <div class="post_actions-check" 
-          :class="state.user ? state.user.account.viewed.includes(post.id) ? 'post_favorite_check' :  '' : ''"
+          :class="objCurrentUser.user ? objCurrentUser.user.account.viewed.includes(post.id) ? 'post_favorite_check' :  '' : ''"
           @click="handlerCheck" :id="post.id">
         </div>
       </div>
     </div>
   </div>
   <div v-else>Loading...</div>
+  <ModalAddPost 
+    @closeModal="(close) => objModal.addWorkModal = close"
+    :activeModal="objModal.activeModal"/>
 </template>

@@ -11,7 +11,7 @@
     async function setUser() {
       const user = await useMethod.getAuth()
       
-      authStore.changeUser(user[0])
+      authStore.changeUser(user)
       authStore.changeAuth(true)
     }
 

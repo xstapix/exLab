@@ -1,7 +1,7 @@
 <script setup>
   import PostsList from '@/components/list/PostsList.vue'
   import Filter from '@/components/tagFilter/Filter.vue'
-  import SideBar from '@/components/sideBar/SideBar.vue'
+  import TheSideBar from '@/components/sideBar/TheSideBar.vue'
   
   import './style.css'
   
@@ -10,7 +10,7 @@
 </script>
 <template lang="">
   <div class="DF">
-    <SideBar/>
+    <TheSideBar/>
     <PostsList/>
     <Filter/>
   </div>

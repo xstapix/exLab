@@ -1,7 +1,3 @@
-.add_work-modal {
-    display: none;
-}
-
 .add_work-modal_active {
     position: fixed;
     left: 0;

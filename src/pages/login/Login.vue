@@ -1,5 +1,5 @@
 <script setup>
-  import SideBar from '@/components/sideBar/SideBar.vue'
+  import TheSideBar from '@/components/sideBar/TheSideBar.vue'
   import {getMethods} from '@/methods.js'
   import { useAuthStore } from '@/stores/authStore' 
 
@@ -20,9 +20,9 @@
   async function handleLogin() {
     const auth = await useMethod.getAuth()
 
-    if (auth[0].account.email === state.email && auth[0].account.password === state.password) {
+    if (auth.account.email === state.email && auth.account.password === state.password) {
       authStore.changeAuth(true)
-      authStore.changeUser(auth[0])
+      authStore.changeUser(auth)
       document.cookie = `cronaClubUserEmail=${state.email}`
       document.cookie = `cronaClubUserPassword=${state.password}`
       router.push('/')
@@ -34,7 +34,7 @@
 
 <template>
   <div class="DF background_space">
-    <SideBar/>
+    <TheSideBar/>
     <div class="login_body">
       <h1 class="login_body-text">Вход во вселенную закрытого клуба дизайнеров «1000 звёзд»</h1>
       <div class="login_body-form">

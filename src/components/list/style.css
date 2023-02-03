@@ -7,6 +7,52 @@
     gap: 10px;
 }
 
+.add_post {
+    padding: 20px;
+    background: rgba(255, 255, 255, .1);
+    border: 1px dashed rgba(255, 255, 255, .4);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.add_post-tip {
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    display: inline-flex;
+    align-items: center;
+    color: #181818;
+}
+
+.add_post-tip svg {
+    margin: 0 4px;
+}
+
+.add_post-text {
+    width: 217px;
+    margin: 4px 0 0;
+    text-align: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #fff;
+}
+
+.add_post-img {
+    width: 41px;
+    height: 41px;
+    margin: 15px 0 0;
+    cursor: pointer;
+}
+
 .post {
     position: relative;
     flex-direction: column;
@@ -18,34 +64,34 @@
     border-radius: 8px;
 }
 
-.post_checked{
-    background: rgb(131,58,180);
-    background: linear-gradient(90deg, rgba(131,58,180,1) 9%, rgba(253,55,29,1) 100%);
+.post_checked {
+    background: rgb(131, 58, 180);
+    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 9%, rgba(253, 55, 29, 1) 100%);
 }
 
-.post a{
+.post a {
     color: white;
 }
 
-.post_info_author{
+.post_info_author {
     height: 40px;
     margin: 0 4px 0 0;
 }
 
-.post_info_author-img{
+.post_info_author-img {
     max-height: 100%;
 }
 
-.post_info_type{
+.post_info_type {
     height: 40px;
     margin: 0 16px 0 0;
 }
 
-.post_info_type svg{
+.post_info_type svg {
     max-height: 100%;
 }
 
-.post_info_date{
+.post_info_date {
     font-size: 12px;
     font-weight: 500;
     color: #fff6;
@@ -55,7 +101,7 @@
     margin: 0;
 }
 
-.post_info_blocked{
+.post_info_blocked {
     height: 15px;
 }
 
@@ -63,7 +109,7 @@
     max-height: 100%;
 }
 
-.post_text{
+.post_text {
     margin: 16px 0 0;
 }
 
@@ -89,13 +135,13 @@
     margin: 10px 0 0;
 }
 
-.post_actions{
+.post_actions {
     position: absolute;
     right: 15px;
     top: 15px;
 }
 
-.post_actions-check{
+.post_actions-check {
     width: 40px;
     height: 40px;
     background-color: white;
@@ -108,7 +154,7 @@
     margin: 0 0 0 4px;
 }
 
-.post_actions-favorite{
+.post_actions-favorite {
     width: 40px;
     height: 40px;
     background-color: white;
@@ -120,12 +166,12 @@
     background-position: top 12px right -1px;
 }
 
-.post_favorite_active{
+.post_favorite_active {
     background-image: url('/favoriteWhite.svg');
     background-color: rgb(0, 0, 0);
 }
 
-.post_favorite_check{
+.post_favorite_check {
     background-image: url('/checkWhite.svg');
     background-color: rgb(0, 0, 0);
 }

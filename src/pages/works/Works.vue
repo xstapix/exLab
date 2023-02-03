@@ -1,5 +1,5 @@
 <script setup>
-  import SideBar from '@/components/sideBar/SideBar.vue'
+  import TheSideBar from '@/components/sideBar/TheSideBar.vue'
 
   import { useWorkStore } from '@/stores/workStore'
   import {getMethods} from '@/methods.js'
@@ -45,7 +45,7 @@
 
 <template>
   <div class="DF">
-    <SideBar/>
+    <TheSideBar/>
     <section class="works-body" v-if="workStore.data.works">
       <div class="works-content">
         <div v-for="item in workStore.data.works.slice(0, state.shownWorks)" 

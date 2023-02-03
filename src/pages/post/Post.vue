@@ -3,7 +3,7 @@
   import { useRoute, useRouter } from 'vue-router'
   import {getMethods} from '@/methods.js'
 
-  import SideBar from '@/components/sideBar/SideBar.vue'
+  import TheSideBar from '@/components/sideBar/TheSideBar.vue'
   import Carousel from '@/components/swiper/Carousel.vue'
   import ModalAddWork from '@/components/modalAddWork/ModalAddWork.vue'
   import { useAuthStore } from '@/stores/authStore' 
@@ -24,7 +24,7 @@
     postViewed: {},
     nextPost: null,
     prevPost: null,
-    amountPost: 0,
+    renderKey: 0
   })
 
   const objModal = reactive({
@@ -39,20 +39,23 @@
 
   async function setObjPost() {
     objPost.postViewed = await useMethod.getPost(route.params.id)
+    objPost.renderKey++
   }
   
   const nextPost = async () => {
     objPost.postViewed = await useMethod.getPost(Number(route.params.id) + 1)
+    objPost.renderKey++
   }
 
   const prevPost = async () => {
     objPost.postViewed = await useMethod.getPost(Number(route.params.id) - 1)
+    objPost.renderKey++
   }
 </script>
 
 <template>
   <div class="DF">
-    <SideBar/>
+    <TheSideBar/>
     <router-link :to="`/post/${Number(objPost.postViewed.id) - 1}`" 
       @click="prevPost" 
       class="postPrew"
@@ -73,7 +76,7 @@
           </div>
         </div>
       </div>
-      <Carousel :activePost="objPost.postViewed"/>
+      <Carousel :key="objPost.renderKey" :activePost="objPost.postViewed"/>
     </div>
     <router-link :to="`/post/${Number(objPost.postViewed.id) + 1}`" 
       @click="nextPost" 
