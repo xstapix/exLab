@@ -6,13 +6,14 @@ import Post from '@/pages/post/Post.vue'
 import Login from '@/pages/login/Login.vue'
 import Works from '@/pages/works/Works.vue'
 import PersonalArea from '@/pages/lk/PersonalArea.vue'
+import PayClub from '@/pages/payClub/PayClub.vue'
 
 export default createRouter({
     history: createWebHashHistory(),
     routes: [
         { path: '/', component: HomePage, alias: '/' },
         { path: '/users', component: Users },
-        { path: '/payclub', component: NotFound },
+        { path: '/payclub', component: PayClub },
         { path: '/lk', component: PersonalArea },
         { path: '/login', component: Login },
         { path: '/works', component: Works },

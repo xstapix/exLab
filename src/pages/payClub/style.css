@@ -1,0 +1,128 @@
+.pay-body {
+    width: 700px;
+    margin: 0 auto;
+}
+
+.pay-body_title {
+    margin: 0;
+    padding: 66px 0 29px;
+    border-bottom: 1px solid #3a3a3a;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 130%;
+    color: #fff;
+}
+
+.pay-body_desc {
+    padding: 50px 0 0;
+    font-size: 16px;
+    color: #fff;
+}
+
+.pay-body_input {
+    width: 100%;
+    height: 60px;
+    font-size: 16px;
+    padding: 0 20px;
+    color: #fff;
+    margin-bottom: 10px;
+    background: #1c1c1c;
+    border: 0;
+    outline: none;
+}
+
+.pay-body_select {
+    height: 60px;
+    width: 100%;
+    color: #fff;
+    font-size: 16px;
+    padding: 0 20px;
+    background: #1c1c1c;
+    border: 0;
+    outline: none;
+}
+
+.input_disabled {
+    color: #fff3;
+}
+
+.pay-body_bonus {
+    border-top: 1px solid #3a3a3a;
+    margin-top: 48px;
+    padding-top: 48px;
+}
+
+.pay-body_bonus_title {
+    margin: 0;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 130%;
+    color: #fff;
+    padding-bottom: 17px;
+}
+
+.pay-body_bonus_desc {
+    margin: 15px 0 0;
+    color: #fff;
+}
+
+.pay-body_bonus_desc ul {
+    list-style-type: disc;
+}
+
+.pay-body_bonus_toggle {
+    background: #fff;
+    height: 20px;
+    width: 40px;
+    border-radius: 50px;
+    padding: 2px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.pay-body_bonus_toggle_dot {
+    height: 16px;
+    width: 16px;
+    background: #787878;
+    border-radius: 50%;
+}
+
+.bonus_toggle-active {
+    margin-left: auto;
+    background-color: #1fa906;
+}
+
+.pay-body_bonus_toggle_text {
+    margin: 0;
+}
+
+.pay-body_total-price {
+    margin: 0;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 130%;
+    padding: 0 0 17px 0;
+    color: #fff;
+}
+
+.pay-body_button-pay {
+    height: 60px;
+    width: 100%;
+    font-size: 16px;
+    color: #000;
+    cursor: pointer;
+    margin-top: 10px;
+    background: #fff;
+}
+
+.pay-body_oferta {
+    color: #fff;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.pay-body_oferta a {
+    text-decoration: underline;
+    padding: 0 0 50px;
+    color: #fff;
+}

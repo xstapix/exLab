@@ -109,6 +109,11 @@
     max-height: 100%;
 }
 
+.post_close {
+    width: 16px;
+    height: 16px;
+}
+
 .post_text {
     margin: 16px 0 0;
 }
@@ -144,34 +149,12 @@
 .post_actions-check {
     width: 40px;
     height: 40px;
-    background-color: white;
-    border-radius: 50%;
     cursor: pointer;
-    padding: 11px;
-    background-image: url('/check.svg');
-    background-repeat: no-repeat;
-    background-position: top 10px right;
     margin: 0 0 0 4px;
 }
 
 .post_actions-favorite {
     width: 40px;
     height: 40px;
-    background-color: white;
-    border-radius: 50%;
     cursor: pointer;
-    padding: 11px;
-    background-image: url('/favorite.svg');
-    background-repeat: no-repeat;
-    background-position: top 12px right -1px;
-}
-
-.post_favorite_active {
-    background-image: url('/favoriteWhite.svg');
-    background-color: rgb(0, 0, 0);
-}
-
-.post_favorite_check {
-    background-image: url('/checkWhite.svg');
-    background-color: rgb(0, 0, 0);
 }

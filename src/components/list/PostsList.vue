@@ -24,24 +24,16 @@
   })
 
   const handlerFavorite = (e) => {
-    if (e.target.classList.length === 2) {
-      for (let index = 0; index < objCurrentUser.user.account.favorites.length; index++) {
-        if (objCurrentUser.user.account.favorites[index] == e.target.id) {
-          objCurrentUser.user.account.favorites.splice(index, 1)
-          break
-        }
-      }
+    if (objCurrentUser.user.account.favorites.includes(e.target.id)) {
+      let newFavorites = objCurrentUser.user.account.favorites.filter(id => id != e.target.id)
+      objCurrentUser.user.account.favorites = newFavorites
     } else objCurrentUser.user.account.favorites.push(e.target.id)
   } 
 
   const handlerCheck = (e) => {
-    if (e.target.classList.length === 2) {
-      for (let index = 0; index < objCurrentUser.user.account.viewed.length; index++) {
-        if (objCurrentUser.user.account.viewed[index] == e.target.id) {
-          objCurrentUser.user.account.viewed.splice(index, 1)
-          break
-        }
-      }
+    if (objCurrentUser.user.account.viewed.includes(e.target.id)) {
+      let newFavorites = objCurrentUser.user.account.viewed.filter(id => id != e.target.id)
+      objCurrentUser.user.account.viewed = newFavorites
     } else objCurrentUser.user.account.viewed.push(e.target.id)
   }
 
@@ -76,6 +68,9 @@
               <p>{{ post.time }}</p>
             </div>
           </div>
+          <div v-if="!authStore.data.auth" class="post_close">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_783_6324)"><path d="M8 1.66602C8.72733 1.66602 9.41133 1.86068 10 2.20202C10.0797 2.24369 10.1501 2.30105 10.207 2.37065C10.2639 2.44025 10.3062 2.52064 10.3313 2.60699C10.3563 2.69334 10.3636 2.78387 10.3528 2.87313C10.3419 2.96238 10.3132 3.04852 10.2682 3.12637C10.2232 3.20421 10.1629 3.27215 10.091 3.32609C10.019 3.38004 9.93692 3.41887 9.84959 3.44026C9.76226 3.46165 9.6715 3.46516 9.58278 3.45057C9.49406 3.43597 9.40921 3.40358 9.33333 3.35535C8.92786 3.12125 8.46789 2.99803 7.99968 2.99808C7.53148 2.99814 7.07154 3.12147 6.66612 3.35567C6.2607 3.58986 5.92408 3.92668 5.69012 4.33224C5.45617 4.7378 5.33311 5.19781 5.33333 5.66602L12.6667 5.66668C13.0203 5.66668 13.3594 5.80716 13.6095 6.05721C13.8595 6.30726 14 6.64639 14 7.00002V13.6667C14 14.0203 13.8595 14.3594 13.6095 14.6095C13.3594 14.8595 13.0203 15 12.6667 15H3.33333C2.97971 15 2.64057 14.8595 2.39052 14.6095C2.14048 14.3594 2 14.0203 2 13.6667V6.99935C2 6.64573 2.14048 6.30659 2.39052 6.05654C2.64057 5.80649 2.97971 5.66602 3.33333 5.66602H4C4 4.60515 4.42143 3.58773 5.17157 2.83759C5.92172 2.08744 6.93913 1.66602 8 1.66602ZM12.6667 6.99935H3.33333V13.666H12.6667V6.99935ZM8 8.33268C8.28439 8.33277 8.56131 8.42379 8.79029 8.59245C9.01928 8.7611 9.18834 8.99856 9.27278 9.27013C9.35722 9.54169 9.35262 9.83315 9.25965 10.1019C9.16667 10.3707 8.9902 10.6027 8.756 10.764L8.66667 10.8207V11.666C8.66648 11.8359 8.60141 11.9994 8.48477 12.1229C8.36812 12.2465 8.2087 12.3208 8.03907 12.3308C7.86944 12.3408 7.70241 12.2856 7.57211 12.1765C7.44181 12.0674 7.35807 11.9127 7.338 11.744L7.33333 11.666V10.8207C7.07916 10.6739 6.88052 10.4474 6.76821 10.1762C6.65589 9.90506 6.63619 9.60442 6.71216 9.32092C6.78812 9.03742 6.95551 8.7869 7.18836 8.60823C7.4212 8.42955 7.7065 8.3327 8 8.33268Z" fill="white"></path><path d="M10 2.20202C9.41133 1.86068 8.72733 1.66602 8 1.66602C6.93913 1.66602 5.92172 2.08744 5.17157 2.83759C4.42143 3.58773 4 4.60515 4 5.66602H5.33333C5.33311 5.19781 5.45617 4.7378 5.69012 4.33224C5.92408 3.92668 6.2607 3.58986 6.66612 3.35567C7.07154 3.12147 7.53148 2.99814 7.99968 2.99808C8.46789 2.99803 8.92786 3.12125 9.33333 3.35535C9.40921 3.40358 9.49406 3.43597 9.58278 3.45057C9.6715 3.46516 9.76226 3.46165 9.84959 3.44026C9.93692 3.41887 10.019 3.38004 10.091 3.32609C10.1629 3.27215 10.2232 3.20421 10.2682 3.12637C10.3132 3.04852 10.3419 2.96238 10.3528 2.87313C10.3636 2.78387 10.3563 2.69334 10.3313 2.60699C10.3062 2.52064 10.2639 2.44025 10.207 2.37065C10.1501 2.30105 10.0797 2.24369 10 2.20202Z" fill="white"></path><path d="M6 2.20201C6.58867 1.86068 7.27267 1.66602 8 1.66602C9.06087 1.66602 10.0783 2.08744 10.8284 2.83758C11.5786 3.58773 12 4.60514 12 5.66601H10.6667C10.6669 5.19781 10.5438 4.73779 10.3099 4.33223C10.0759 3.92667 9.73876 3.58955 9.33333 3.35535C8.92786 3.12125 8.46789 2.99803 7.99968 2.99808C7.53148 2.99814 7.07154 3.12147 6.66612 3.35567C6.59024 3.4039 6.50594 3.43597 6.41722 3.45056C6.3285 3.46515 6.23774 3.46165 6.15041 3.44026C6.06308 3.41887 5.98098 3.38003 5.90904 3.32609C5.83711 3.27214 5.77683 3.20421 5.73184 3.12636C5.68684 3.04852 5.65806 2.96238 5.64721 2.87312C5.63637 2.78387 5.6437 2.69334 5.66875 2.60699C5.6938 2.52063 5.73606 2.44024 5.79299 2.37065C5.84991 2.30105 5.92033 2.24369 6 2.20201Z" fill="white"></path></g><defs><clipPath id="clip0_783_6324"><rect width="16" height="16" fill="white"></rect></clipPath></defs></svg>
+          </div>
         </div>
         <div class="post_text">
           <p class="post_title">{{post.title}}</p>
@@ -84,18 +79,26 @@
       </router-link>
       <div v-if="authStore.data.auth" class="post_actions DF">
         <div class="post_actions-favorite"
-          :class="objCurrentUser.user ? objCurrentUser.user.account.favorites.includes(post.id) ? 'post_favorite_active' :  '' : ''"
           @click="handlerFavorite" :id="post.id">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle :id="post.id" cx="20" cy="20" r="20" :fill="objCurrentUser.user ? objCurrentUser.user.account.favorites.includes(post.id) ? 'black' : 'white' : ''"></circle>
+            <path :id="post.id" d="M15.2694 19.889C14.0795 18.2593 14.4761 15.8148 16.4592 15C18.4423 14.1852 19.6321 15.8148 20.0287 16.6297C20.4253 15.8148 22.0118 14.1852 23.9948 15C25.9779 15.8148 25.9779 18.2593 24.7881 19.889C23.5982 21.5186 20.0287 24.7779 20.0287 24.7779C20.0287 24.7779 16.4592 21.5186 15.2694 19.889Z" 
+              :stroke="objCurrentUser.user ? objCurrentUser.user.account.favorites.includes(post.id) ? 'white' : 'black' : ''" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
         </div>
         <div class="post_actions-check" 
-          :class="objCurrentUser.user ? objCurrentUser.user.account.viewed.includes(post.id) ? 'post_favorite_check' :  '' : ''"
           @click="handlerCheck" :id="post.id">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle :id="post.id" cx="20" cy="20" r="20" :fill="objCurrentUser.user ? objCurrentUser.user.account.viewed.includes(post.id) ? 'black' : 'white' : ''"></circle>
+            <path :id="post.id" d="M21.0448 16.0216C21.2299 15.8455 21.4762 15.7481 21.7317 15.75C21.9872 15.7519 22.232 15.853 22.4144 16.032C22.5967 16.211 22.7025 16.4538 22.7092 16.7092C22.716 16.9647 22.6232 17.2127 22.4506 17.4011L17.2087 23.9567C17.1185 24.0538 17.0097 24.1317 16.8888 24.1858C16.7679 24.2399 16.6373 24.269 16.5048 24.2715C16.3724 24.2739 16.2408 24.2497 16.1179 24.2001C15.9951 24.1505 15.8835 24.0767 15.7898 23.983L12.3136 20.5068C12.2168 20.4166 12.1392 20.3078 12.0853 20.187C12.0314 20.0661 12.0025 19.9356 12.0002 19.8033C11.9978 19.671 12.0222 19.5396 12.0717 19.4169C12.1213 19.2942 12.195 19.1828 12.2886 19.0892C12.3822 18.9957 12.4936 18.9219 12.6163 18.8723C12.739 18.8228 12.8704 18.7984 13.0027 18.8008C13.135 18.8031 13.2655 18.8321 13.3863 18.8859C13.5072 18.9398 13.616 19.0174 13.7062 19.1142L16.4572 21.8639L21.0186 16.0505C21.0268 16.0404 21.0355 16.0308 21.0448 16.0216ZM19.8362 22.7744L21.0448 23.983C21.1385 24.0765 21.25 24.1502 21.3727 24.1996C21.4955 24.249 21.6269 24.2733 21.7592 24.2708C21.8915 24.2684 22.0219 24.2393 22.1427 24.1853C22.2636 24.1314 22.3723 24.0536 22.4624 23.9567L27.7069 17.4011C27.8011 17.3081 27.8756 17.197 27.926 17.0746C27.9763 16.9521 28.0015 16.8208 27.9999 16.6884C27.9984 16.5561 27.9702 16.4253 27.917 16.3041C27.8638 16.1829 27.7867 16.0736 27.6904 15.9828C27.594 15.892 27.4804 15.8216 27.3562 15.7757C27.232 15.7298 27.0998 15.7094 26.9676 15.7157C26.8354 15.722 26.7058 15.755 26.5865 15.8125C26.4673 15.87 26.3609 15.951 26.2736 16.0505L21.7109 21.8639L21.0737 21.2254L19.8349 22.7744H19.8362Z" 
+              :fill="objCurrentUser.user ? objCurrentUser.user.account.viewed.includes(post.id) ? 'white' : 'black' : ''"></path>
+          </svg>
         </div>
       </div>
     </div>
   </div>
   <div v-else>Loading...</div>
   <ModalAddPost 
-    @closeModal="(close) => objModal.addWorkModal = close"
+    @closeModal="(close) => objModal.activeModal = close"
     :activeModal="objModal.activeModal"/>
 </template>

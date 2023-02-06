@@ -4,7 +4,7 @@
   import './style.css'
 
   const postsStore = useStore()
-  console.log(postsStore.data.tags);
+  
   const props = defineProps({
     activeModal: Boolean
   })

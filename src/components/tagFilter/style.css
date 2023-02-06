@@ -87,6 +87,7 @@
 }
 
 .filter_actions-item {
+    margin: 0 0 0 10px;
     padding: 7px 0;
 }
 
@@ -94,22 +95,13 @@
     border-bottom: 1px solid #3A3A3A;
 }
 
-.filter_actions-img_check {
+.filter_actions-img {
     width: 16px;
     height: 16px;
-    background-image: url('/checkWhite.svg');
-    background-repeat: no-repeat;
 }
 
-.filter_actions-img_favorite {
-    width: 16px;
-    height: 16px;
-    background-image: url('/favoriteWhite.svg');
-    background-repeat: no-repeat;
-}
-
-.filter_actions-test {
-    margin: 3px 0 0 6px;
+.filter_actions-text {
+    margin: 0 0 0 6px;
     font-size: 14px;
     color: #fff;
 }
