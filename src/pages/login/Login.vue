@@ -23,12 +23,35 @@
     if (auth.account.email === state.email && auth.account.password === state.password) {
       authStore.changeAuth(true)
       authStore.changeUser(auth)
-      document.cookie = `cronaClubUserEmail=${state.email}`
-      document.cookie = `cronaClubUserPassword=${state.password}`
+
+      setCookie('cronaClubUserEmail', state.email, {});
+
       router.push('/')
     } else {
       authStore.changeAuth(false)
     }
+  }
+
+  function setCookie(name, value, options = {}) {
+    options = {
+      ...options
+    };
+
+    if (options.expires instanceof Date) {
+      options.expires = options.expires.toUTCString();
+    }
+
+    let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+    for (let optionKey in options) {
+      updatedCookie += "; " + optionKey;
+      let optionValue = options[optionKey];
+      if (optionValue !== true) {
+        updatedCookie += "=" + optionValue;
+      }
+    }
+
+    document.cookie = updatedCookie;
   }
 </script>
 

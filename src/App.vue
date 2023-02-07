@@ -5,7 +5,6 @@
 
   onBeforeMount( () => {
     const authStore = useAuthStore()
-    const cookies = document.cookie.split(';')
     const useMethod = getMethods()
 
     async function setUser() {
@@ -15,17 +14,19 @@
       authStore.changeAuth(true)
     }
 
-    for (let index in cookies) {
-      let line = cookies[index].split('=')
-      let lineCopy = line[0].split('')
-      // lineCopy.shift()
+    if(getCookie('cronaClubUserEmail')){
+      setUser()
+    }
 
-      if(lineCopy.join('') === 'cronaClubUserEmail'){
-        setUser()
-      }
+    function getCookie(name) {
+      let matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+      ));
+      return matches ? decodeURIComponent(matches[1]) : undefined;
     }
   })
 </script>
+
 <template>
   <router-view></router-view>
 </template>

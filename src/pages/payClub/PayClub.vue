@@ -54,7 +54,7 @@
 <template>
   <div class="DF">
     <TheSideBar/>
-    <div class="pay-body">
+    <div class="pay-body" v-if="authStore.data.auth">
       <p class="pay-body_title">Клуб. Оплата подписки</p>
       <div class="pay-body_desc">
         Вы можете продлить участие в клубе в любой момент. Если у вас есть действующая подписка, то к действующему периоду прибавится оплаченный период.
