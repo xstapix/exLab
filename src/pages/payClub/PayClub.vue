@@ -74,7 +74,7 @@
       <select class="pay-body_select" @change="handlerSelect">
         <option value="1">1 месяц (30 дней) = 1300₽</option>
         <option value="3">3 месяца (90 дней) (-10%) = 3510₽</option>
-        <option value="6">6 месяцев (180 дней) (6 месяц бесплатно) = 6500₽</option>
+        <option value="6">6 месяцев (180 дней) (1 месяц бесплатно) = 6500₽</option>
         <option value="12">12 месяцев (365 дней) (3 месяца бесплатно) = 11700₽</option>
       </select>
       <div class="pay-body_bonus">

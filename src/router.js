@@ -1,12 +1,21 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import HomePage from '@/pages/home/HomePage.vue'
-import NotFound from '@/pages/404/NotFound.vue'
-import Users from '@/pages/users/Users.vue'
-import Post from '@/pages/post/Post.vue'
-import Login from '@/pages/login/Login.vue'
-import Works from '@/pages/works/Works.vue'
-import PersonalArea from '@/pages/lk/PersonalArea.vue'
-import PayClub from '@/pages/payClub/PayClub.vue'
+
+const HomePage = () =>
+    import ('@/pages/home/HomePage.vue')
+const Users = () =>
+    import ('@/pages/users/Users.vue')
+const NotFound = () =>
+    import ('@/pages/404/NotFound.vue')
+const Post = () =>
+    import ('@/pages/post/Post.vue')
+const Login = () =>
+    import ('@/pages/login/Login.vue')
+const Works = () =>
+    import ('@/pages/works/Works.vue')
+const PersonalArea = () =>
+    import ('@/pages/lk/PersonalArea.vue')
+const PayClub = () =>
+    import ('@/pages/payClub/PayClub.vue')
 
 export default createRouter({
     history: createWebHashHistory(),

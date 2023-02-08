@@ -1,0 +1,54 @@
+.up {
+    z-index: 1001;
+}
+
+.modal-unsavedChanges {
+    width: 400px;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 24px
+}
+
+.modal-unsavedChanges_text {
+    margin: 0;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000;
+    transform: scale(1);
+}
+
+.modal-unsavedChanges_desc {
+    margin: 0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000;
+    transform: scale(1);
+}
+
+.modal-unsavedChanges_btn {
+    margin: 24px 0 0;
+}
+
+.modal-unsavedChanges_btn_close {
+    margin-right: 8px;
+    background: #F0F0F0;
+    border-radius: 8px;
+    padding: 15px 30px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    cursor: pointer;
+}
+
+.modal-unsavedChanges_btn_cancel {
+    background: #2E2E2E;
+    color: #fff;
+    border-radius: 8px;
+    padding: 15px 30px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    cursor: pointer;
+}

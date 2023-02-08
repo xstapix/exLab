@@ -2,12 +2,17 @@
   import {useStore} from '@/stores/postStore'
   import { useAuthStore } from '@/stores/authStore'
 
-  import ModalAddPost from '@/components/modalAddPost/ModalAddPost.vue'
-  import ModalBlockedPost from '@/components/modalBlockedPost/ModalBlockedPost.vue'
-
-  import {watch, reactive} from 'vue'
+  import {watch, reactive, defineAsyncComponent} from 'vue'
 
   import './style.css'
+
+  const ModalAddPost = defineAsyncComponent(
+    () => import('@/components/modalAddPost/ModalAddPost.vue')
+  )
+
+  const ModalBlockedPost = defineAsyncComponent(
+    () => import('@/components/modalBlockedPost/ModalBlockedPost.vue')
+  )
 
   const postsStore = useStore()
   const authStore = useAuthStore()
@@ -24,6 +29,7 @@
   watch(authStore.data, (newUser) => {
     objCurrentUser.user = newUser.user;
   })
+
 
   const handlerFavorite = (e) => {
     if (objCurrentUser.user.account.favorites.includes(e.target.id)) {
@@ -107,9 +113,11 @@
   </div>
   <div v-else>Loading...</div>
   <ModalAddPost 
+    v-if="objModal.activeModalAddPost"
     @closeModal="(close) => objModal.activeModalAddPost = close"
     :activeModal="objModal.activeModalAddPost"/>
   <ModalBlockedPost
+    v-if="objModal.activeModalBlocked"
     @closeModal="(close) => objModal.activeModalBlocked = close"
     :activeModal="objModal.activeModalBlocked"/>
 </template>

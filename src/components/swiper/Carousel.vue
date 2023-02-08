@@ -6,6 +6,7 @@
   import {getMethods} from '@/methods.js'
 
   import './style.css'
+  import '@/components/list/style.css'
   import './media-style.css'
 
   const useMethod = getMethods()

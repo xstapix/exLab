@@ -1,12 +1,17 @@
 <script setup>
   import { useAuthStore } from '@/stores/authStore' 
 
-  import ModalAddPost from '@/components/modalAddPost/ModalAddPost.vue'
-  import ModalAddWork from '@/components/modalAddWork/ModalAddWork.vue'
-
-  import { reactive } from 'vue';
+  import { reactive, defineAsyncComponent } from 'vue';
 
   import './style.css'
+
+  const ModalAddPost = defineAsyncComponent(
+    () => import('@/components/modalAddPost/ModalAddPost.vue')
+  )
+
+  const ModalAddWork = defineAsyncComponent(
+    () => import('@/components/modalAddWork/ModalAddWork.vue')
+  )
 
   const authStore = useAuthStore()
 
@@ -189,9 +194,11 @@
       </router-link>
     </div>
     <ModalAddPost 
+      v-if="objModal.activePostModal"
       @closeModal="(close) => objModal.activePostModal = close"
       :activeModal="objModal.activePostModal"/>
     <ModalAddWork 
+      v-if="objModal.activeWorkModal"
       @closeModal="(close) => objModal.activeWorkModal = close"
       :activeModal="objModal.activeWorkModal"/>
   </section>

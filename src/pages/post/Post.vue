@@ -1,16 +1,19 @@
 <script setup>
-  import {reactive} from 'vue'
+  import {reactive, defineAsyncComponent} from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import {getMethods} from '@/methods.js'
 
   import TheSideBar from '@/components/sideBar/TheSideBar.vue'
   import Carousel from '@/components/swiper/Carousel.vue'
-  import ModalAddWork from '@/components/modalAddWork/ModalAddWork.vue'
   import { useAuthStore } from '@/stores/authStore' 
   import {useStore} from '@/stores/postStore'
 
   import './style.css'
   import './media-style.css'
+
+  const ModalAddWork = defineAsyncComponent(
+    () => import('@/components/modalAddWork/ModalAddWork.vue')
+  )
   
   const route = useRoute()
   const router = useRouter()
@@ -86,6 +89,7 @@
     <div v-else></div>
   </div>
   <ModalAddWork 
+    v-if="objModal.addWorkModal"
     :activeModal="objModal.addWorkModal" 
     @closeModal="(close) => objModal.addWorkModal = close"/>
   
