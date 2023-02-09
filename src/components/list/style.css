@@ -1,5 +1,4 @@
 .postsBody {
-    width: 100%;
     padding: 8px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(335px, 1fr));
@@ -8,6 +7,7 @@
 }
 
 .add_post {
+    height: 200px;
     padding: 20px;
     background: rgba(255, 255, 255, .1);
     border: 1px dashed rgba(255, 255, 255, .4);

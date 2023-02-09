@@ -96,7 +96,7 @@
         }
       }
     },
-    // data: JSON.parse(this.model.materials.show[this.model.materials.current_show]['detail_text'])
+    // data: JSON.parse(this.model.tags.show[this.model.tags.current_show]['detail_text'])
   });
 
   const postsStore = useStore()
@@ -114,14 +114,19 @@
     }
   })
 
+  const objTags = reactive({
+    tags: JSON.parse(JSON.stringify(postsStore.data.tags))
+  })
+
+  
   const objModal = reactive({
     activeModalUnsavedChanges: false
   })
-
+  
   const objCheckPost = reactive({
     successPost: false
   })
-
+  
   watch(objNewPost.post, () => {
     let point = 0
 
@@ -141,25 +146,54 @@
     }
   })
 
-  const handlerTag = (e) => {
-    if(objNewPost.post.tags.includes(e.target.id)){
-      let newList = objNewPost.post.tags.filter((id) => id !== e.target.id)
+  const handlerTag = (id) => {
+    if(objNewPost.post.tags.includes(id)){
+      let newList = objNewPost.post.tags.filter((iditem) => iditem !== id)
       objNewPost.post.tags = newList
-      document.getElementById(e.target.id).classList.toggle('tags-item_selected')
+      objTags.tags[id].active = false
     } else {
-      objNewPost.post.tags.push(e.target.id)
-      e.target.classList.add('tags-item_selected')
+      objNewPost.post.tags.push(id)
+      objTags.tags[id].active = true
     }
   }
 
   const handlerCloseModal = (obj) => {
     objModal.activeModalUnsavedChanges = obj.closeChanges
-    emit('closeModal', obj.totalClose)
+
+    if (!obj.totalClose) {
+      emit('closeModal', obj.totalClose)
+
+      objNewPost.post = {
+        name: '',
+        desc: '',
+        tags: []
+      }
+    }
   }
 
   const handlerDesc = (e) => {
-    // console.log()
     objNewPost.post.desc = e.target.textContent 
+  }
+
+  const handlerSavePost = () => {
+    editor.save().then((outputData) => {
+      objNewPost.post.editorData = outputData
+      console.log(objNewPost.post);
+    }).catch((error) => {
+      console.log('Saving failed: ', error)
+    });
+
+    emit('closeModal', false)
+  }
+
+  const handlerSaveDraft = () => {
+    objNewPost.post = {
+      name: '',
+      desc: '',
+      tags: []
+    }
+
+    emit('closeModal', false)
   }
 
 </script>
@@ -222,16 +256,14 @@
                 </div>
               </div>
             </div>
-            <div class="form-field_tags DF" v-if="postsStore.data.tags"> 
-              <div @click="handlerTag" v-for="tag in postsStore.data.tags.slice(1, postsStore.data.tags.length)" 
-                :id="tag.id" 
-                class="form-field_tags-item DF"
-              >
+            <div class="form-field_tags DF" v-if="objTags.tags"> 
+              <div @click="handlerTag(index)" v-for="(tag, index) in objTags.tags" 
+                class="form-field_tags-item DF" :class="{activeTag: tag.active}">
                 {{ tag.tag }}
-                <div v-if="objNewPost.post.tags.includes(String(tag.id))" 
-                class="form-field_tags-item_close" :id="tag.id">
-                  <svg  :id="tag.id" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path  :id="tag.id" opacity="0.5" d="M5.5792 5.52626L10.5267 10.4737M5.5792 10.4737L10.5267 5.52626" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <div v-if="tag.active" 
+                  class="form-field_tags-item_close">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path opacity="0.5" d="M5.5792 5.52626L10.5267 10.4737M5.5792 10.4737L10.5267 5.52626" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                   </svg>
                 </div>
               </div>
@@ -247,10 +279,10 @@
             @click="objModal.activeModalUnsavedChanges = true" 
             class="post_modal-body_btn_cancel">Отмена</button>
           <button 
-            @click="emit('closeModal', false)" 
+            @click="handlerSaveDraft" 
             class="post_modal-body_btn_draft">Сохранить как черновик</button>
           <button v-if="objCheckPost.successPost"
-            @click="emit('closeModal', false)" 
+            @click="handlerSavePost" 
             class="post_modal-body_btn_send">Запустить</button>
         </div>
       </div>

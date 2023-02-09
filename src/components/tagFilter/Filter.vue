@@ -21,11 +21,12 @@
   
   async function setState() {
     const allTags = await useMethod.getTags()
-    state.arrTags = allTags
+    state.arrTags = JSON.parse(JSON.stringify(allTags))
     
     const allPosts = await useMethod.getPosts()
-    state.arrPosts = allPosts
-    changeTags()
+    state.arrPosts = JSON.parse(JSON.stringify(allPosts))
+
+    state.arrTags.unshift({ id: 30, tag: 'Все', active: true })
   }
 
   const handlerTag = (tagId, index) => {
@@ -67,13 +68,6 @@
         postsStore.changePostsList(filteredPosts)
       }
     }
-  }
-
-  function changeTags() {
-    for (let item in state.arrTags) {
-      state.arrTags[item].active = false
-    }
-    state.arrTags.unshift({ id: 30, tag: 'Все', active: true })
   }
 
   const handlerEnter = (e) => {

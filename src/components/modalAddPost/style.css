@@ -124,7 +124,7 @@
     cursor: pointer;
 }
 
-.tags-item_selected {
+.activeTag {
     background: #2E2E2E;
     position: relative;
     color: #fff;
