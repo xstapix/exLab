@@ -3,6 +3,7 @@
     width: 400px;
     min-height: 100%;
     flex-shrink: 0;
+    border-left: 1px solid #3A3A3A;
 }
 
 .filter-body {
@@ -10,7 +11,6 @@
     width: 400px;
     right: 0;
     padding: 8px;
-    border-left: 1px solid #3A3A3A;
 }
 
 .filter_search {
@@ -33,6 +33,7 @@
     border: none;
     font-size: 14px;
     color: #ffff;
+    outline: none;
 }
 
 .tag {

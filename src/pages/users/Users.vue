@@ -2,8 +2,11 @@
   import TheSideBar from '@/components/sideBar/TheSideBar.vue'
   import {getMethods} from '@/methods.js'
   import { useAuthStore } from '@/stores/authStore' 
+  import { useUserStore } from '@/stores/userStore' 
+
+  import VButtonShowMore from '@/components/buttonShowMore/VButtonShowMore.vue'
   
-  import {reactive, onMounted} from 'vue'
+  import {reactive} from 'vue'
   import { useRouter } from 'vue-router'
 
   import './style.css'
@@ -11,6 +14,7 @@
   const useMethod = getMethods()
   const router = useRouter()
   const authStore = useAuthStore()
+  const userStore = useUserStore()
 
   document.body.style.backgroundColor = '#000'
 
@@ -21,9 +25,15 @@
   const objUsers = reactive({
     users: [],
   })
-  
+
   const objSelect = reactive({
-    activeSelect: false
+    activeSelect: false,
+  })
+  
+  const objParamsPage = reactive({
+    selectedPeriod: 'month',
+    page: 1,
+    idLastUser: 0
   })
 
   const odjSortArrow = reactive({
@@ -62,6 +72,20 @@
     }
   }
 
+  async function handlerSelectText() {
+    if (objParamsPage.selectedPeriod === 'month') {
+      objParamsPage.selectedPeriod = 'all'
+    } else objParamsPage.selectedPeriod = 'month'
+
+    await useMethod.getUsers(objParamsPage)
+  }
+
+  async function handlerShowMore() {
+    objParamsPage.page++
+    objParamsPage.idLastUser = userStore.data.users[userStore.data.users.length - 1].id
+    await useMethod.getUsers(objParamsPage)
+  }
+
 </script>
 <template>
   <div class="DF">
@@ -70,11 +94,11 @@
       <div class="stark_rating DF AIC">
         <p class="stark_rating-text">Pейтинг старков</p>
         <div class="stark_rating-select DF AIC" @click="objSelect.activeSelect = !objSelect.activeSelect">
-          <p class="stark_rating-select_text">За месяц</p>
+          <p class="stark_rating-select_text">{{ objParamsPage.selectedPeriod == 'month' ? 'За месяц' : 'За все время' }}</p>
           <div :class="objSelect.activeSelect ? 'stark_rating-select_arrow_down' :  'stark_rating-select_arrow_up'"></div>
           <div v-if="objSelect.activeSelect" class="stark_rating-selectActive_options">
-            <p class="stark_rating-select_text">За месяц</p>
-            <p class="stark_rating-select_text text_options_margin">За все время</p>
+            <p class="stark_rating-select_text" @click="handlerSelectText">За месяц</p>
+            <p class="stark_rating-select_text text_options_margin" @click="handlerSelectText">За все время</p>
           </div>
         </div>
       </div>
@@ -152,6 +176,7 @@
           </tr>
         </tbody>
       </table>
+      <VButtonShowMore @click="handlerShowMore"/>
     </section>
   </div>
 </template>

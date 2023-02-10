@@ -1,16 +1,18 @@
-.single_post-body {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.single_post {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 50px 0 0;
 }
 
-.single_post-content {
+.single_post-body {
     width: 680px;
+    min-height: 100vh;
+    padding: 0 24px;
+    flex-shrink: 0;
 }
 
 .single_post-content_title {
+    margin: 0 0 24px;
     font-size: 32px;
     font-weight: 700;
     color: black;
@@ -104,4 +106,94 @@
 .work_add-button {
     width: 40px;
     height: 40px;
+}
+
+.single_post-notes_title {
+    margin: 0 0 20px;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 130%;
+    letter-spacing: -.02em;
+    color: #000;
+}
+
+.single_post-notes {
+    width: 100%;
+}
+
+.single_post-notes_button {
+    width: 100%;
+    height: 47px;
+    background: #000000;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+.single_post-new_notes_box {
+    background: #FFFFFF;
+    border-radius: 8px;
+    position: relative
+}
+
+.single_post-new_notes_input {
+    min-height: 50px;
+    padding: 16px 42px 16px 16px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #181818;
+    width: 100%;
+    outline: none;
+}
+
+.single_post-new_notes_img {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.single_post-new_notes_img svg {
+    max-height: 100%;
+}
+
+.single_post-notes_list {
+    background: #FFFFFF;
+    border-radius: 8px;
+    margin-bottom: 4px;
+}
+
+.single_post-notes_list-item {
+    padding: 16px;
+    position: relative;
+}
+
+.notes_list-item_info {
+    margin: 0 0 10px;
+}
+
+.notes_list-item_info_date {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #18181866;
+}
+
+.item_info_actions-img {
+    height: 16px;
+    cursor: pointer;
+}
+
+.item_info_actions-img svg {
+    max-height: 100%;
+}
+
+.actions-img_edit {
+    margin: 0 10px 0 0;
 }

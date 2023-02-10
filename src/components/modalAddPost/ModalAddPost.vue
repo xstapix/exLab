@@ -171,10 +171,6 @@
     }
   }
 
-  const handlerDesc = (e) => {
-    objNewPost.post.desc = e.target.textContent 
-  }
-
   const handlerSavePost = () => {
     editor.save().then((outputData) => {
       objNewPost.post.editorData = outputData
@@ -238,11 +234,10 @@
             </div>
             <div 
               class="form-field_input" 
-              @input="handlerDesc"
+              @input="(e) => {objNewPost.post.desc = e.target.textContent}"
               contenteditable 
               placeholder="Как я нашла работу на фрилансе с нуля?">
             </div>
-            <!-- <input class="form-field_input" type="text" v-model="objNewPost.post.desc" placeholder="Как я нашла работу на фрилансе с нуля?"> -->
           </div>
           <div class="post_modal-body_form-field">
             <div class="DF JCSB">

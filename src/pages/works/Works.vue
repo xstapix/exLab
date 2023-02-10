@@ -1,5 +1,6 @@
 <script setup>
   import TheSideBar from '@/components/sideBar/TheSideBar.vue'
+  import VButtonShowMore from '@/components/buttonShowMore/VButtonShowMore.vue'
 
   import { useWorkStore } from '@/stores/workStore'
   import {getMethods} from '@/methods.js'
@@ -18,12 +19,17 @@
     renderKey: 0
   })
 
+  const objParamsPage = reactive({
+    page: 1,
+    idLastMaterial: null
+  })
+
   document.body.style.backgroundColor = '#000'
 
   setWorks()
 
   async function setWorks() {
-    await useMethod.getWorks()
+    await useMethod.getWorks(objParamsPage)
   }
 
   const handlerModal = (e) => {
@@ -41,6 +47,13 @@
     state.renderKey++
   }
 
+  async function handlerShowMore() {
+    objParamsPage.page++
+    objParamsPage.idLastMaterial = workStore.data.works[workStore.data.works.length - 1].id
+
+    await useMethod.getWorks(objParamsPage)
+  }
+
 </script>
 
 <template>
@@ -48,14 +61,14 @@
     <TheSideBar/>
     <section class="works-body" v-if="workStore.data.works">
       <div class="works-content">
-        <div v-for="item in workStore.data.works.slice(0, state.shownWorks)" 
+        <div v-for="item in workStore.data.works" 
           @click="handlerModal" 
           :key="item.id"
           class="works-item">
           <div :style="{backgroundImage: item.imgPreview}" :id="item.id" class="works-item_img"></div>
         </div>
       </div>
-      <button class="works_button-more" @click="state.shownWorks += 8">Показать ещё +</button>
+      <VButtonShowMore @click="handlerShowMore"/>
     </section> 
     <div v-else></div>
   </div>

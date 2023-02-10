@@ -31,6 +31,7 @@
     margin: 0;
     font-size: 12px;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .stark_rating-select_arrow_up {
@@ -60,6 +61,7 @@
     position: absolute;
     top: 30px;
     left: 0;
+    cursor: default;
 }
 
 .text_options_margin {

@@ -1,5 +1,5 @@
 @media (max-width: 1600px) {
-  .single_post-content{
-    width: 552px;
-  }
+    .single_post-body {
+        width: 600px;
+    }
 }

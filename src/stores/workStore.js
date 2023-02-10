@@ -7,7 +7,7 @@ export const useWorkStore = defineStore('worksStore', () => {
     })
 
     const changeWorksList = (newList) => {
-        data.works = newList
+        data.works = newList //добавить spread ...
     }
 
     return {

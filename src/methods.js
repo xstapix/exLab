@@ -15,8 +15,13 @@ export const getMethods = () => {
         return tags.data
     }
 
-    async function getPosts() {
-        const posts = await axios.get('https://63385f16937ea77bfdbf1257.mockapi.io/kronaPostsList')
+    async function getPosts(objParam) {
+        const posts = await axios({
+            method: "get",
+            url: "https://63385f16937ea77bfdbf1257.mockapi.io/kronaPostsList",
+            data: objParam,
+            headers: { "Content-Type": "" },
+        })
         postsStore.changePostsList(posts.data)
 
         return posts.data
@@ -28,8 +33,14 @@ export const getMethods = () => {
         return post.data
     }
 
-    async function getUsers() {
-        const users = await axios.get('https://6392fd90ab513e12c5ff47f0.mockapi.io/peopleVSU')
+    async function getUsers(objParam) {
+        const users = await axios({
+            method: "get",
+            url: "https://6392fd90ab513e12c5ff47f0.mockapi.io/peopleVSU",
+            data: objParam,
+            headers: { "Content-Type": "" },
+        })
+
         userStore.changeUsersList(users.data)
 
         return users.data
@@ -41,8 +52,14 @@ export const getMethods = () => {
         return auth.data
     }
 
-    async function getWorks() {
-        const works = await axios.get('https://6392fd90ab513e12c5ff47f0.mockapi.io/properties')
+    async function getWorks(objParam) {
+        const works = await axios({
+            method: "get",
+            url: "https://6392fd90ab513e12c5ff47f0.mockapi.io/properties",
+            data: objParam,
+            headers: { "Content-Type": "" },
+        })
+
         workStore.changeWorksList(works.data)
 
         return works.data
@@ -66,6 +83,6 @@ export const getMethods = () => {
         getUsers,
         getAuth,
         getWorks,
-        postWork
+        postWork,
     }
 }
