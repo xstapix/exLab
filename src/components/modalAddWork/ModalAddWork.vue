@@ -55,7 +55,9 @@
   const handlerSendWork = () => {
     let formData = new FormData()
     
-    formData.append('method', 'sendWorkImgs')
+    // formData.append('method', 'sendWorkImgs')
+    // formData.append('method', 'sendTest')
+    formData.append('method', 'sendTest2')
     formData.append('image', objModal.newWork.img)
     
     sendWork()

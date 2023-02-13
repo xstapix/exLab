@@ -1,5 +1,17 @@
 @media (max-width: 1600px) {
+    .single_post {
+        width: 1000px;
+    }
     .single_post-body {
         width: 600px;
+    }
+    .additional-post_content {
+        margin: 50px 0 0;
+    }
+    .single_post-content_title {
+        font-size: 28px;
+    }
+    .single_post-notes_title {
+        font-size: 22px;
     }
 }

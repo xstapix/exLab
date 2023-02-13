@@ -7,11 +7,11 @@ export const useParamsPageStore = defineStore('useParamsPageStore', () => {
 
     const objParamsPage = reactive({
         page: 1,
-        activeTags: [],
+        active_tags: [],
         search: '',
-        idLastMaterial: 0,
-        toggleFavorite: false,
-        toggleUnfinished: false
+        id_last_material: 0,
+        toggle_favorite: false,
+        toggle_unfinished: false
     })
 
     const changePage = () => {

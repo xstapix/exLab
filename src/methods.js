@@ -16,15 +16,13 @@ export const getMethods = () => {
     }
 
     async function getPosts(objParam) {
-        const posts = await axios({
-            method: "get",
-            url: "https://63385f16937ea77bfdbf1257.mockapi.io/kronaPostsList",
-            data: objParam,
-            headers: { "Content-Type": "" },
-        })
-        postsStore.changePostsList(posts.data)
+        objParam.method = 'getMaterialsPage'
+        const posts = await axios.post("https://kronadev.ru/api_2/", objParam)
+        console.log(posts);
+        postsStore.changePostsList(posts.data.materials)
 
-        return posts.data
+
+        return posts.data.materials
     }
 
     async function getPost(currentPostId) {
@@ -38,7 +36,6 @@ export const getMethods = () => {
             method: "get",
             url: "https://6392fd90ab513e12c5ff47f0.mockapi.io/peopleVSU",
             data: objParam,
-            headers: { "Content-Type": "" },
         })
 
         userStore.changeUsersList(users.data)
@@ -57,7 +54,6 @@ export const getMethods = () => {
             method: "get",
             url: "https://6392fd90ab513e12c5ff47f0.mockapi.io/properties",
             data: objParam,
-            headers: { "Content-Type": "" },
         })
 
         workStore.changeWorksList(works.data)
@@ -66,11 +62,8 @@ export const getMethods = () => {
     }
 
     async function postWork(formData) {
-        const answer = await axios({
-            method: "post",
-            url: "https://kronadev.ru/api_2/",
-            data: formData,
-            headers: { "Content-Type": "" },
+        const answer = await axios.post("https://kronadev.ru/api_2/", {
+            method: 'sendTest2'
         })
 
         return answer

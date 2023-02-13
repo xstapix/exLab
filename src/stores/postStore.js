@@ -8,7 +8,10 @@ export const useStore = defineStore('postsStore', () => {
     })
 
     const changePostsList = (newList) => {
-        data.posts = newList //добавить spread ...
+        let xx = data.posts.concat(newList)
+
+        data.posts = xx //добавить spread ...
+        console.log(xx);
     }
 
     const changeTagsList = (newList) => {

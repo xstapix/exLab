@@ -28,6 +28,8 @@
     const allPosts = await useMethod.getPosts(paramsPageStore.objParamsPage)
     objMaterials.arrPosts = JSON.parse(JSON.stringify(allPosts))
 
+    console.log(objMaterials.arrPosts);
+
     objMaterials.arrTags.unshift({ id: 30, tag: 'Все', active: true })
   }
 
@@ -45,15 +47,15 @@
     } else {
       objMaterials.arrTags[index].active = !objMaterials.arrTags[index].active
       if (!objMaterials.arrTags[index].active) {
-        let filterActiveTags= paramsPageStore.objParamsPage.activeTags.filter(e => e !== tagId)
+        let filterActiveTags = paramsPageStore.objParamsPage.active_tags.filter(e => e !== tagId)
 
         paramsPageStore.changeActiveTags(filterActiveTags)
       } else {
-        let expandOriginalActiveTags = paramsPageStore.objParamsPage.activeTags
+        let expandOriginalActiveTags = paramsPageStore.objParamsPage.active_tags
         paramsPageStore.changeActiveTags([...expandOriginalActiveTags, tagId])
         objMaterials.arrTags[0].active = false
       }
-      if (paramsPageStore.objParamsPage.activeTags.length == 0) {
+      if (paramsPageStore.objParamsPage.active_tags.length == 0) {
         objMaterials.arrTags[0].active = true
         postsStore.changePostsList(objMaterials.arrPosts)
       } 
@@ -113,10 +115,10 @@
           </div>
           <p class="filter_actions-text">Показать незавершенные</p>
           <div class="filter_actions-toggle_check" 
-            :class="{toggle_check_checked: paramsPageStore.objParamsPage.toggleUnfinished}"
+            :class="{toggle_check_checked: paramsPageStore.objParamsPage.toggle_unfinished}"
             @click="handlerActionUnfinished">
             <div class="filter_actions-toggle_dot_check" 
-              :class="{toggle_dot_check_checked: paramsPageStore.objParamsPage.toggleUnfinished}"></div>
+              :class="{toggle_dot_check_checked: paramsPageStore.objParamsPage.toggle_unfinished}"></div>
           </div>
         </div>
         <div class="DF AIC filter_actions-item" >
@@ -125,10 +127,10 @@
           </div>
           <p class="filter_actions-text">Показать избранное</p>
           <div class="filter_actions-toggle_favorite"
-            :class="{toggle_favorite_checked: paramsPageStore.objParamsPage.toggleFavorite}"
+            :class="{toggle_favorite_checked: paramsPageStore.objParamsPage.toggle_favorite}"
             @click="handlerActionFavorite">
             <div class="filter_actions-toggle_dot_favorite" 
-              :class="{toggle_dot_favorite_checked: paramsPageStore.objParamsPage.toggleFavorite}"></div>
+              :class="{toggle_dot_favorite_checked: paramsPageStore.objParamsPage.toggle_favorite}"></div>
           </div>
         </div>
       </div>

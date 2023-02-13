@@ -1,0 +1,27 @@
+.additional-post_content-work_add {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 175px;
+    height: 175px;
+    margin: 0 0 50px;
+    background-color: #ffffff;
+    border: 2px dashed #000;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.work_add-text {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #000;
+    padding: 0 15px;
+}
+
+.work_add-button {
+    width: 40px;
+    height: 40px;
+}

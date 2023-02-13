@@ -1,0 +1,87 @@
+.single_post-notes {
+    width: 100%;
+    flex-shrink: 1;
+}
+
+.single_post-notes_title {
+    margin: 0 0 20px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 130%;
+    letter-spacing: -.02em;
+    color: #000;
+}
+
+.single_post-notes_button {
+    width: 100%;
+    height: 47px;
+    background: #000000;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.single_post-new_notes_box {
+    background: #FFFFFF;
+    border-radius: 8px;
+    position: relative;
+    margin: 0 0 4px;
+}
+
+.single_post-new_notes_input {
+    min-height: 50px;
+    padding: 16px 42px 16px 16px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #181818;
+    width: 100%;
+    outline: none;
+}
+
+.single_post-new_notes_img {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.single_post-new_notes_img svg {
+    max-height: 100%;
+}
+
+.single_post-notes_list-item {
+    background: #FFFFFF;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    padding: 16px;
+    position: relative;
+}
+
+.notes_list-item_info {
+    margin: 0 0 10px;
+}
+
+.notes_list-item_info_date {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #18181866;
+}
+
+.item_info_actions-img {
+    height: 16px;
+    cursor: pointer;
+}
+
+.item_info_actions-img svg {
+    max-height: 100%;
+}
+
+.actions-img_edit {
+    margin: 0 10px 0 0;
+}
