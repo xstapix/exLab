@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue';
+
 import { useStore } from '@/stores/postStore'
 
 export const useParamsPageStore = defineStore('useParamsPageStore', () => {
@@ -19,7 +20,7 @@ export const useParamsPageStore = defineStore('useParamsPageStore', () => {
     }
 
     const changeActiveTags = (newTags) => {
-        objParamsPage.activeTags = newTags
+        objParamsPage.active_tags = newTags
     }
 
     const changeSearch = (newSearch) => {
@@ -27,15 +28,15 @@ export const useParamsPageStore = defineStore('useParamsPageStore', () => {
     }
 
     const changeLastId = () => {
-        objParamsPage.idLastMaterial = postsStore.data.posts[postsStore.data.posts.length - 1].id
+        objParamsPage.id_last_material = postsStore.data.posts[postsStore.data.posts.length - 1].id
     }
 
     const changeToggleFavorite = () => {
-        objParamsPage.toggleFavorite = !objParamsPage.toggleFavorite
+        objParamsPage.toggle_favorite = !objParamsPage.toggle_favorite
     }
 
     const changeToggleUnfinished = () => {
-        objParamsPage.toggleUnfinished = !objParamsPage.toggleUnfinished
+        objParamsPage.toggle_unfinished = !objParamsPage.toggle_unfinished
     }
 
     return {

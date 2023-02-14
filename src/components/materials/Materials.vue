@@ -11,8 +11,8 @@
 
   import './style.css'
 
-  const ModalAddPost = defineAsyncComponent(
-    () => import('@/components/modalAddPost/ModalAddPost.vue')
+  const ModalAddMaterial = defineAsyncComponent(
+    () => import('@/components/modalAddMaterial/ModalAddMaterial.vue')
   )
 
   const ModalBlockedPost = defineAsyncComponent(
@@ -61,23 +61,20 @@
     paramsPageStore.changePage()
     paramsPageStore.changeLastId()
 
-    await useMethod.getPosts(paramsPageStore.objParamsPage)
+    await useMethod.getMaterials(paramsPageStore.objParamsPage)
   }
 
-  function getNoun(number, one, two, five) {
-    let n = Math.abs(number);
-    n %= 100;
-    if (n >= 5 && n <= 20) {
-      return five;
+  const addWordMinute = (number) => {
+    let remainder = Math.abs(number) % 10;
+
+    if (remainder === 1) {
+      return `${number} минута`;
     }
-    n %= 10;
-    if (n === 1) {
-      return one;
+    if (remainder >= 2 && remainder <= 4) {
+      return `${number} минуты`;
     }
-    if (n >= 2 && n <= 4) {
-      return two;
-    }
-    return five;
+
+    return `${number} минут`;
   }
 
  </script>
@@ -85,7 +82,7 @@
 <template>
   <div style="width: 100%;">
     <div v-if="postsStore.data.posts" class="postsBody"> 
-      <div class="add_post">
+      <div v-if="authStore.data.auth" class="add_post">
         <div class="add_post-tip DF">
           +3
           <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.15129 1.0843C6.54247 0.454335 7.45918 0.454335 7.85036 1.0843L9.25806 3.35128C9.39565 3.57286 9.61437 3.73191 9.86756 3.79452L12.4578 4.43498C13.1768 4.61276 13.4597 5.48318 12.9828 6.04977L11.2619 8.09385C11.0942 8.29311 11.0108 8.54997 11.0295 8.80977L11.2217 11.475C11.275 12.2143 10.5336 12.7526 9.84717 12.4731L7.37793 11.4677C7.13616 11.3692 6.86549 11.3692 6.62372 11.4677L4.15448 12.4731C3.46801 12.7526 2.72667 12.2143 2.77997 11.475L2.97211 8.80977C2.99084 8.54997 2.90745 8.29311 2.7397 8.09385L1.01889 6.04977C0.541904 5.48318 0.824883 4.61276 1.54386 4.43498L4.13408 3.79452C4.38728 3.73191 4.606 3.57286 4.74359 3.35128L6.15129 1.0843Z" fill="#7000FF"></path></svg>
@@ -100,9 +97,9 @@
         :class="objCurrentUser.user ? objCurrentUser.user.account.viewed.includes(post.id) ? 'post_checked' :  '' : ''">
         <router-link 
           @click="handlerBlockedPost" 
-          :to="authStore.data.auth ? `/post${post.link}` : ''"
+          :to="authStore.data.auth && post.open ? `${post.link}` : ''"
           class="DF FDC JCSB">
-          <div class="post_info">
+          <div class="DF JCSB">
             <div class="DF AIC">
               <div class="post_info_author">
                 <img class="post_info_author-img" :src="post.author.img" alt="">
@@ -113,11 +110,12 @@
               </div>
               <div class="post_info_date">
                 <p>{{ post.date }}</p>
-                <p>{{ post.time + getNoun(Number(post.time), ' минута', ' минуты', ' минут') }}</p>
+                <p>{{ addWordMinute(post.time) }}</p>
               </div>
             </div>
-            <div v-if="!authStore.data.auth" class="post_close">
+            <div v-if="!authStore.data.auth && !post.open" class="post_close">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_783_6324)"><path d="M8 1.66602C8.72733 1.66602 9.41133 1.86068 10 2.20202C10.0797 2.24369 10.1501 2.30105 10.207 2.37065C10.2639 2.44025 10.3062 2.52064 10.3313 2.60699C10.3563 2.69334 10.3636 2.78387 10.3528 2.87313C10.3419 2.96238 10.3132 3.04852 10.2682 3.12637C10.2232 3.20421 10.1629 3.27215 10.091 3.32609C10.019 3.38004 9.93692 3.41887 9.84959 3.44026C9.76226 3.46165 9.6715 3.46516 9.58278 3.45057C9.49406 3.43597 9.40921 3.40358 9.33333 3.35535C8.92786 3.12125 8.46789 2.99803 7.99968 2.99808C7.53148 2.99814 7.07154 3.12147 6.66612 3.35567C6.2607 3.58986 5.92408 3.92668 5.69012 4.33224C5.45617 4.7378 5.33311 5.19781 5.33333 5.66602L12.6667 5.66668C13.0203 5.66668 13.3594 5.80716 13.6095 6.05721C13.8595 6.30726 14 6.64639 14 7.00002V13.6667C14 14.0203 13.8595 14.3594 13.6095 14.6095C13.3594 14.8595 13.0203 15 12.6667 15H3.33333C2.97971 15 2.64057 14.8595 2.39052 14.6095C2.14048 14.3594 2 14.0203 2 13.6667V6.99935C2 6.64573 2.14048 6.30659 2.39052 6.05654C2.64057 5.80649 2.97971 5.66602 3.33333 5.66602H4C4 4.60515 4.42143 3.58773 5.17157 2.83759C5.92172 2.08744 6.93913 1.66602 8 1.66602ZM12.6667 6.99935H3.33333V13.666H12.6667V6.99935ZM8 8.33268C8.28439 8.33277 8.56131 8.42379 8.79029 8.59245C9.01928 8.7611 9.18834 8.99856 9.27278 9.27013C9.35722 9.54169 9.35262 9.83315 9.25965 10.1019C9.16667 10.3707 8.9902 10.6027 8.756 10.764L8.66667 10.8207V11.666C8.66648 11.8359 8.60141 11.9994 8.48477 12.1229C8.36812 12.2465 8.2087 12.3208 8.03907 12.3308C7.86944 12.3408 7.70241 12.2856 7.57211 12.1765C7.44181 12.0674 7.35807 11.9127 7.338 11.744L7.33333 11.666V10.8207C7.07916 10.6739 6.88052 10.4474 6.76821 10.1762C6.65589 9.90506 6.63619 9.60442 6.71216 9.32092C6.78812 9.03742 6.95551 8.7869 7.18836 8.60823C7.4212 8.42955 7.7065 8.3327 8 8.33268Z" fill="white"></path><path d="M10 2.20202C9.41133 1.86068 8.72733 1.66602 8 1.66602C6.93913 1.66602 5.92172 2.08744 5.17157 2.83759C4.42143 3.58773 4 4.60515 4 5.66602H5.33333C5.33311 5.19781 5.45617 4.7378 5.69012 4.33224C5.92408 3.92668 6.2607 3.58986 6.66612 3.35567C7.07154 3.12147 7.53148 2.99814 7.99968 2.99808C8.46789 2.99803 8.92786 3.12125 9.33333 3.35535C9.40921 3.40358 9.49406 3.43597 9.58278 3.45057C9.6715 3.46516 9.76226 3.46165 9.84959 3.44026C9.93692 3.41887 10.019 3.38004 10.091 3.32609C10.1629 3.27215 10.2232 3.20421 10.2682 3.12637C10.3132 3.04852 10.3419 2.96238 10.3528 2.87313C10.3636 2.78387 10.3563 2.69334 10.3313 2.60699C10.3062 2.52064 10.2639 2.44025 10.207 2.37065C10.1501 2.30105 10.0797 2.24369 10 2.20202Z" fill="white"></path><path d="M6 2.20201C6.58867 1.86068 7.27267 1.66602 8 1.66602C9.06087 1.66602 10.0783 2.08744 10.8284 2.83758C11.5786 3.58773 12 4.60514 12 5.66601H10.6667C10.6669 5.19781 10.5438 4.73779 10.3099 4.33223C10.0759 3.92667 9.73876 3.58955 9.33333 3.35535C8.92786 3.12125 8.46789 2.99803 7.99968 2.99808C7.53148 2.99814 7.07154 3.12147 6.66612 3.35567C6.59024 3.4039 6.50594 3.43597 6.41722 3.45056C6.3285 3.46515 6.23774 3.46165 6.15041 3.44026C6.06308 3.41887 5.98098 3.38003 5.90904 3.32609C5.83711 3.27214 5.77683 3.20421 5.73184 3.12636C5.68684 3.04852 5.65806 2.96238 5.64721 2.87312C5.63637 2.78387 5.6437 2.69334 5.66875 2.60699C5.6938 2.52063 5.73606 2.44024 5.79299 2.37065C5.84991 2.30105 5.92033 2.24369 6 2.20201Z" fill="white"></path></g><defs><clipPath id="clip0_783_6324"><rect width="16" height="16" fill="white"></rect></clipPath></defs></svg>
+              <div class="post_close-tip">Доступно только членам клуба</div>
             </div>
           </div>
           <div class="post_text">
@@ -146,9 +144,9 @@
       </div>
     </div>
     <div v-else>Loading...</div>
-    <VButtonShowMore @click="handlerShowMore"/>
+    <VButtonShowMore v-if="postsStore.data.next" @click="handlerShowMore"/>
   </div>
-  <ModalAddPost 
+  <ModalAddMaterial 
     v-if="objModal.activeModalAddPost"
     @closeModal="(close) => objModal.activeModalAddPost = close"
     :activeModal="objModal.activeModalAddPost"/>

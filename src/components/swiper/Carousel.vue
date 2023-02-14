@@ -6,7 +6,7 @@
   import {getMethods} from '@/methods.js'
 
   import './style.css'
-  import '@/components/list/style.css'
+  import '@/components/materials/style.css'
   import './media-style.css'
 
   const useMethod = getMethods()
@@ -21,7 +21,7 @@
   setState()
 
   async function setState() {
-    const allPosts = await useMethod.getPosts()
+    const allPosts = await useMethod.getMaterials()
     
     let filteredPosts = []
     let idСontributedPosts = []

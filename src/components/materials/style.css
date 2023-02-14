@@ -4,6 +4,7 @@
     grid-template-columns: repeat(auto-fill, minmax(335px, 1fr));
     grid-gap: 10px 10px;
     gap: 10px;
+    margin-left: 56px;
 }
 
 .add_post {
@@ -108,8 +109,31 @@
 }
 
 .post_close {
+    position: relative;
     width: 16px;
     height: 16px;
+}
+
+.post_close:hover>.post_close-tip {
+    display: block;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    color: #000;
+    background: #FFFFFF;
+    box-shadow: 0 4px 8px #00000040;
+    border-radius: 2px;
+    height: 28px;
+    padding: 8px;
+    position: absolute;
+    right: 0;
+    width: 175px;
+    text-align: center;
+    top: -7px;
+}
+
+.post_close-tip {
+    display: none;
 }
 
 .post_text {
@@ -126,7 +150,7 @@
 
 .post_previewText {
     margin: 0;
-    height: 36px;
+    max-height: 36px;
     overflow: hidden;
     font-size: 14px;
     font-weight: 400;

@@ -25,7 +25,7 @@
     const allTags = await useMethod.getTags()
     objMaterials.arrTags = JSON.parse(JSON.stringify(allTags))
     
-    const allPosts = await useMethod.getPosts(paramsPageStore.objParamsPage)
+    const allPosts = await useMethod.getMaterials(paramsPageStore.objParamsPage)
     objMaterials.arrPosts = JSON.parse(JSON.stringify(allPosts))
 
     console.log(objMaterials.arrPosts);
@@ -60,7 +60,7 @@
         postsStore.changePostsList(objMaterials.arrPosts)
       } 
 
-      const newMaterials = await useMethod.getPosts(paramsPageStore.objParamsPage)
+      const newMaterials = await useMethod.getMaterials(paramsPageStore.objParamsPage)
 
       objMaterials.arrPosts = JSON.parse(JSON.stringify(newMaterials))
     }
@@ -68,7 +68,7 @@
 
   async function handlerEnter(e) {
     if (e.code == 'Enter') {
-      const newMaterials = await useMethod.getPosts(paramsPageStore.objParamsPage)
+      const newMaterials = await useMethod.getMaterials(paramsPageStore.objParamsPage)
 
       objMaterials.arrPosts = JSON.parse(JSON.stringify(newMaterials))
     }
@@ -76,12 +76,12 @@
 
   async function handlerActionFavorite() {
     paramsPageStore.changeToggleFavorite()
-    await useMethod.getPosts(paramsPageStore.objParamsPage)
+    await useMethod.getMaterials(paramsPageStore.objParamsPage)
   }
 
   async function handlerActionUnfinished() {
     paramsPageStore.changeToggleUnfinished()
-    await useMethod.getPosts(paramsPageStore.objParamsPage)
+    await useMethod.getMaterials(paramsPageStore.objParamsPage)
   }
 </script>
 

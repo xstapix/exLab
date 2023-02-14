@@ -1,6 +1,7 @@
 .users_body {
-    margin: 16px;
     width: 100%;
+    margin: 0 0 0 56px;
+    padding: 16px;
 }
 
 .stark_rating {

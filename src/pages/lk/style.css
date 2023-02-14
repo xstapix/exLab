@@ -2,6 +2,7 @@
     flex-shrink: 0;
     width: 290px;
     height: 100vh;
+    margin: 0 0 0 56px;
     border-right: 1px solid #3A3A3A;
 }
 
@@ -77,4 +78,93 @@
     line-height: 17px;
     color: #fff;
     cursor: pointer;
+}
+
+.satellites-body {
+    display: grid;
+    width: 100%;
+    grid-gap: 8px 8px;
+    grid-template-columns: repeat(auto-fill, minmax(332px, .5fr));
+    grid-auto-rows: max-content;
+}
+
+.satellites-body_material-draft {
+    height: 200px;
+    padding: 16px;
+    border-radius: 8px;
+    background: #333333;
+    position: relative;
+}
+
+.material-info_img {
+    width: 40px;
+}
+
+.material-info_img img {
+    max-width: 100%;
+}
+
+.material-info_edit {
+    width: 15px;
+}
+
+.material-info_edit svg {
+    max-width: 100%;
+}
+
+.material-text {
+    margin: 16px 0 0;
+}
+
+.material-text_title {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -.03em;
+    color: #fff;
+    max-height: 44px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.material-text_desc {
+    font-weight: 500;
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 17px;
+    color: #fff9;
+    max-height: 51px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.satellites-body_material-draft:hover>.material-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    background: rgba(0, 0, 0, .3);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+}
+
+.material-blur {
+    display: none;
+}
+
+.material-blur_action {
+    width: 40px;
+    cursor: pointer;
+}
+
+.material-blur_action svg {
+    max-width: 100%;
+}
+
+.blur_action-margin_fix {
+    margin: 0 0 0 8px;
 }

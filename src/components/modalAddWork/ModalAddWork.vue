@@ -71,7 +71,7 @@
     objModal.newWork.preview = null
 
     async function sendWork() {
-      await useMethod.postWork(formData)
+      await useMethod.sendWork(formData)
         .then((res) => console.log(res))
         .catch((rej) => console.log(rej))
     }

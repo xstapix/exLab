@@ -18,9 +18,9 @@
 
   document.body.style.backgroundColor = '#000'
 
-  if (!authStore.data.auth) {
-    router.push('/login')
-  }
+  // if (!authStore.data.auth) {
+  //   router.push('/login')
+  // }
   
   const objUsers = reactive({
     users: [],

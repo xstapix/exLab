@@ -16,7 +16,7 @@
 
     if(getCookie('cronaClubUserEmail')){
       setUser()
-    }
+    } 
 
     function getCookie(name) {
       let matches = document.cookie.match(new RegExp(

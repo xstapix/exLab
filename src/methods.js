@@ -15,12 +15,12 @@ export const getMethods = () => {
         return tags.data
     }
 
-    async function getPosts(objParam) {
+    async function getMaterials(objParam) {
         objParam.method = 'getMaterialsPage'
         const posts = await axios.post("https://kronadev.ru/api_2/", objParam)
-        console.log(posts);
-        postsStore.changePostsList(posts.data.materials)
 
+        postsStore.changePostsList(posts.data.materials)
+        postsStore.changeNext(posts.data.next)
 
         return posts.data.materials
     }
@@ -33,7 +33,7 @@ export const getMethods = () => {
 
     async function getUsers(objParam) {
         const users = await axios({
-            method: "get",
+            method: "post",
             url: "https://6392fd90ab513e12c5ff47f0.mockapi.io/peopleVSU",
             data: objParam,
         })
@@ -51,7 +51,7 @@ export const getMethods = () => {
 
     async function getWorks(objParam) {
         const works = await axios({
-            method: "get",
+            method: "post",
             url: "https://6392fd90ab513e12c5ff47f0.mockapi.io/properties",
             data: objParam,
         })
@@ -61,21 +61,19 @@ export const getMethods = () => {
         return works.data
     }
 
-    async function postWork(formData) {
-        const answer = await axios.post("https://kronadev.ru/api_2/", {
-            method: 'sendTest2'
-        })
+    async function sendWork(formData) {
+        const answer = await axios.post("https://kronadev.ru/api_2/", formData)
 
         return answer
     }
 
     return {
         getTags,
-        getPosts,
+        getMaterials,
         getPost,
         getUsers,
         getAuth,
         getWorks,
-        postWork,
+        sendWork,
     }
 }
