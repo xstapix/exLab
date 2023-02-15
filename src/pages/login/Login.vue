@@ -7,6 +7,7 @@
   import { useRouter } from 'vue-router'
 
   import './style.css'
+  import './media-style.css'
   
   const useMethod = getMethods()
   const authStore = useAuthStore()
@@ -20,7 +21,7 @@
   async function handleLogin() {
     const auth = await useMethod.getAuth()
 
-    if (auth.account.email === state.email && auth.account.password === state.password) {
+    if (auth.account.email.email_text === state.email && auth.account.password === state.password) {
       authStore.changeAuth(true)
       authStore.changeUser(auth)
 

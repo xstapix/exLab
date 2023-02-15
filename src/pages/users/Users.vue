@@ -136,7 +136,7 @@
                   <img class="table_account_avatar-img" src="/yyhqfinwoon1yvcb6hm7jam67nnus0ec.png" alt="" srcset="">
                 </div>
                 <div class="table_account_text">
-                  <p class="table_account_text-name">{{user.account.name}}</p>
+                  <p class="table_account_text-name">{{user.account.account_name}}</p>
                   <p class="table_account_text-which_stark">{{ user.stark }}</p>
                 </div>
               </div>

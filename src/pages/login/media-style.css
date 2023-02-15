@@ -1,0 +1,29 @@
+@media (max-width: 1000px) {
+    .login_body {
+        margin-left: 155px;
+    }
+}
+
+@media (max-width: 680px) {
+    .background_space {
+        background-image: url('https://club.krona.studio/assets/mobbg.7f397e70.jpg');
+        background-position: center;
+        background-size: cover;
+        margin: 57px 0 0;
+    }
+    .login_body {
+        margin: 35px 0 0;
+        padding: 0 16px;
+    }
+    .login_body-text {
+        width: 100%;
+        font-size: 32px
+    }
+    .login_body-form {
+        width: 100%;
+    }
+    .login_body-register {
+        width: 100%;
+        padding-bottom: 57px;
+    }
+}

@@ -4,6 +4,15 @@
     margin: 0 0 0 56px;
 }
 
+.post_info_author {
+    height: 40px;
+    margin: 0 4px 0 0;
+}
+
+.post_info_author-img {
+    max-height: 100%;
+}
+
 .works-content {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
@@ -154,6 +163,7 @@
 }
 
 .post-preview_date {
+    margin: 0 0 0 16px;
     font-weight: 500;
     font-size: 12px;
     line-height: 15px;

@@ -51,12 +51,12 @@ export const getMethods = () => {
 
     async function getWorks(objParam) {
         const works = await axios({
-            method: "post",
+            method: "get",
             url: "https://6392fd90ab513e12c5ff47f0.mockapi.io/properties",
-            data: objParam,
         })
 
         workStore.changeWorksList(works.data)
+        console.log(works);
 
         return works.data
     }
