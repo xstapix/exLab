@@ -133,15 +133,12 @@
 
 .sidebar_top-item_user {
     margin: 4px auto 0;
+    width: 32px;
+    height: 32px;
 }
 
 .sidebar_top-item_user_img {
     max-width: 100%;
-}
-
-.sidebar_top-item_user {
-    width: 32px;
-    height: 32px;
 }
 
 .item_padding_fix {

@@ -1,8 +1,8 @@
 @media (max-width: 1600px) {
-  .media_width{
-    width: 552px;
-  }
-  .swiper{
-    width: 552px;
-  }
+    .media_width {
+        width: 100%;
+    }
+    .swiper {
+        width: 100%;
+    }
 }

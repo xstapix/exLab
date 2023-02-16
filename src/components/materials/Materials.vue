@@ -2,14 +2,17 @@
   import {useStore} from '@/stores/postStore'
   import { useAuthStore } from '@/stores/authStore'
   import { useParamsPageStore } from '@/stores/paramsPageStore'
+  import { useWindowSizeStore } from '@/stores/windowSizeStore' 
 
   import VButtonShowMore from '@/components/buttonShowMore/VButtonShowMore.vue'
+  import Filter from '@/components/tagFilter/Filter.vue'
   
   import {getMethods} from '@/methods.js'
 
   import {watch, reactive, defineAsyncComponent} from 'vue'
 
   import './style.css'
+  import './media-style.css'
 
   const ModalAddMaterial = defineAsyncComponent(
     () => import('@/components/modalAddMaterial/ModalAddMaterial.vue')
@@ -22,6 +25,7 @@
   const postsStore = useStore()
   const authStore = useAuthStore()
   const paramsPageStore = useParamsPageStore()
+  const windowSizeStore = useWindowSizeStore()
   const useMethod = getMethods()
 
   const objCurrentUser = reactive({
@@ -77,10 +81,12 @@
     return `${number} минут`;
   }
 
+  console.log(windowSizeStore.objAdaptive.currentSize);
  </script>
 
 <template>
-  <div style="width: 100%;">
+  <div class="materials-wrapper DF FDC">
+    <Filter v-if="windowSizeStore.objAdaptive.currentSize < 1200"/>
     <div v-if="postsStore.data.posts" class="postsBody"> 
       <div v-if="authStore.data.auth" class="add_post">
         <div class="add_post-tip DF">
@@ -146,6 +152,7 @@
     <div v-else>Loading...</div>
     <VButtonShowMore v-if="postsStore.data.next" @click="handlerShowMore"/>
   </div>
+  <Filter v-if="windowSizeStore.objAdaptive.currentSize > 1200"/>
   <ModalAddMaterial 
     v-if="objModal.activeModalAddPost"
     @closeModal="(close) => objModal.activeModalAddPost = close"

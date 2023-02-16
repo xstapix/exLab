@@ -5,6 +5,7 @@
   import { reactive } from 'vue';
 
   import './style.css'
+  import './media-style.css'
 
   document.body.style.backgroundColor = '#000'
 

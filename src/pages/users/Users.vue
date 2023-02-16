@@ -10,6 +10,7 @@
   import { useRouter } from 'vue-router'
 
   import './style.css'
+  import './media-style.css'
 
   const useMethod = getMethods()
   const router = useRouter()
@@ -46,6 +47,7 @@
 
   async function setState() {
     objUsers.users = await useMethod.getUsers()
+    console.log(objUsers.users);
   }
 
   const handlerSort = (sortBy) => {

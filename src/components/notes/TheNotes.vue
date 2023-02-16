@@ -2,6 +2,7 @@
   import {reactive} from 'vue'
 
   import './style.css'
+  import './media-style.css'
 
   const objNote = reactive({
     activeAddNote: false,

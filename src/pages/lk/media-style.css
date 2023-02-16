@@ -1,0 +1,13 @@
+@media (max-width: 1000px) {
+    .profile_preview {
+        margin: 0;
+        padding: 74px 24px 74px;
+    }
+    .profile_info {
+        margin: 0 0 0 290px;
+        padding: 74px 24px 74px;
+    }
+    .satellites-body {
+        grid-template-columns: repeat(auto-fit, minmax(332px, 1fr));
+    }
+}

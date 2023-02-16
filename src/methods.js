@@ -33,7 +33,7 @@ export const getMethods = () => {
 
     async function getUsers(objParam) {
         const users = await axios({
-            method: "post",
+            method: "get",
             url: "https://6392fd90ab513e12c5ff47f0.mockapi.io/peopleVSU",
             data: objParam,
         })

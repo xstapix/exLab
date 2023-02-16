@@ -1,5 +1,4 @@
 <script setup>
-  import Filter from '@/components/tagFilter/Filter.vue'
   import TheSideBar from '@/components/sideBar/TheSideBar.vue'
 
   import { useParamsPageStore } from '@/stores/paramsPageStore'
@@ -9,7 +8,7 @@
   
   import './style.css'
 
-  const PostsList = defineAsyncComponent(
+  const Materials = defineAsyncComponent(
     () => import('@/components/materials/Materials.vue')
   )
   
@@ -30,7 +29,6 @@
 <template lang="">
   <div class="DF">
     <TheSideBar/>
-    <PostsList/>
-    <Filter/>
+    <Materials/>
   </div>
 </template>

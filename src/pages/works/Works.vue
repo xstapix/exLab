@@ -8,6 +8,7 @@
   import {reactive} from 'vue'
  
   import './style.css'
+  import './media-style.css'
   
   const workStore = useWorkStore()
   const useMethod = getMethods()

@@ -40,3 +40,7 @@ a {
 .FDC {
     flex-direction: column;
 }
+
+.FW {
+    flex-wrap: wrap;
+}

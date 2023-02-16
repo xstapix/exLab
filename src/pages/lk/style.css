@@ -83,6 +83,61 @@
     margin: 0 0 20px;
 }
 
+.profile_preview-data {
+    margin-top: 24px;
+}
+
+.profile_preview-data_box {
+    width: 50%;
+    margin-bottom: 4px;
+}
+
+.profile_preview-data_item {
+    width: 100%;
+    padding: 16px;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+}
+
+.profile_preview-data_box:nth-child(2n+1) {
+    padding-right: 4px;
+}
+
+.data_item-img {
+    flex-shrink: 0;
+    background: #7000FF;
+    box-shadow: 0 8px 16px #7000ff4d;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4px;
+}
+
+.data_item-number {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 130%;
+    letter-spacing: -.04em;
+    color: #7000ff;
+}
+
+.profile_preview-data_item-text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    color: #7000ff;
+    opacity: .6;
+    margin: 4px 0 0;
+}
+
 .profile_preview-link {
     width: 40px;
     cursor: pointer;

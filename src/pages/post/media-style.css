@@ -15,3 +15,53 @@
         font-size: 22px;
     }
 }
+
+@media (max-width: 1300px) {
+    .single_post-body {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 1150px) {
+    .single_post {
+        width: 560px;
+    }
+    .single_post-body {
+        width: 476px;
+    }
+}
+
+@media (max-width: 1150px) {
+    .single_post {
+        width: 560px;
+    }
+    .single_post-body {
+        width: 476px;
+        padding: 80px 0 0 24px;
+    }
+    .single_post-side_bar {
+        padding: 80px 0 0;
+    }
+}
+
+@media (max-width: 1000px) {
+    .post-body {
+        margin-left: 0;
+    }
+    .single_post {
+        width: 460px;
+    }
+    .single_post-body {
+        width: 400px;
+        padding: 80px 0 0 24px;
+    }
+    .postPrew {
+        left: 25px;
+    }
+}
+
+@media (max-width: 620px) {
+    .single_post-body {
+        padding: 80px 0 0;
+    }
+}
