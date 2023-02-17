@@ -8,12 +8,53 @@
 }
 
 .profile_preview-img {
+    position: relative;
     width: 64px;
+    height: 64px;
     margin: 0 auto;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .profile_preview-img img {
+    border-radius: 50%;
     max-width: 100%;
+}
+
+.profile_preview-upload {
+    display: none;
+}
+
+.profile_preview-img:hover>.profile_preview-upload {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 64px;
+    height: 64px;
+    display: block;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, .6);
+}
+
+.profile_preview-upload svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.profile_preview-upload_input {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .profile_preview-name_text {
@@ -88,6 +129,7 @@
 }
 
 .profile_preview-data_box {
+    position: relative;
     width: 50%;
     margin-bottom: 4px;
 }
@@ -99,7 +141,6 @@
     background-color: #fff;
     border-radius: 8px;
     cursor: pointer;
-    position: relative;
 }
 
 .profile_preview-data_box:nth-child(2n+1) {
@@ -119,8 +160,16 @@
     margin-right: 4px;
 }
 
+.data_item-num {
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 130%;
+    letter-spacing: -.04em;
+    color: #7000ff;
+}
+
 .data_item-number {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 24px;
     line-height: 130%;
     letter-spacing: -.04em;
@@ -136,6 +185,44 @@
     color: #7000ff;
     opacity: .6;
     margin: 4px 0 0;
+}
+
+.profile_preview-data_box-tip {
+    position: absolute;
+    left: -15px;
+    bottom: 107px;
+    width: 180px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #181818;
+    z-index: 10;
+    box-shadow: 0 10px 20px #0003;
+}
+
+.profile_preview-data_box-tip::after {
+    content: "";
+    position: absolute;
+    left: 81px;
+    bottom: -20px;
+    border: 10px solid transparent;
+    border-top: 10px solid white;
+}
+
+.profile_preview-data_box-tip p {
+    margin: 0 0 5px;
+}
+
+.profile_preview-data_box-tip div {
+    font-weight: 700;
+}
+
+.profile_preview-data_box-tip ul {
+    padding: 0;
+    margin: 10px 0 0;
 }
 
 .profile_preview-link {
@@ -157,6 +244,7 @@
 .profile_info-nav ul {
     margin: 0 0 32px 0;
     padding: 0;
+    overflow-x: auto;
 }
 
 .profile_info-nav ul li:nth-child(1),
@@ -168,6 +256,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     padding: 10px 20px;
     font-weight: 500;
     font-size: 14px;

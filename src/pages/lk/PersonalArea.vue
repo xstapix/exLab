@@ -1,6 +1,9 @@
 <script setup>
   import TheSideBar from '@/components/sideBar/TheSideBar.vue'
+
   import { useAuthStore } from '@/stores/authStore'
+  import { useWindowSizeStore } from '@/stores/windowSizeStore' 
+
   import {getMethods} from '@/methods.js'
 
   import { useRouter } from 'vue-router'
@@ -20,6 +23,7 @@
   )
 
   const authStore = useAuthStore()
+  const windowSizeStore = useWindowSizeStore()
   const router = useRouter()
   const useMethod = getMethods()
 
@@ -51,6 +55,15 @@
   const objProfileTabs = reactive({
     card: true,
     data: false,
+  })
+
+  const objDataTip = reactive({
+    level: false,
+    month: false,
+    balanceStar: false,
+    daysEndSubscription: false,
+    discount: false,
+    clubPrice: false
   })
 
   const handlerNav = (li) => {
@@ -109,11 +122,15 @@
 </script>
 
 <template>
-  <div class="DF">
+  <div v-if="authStore.data.auth" :class="windowSizeStore.objAdaptive.mobile ? 'DB' : 'DF'">
     <TheSideBar/>
-    <div v-if="authStore.data.auth" class="profile_preview DF FDC JCSB">
+    <div v-if="windowSizeStore.objAdaptive.tablet || windowSizeStore.objAdaptive.desktop" class="profile_preview DF FDC JCSB">
       <div>
         <div class="profile_preview-img">
+          <div class="profile_preview-upload">
+            <input type="file" accept="image/png,image/jpeg" class="profile_preview-upload_input">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6L19 6C19.5523 6 20 5.55228 20 5C20 4.44772 19.5523 4 19 4L5 4C4.44771 4 4 4.44772 4 5C4 5.55228 4.44771 6 5 6Z" fill="white"></path><path d="M20 7V5C20 4.44772 19.5523 4 19 4C18.4477 4 18 4.44772 18 5V7C18 7.55228 18.4477 8 19 8C19.5523 8 20 7.55228 20 7Z" fill="white"></path><path d="M6 7V5C6 4.44772 5.55228 4 5 4C4.44772 4 4 4.44772 4 5V7C4 7.55228 4.44772 8 5 8C5.55228 8 6 7.55228 6 7Z" fill="white"></path><path d="M8 14C7.84476 14 7.69164 13.9639 7.55279 13.8945C7.41393 13.825 7.29315 13.7242 7.2 13.6C7.12121 13.495 7.06388 13.3754 7.03129 13.2482C6.99869 13.121 6.99148 12.9886 7.01005 12.8586C7.02862 12.7286 7.07262 12.6035 7.13953 12.4905C7.20643 12.3775 7.29494 12.2788 7.4 12.2L11.4 9.20004C11.5713 9.07489 11.7779 9.00745 11.99 9.00745C12.2021 9.00745 12.4087 9.07489 12.58 9.20004L16.58 12.02C16.7956 12.173 16.9419 12.405 16.9868 12.6655C17.0318 12.926 16.9718 13.1937 16.82 13.41C16.7442 13.5182 16.6478 13.6103 16.5362 13.6809C16.4246 13.7516 16.3002 13.7995 16.17 13.8218C16.0399 13.8441 15.9066 13.8404 15.7778 13.8109C15.6491 13.7815 15.5275 13.7268 15.42 13.65L12 11.24L8.6 13.8C8.4269 13.9299 8.21637 14 8 14Z" fill="white"></path><path d="M12 21C11.7348 21 11.4804 20.8946 11.2929 20.7071C11.1054 20.5196 11 20.2652 11 20V12C11 11.7348 11.1054 11.4804 11.2929 11.2929C11.4804 11.1054 11.7348 11 12 11C12.2652 11 12.5196 11.1054 12.7071 11.2929C12.8946 11.4804 13 11.7348 13 12V20C13 20.2652 12.8946 20.5196 12.7071 20.7071C12.5196 20.8946 12.2652 21 12 21Z" fill="white"></path></svg>
+          </div>
           <img src="https://kronadev.ru/local/templates/kronaclub/build/img/avatar2.png" alt="">
         </div>
         <div class="profile_preview-name">
@@ -140,7 +157,9 @@
           </div>
         </div>
         <div v-if="objProfileTabs.data" class="profile_preview-data DF FW">
-          <div class="profile_preview-data_box">
+          <div class="profile_preview-data_box"
+            @mouseover="objDataTip.level = true" 
+            @mouseleave="objDataTip.level = false">
             <div class="profile_preview-data_item">
               <div class="DF">
                 <div class="data_item-img">
@@ -152,8 +171,11 @@
               </div>
               <p class="profile_preview-data_item-text">уровень звездности</p>
             </div>
+            <div v-if="objDataTip.level" class="profile_preview-data_box-tip">Соответствует количеству материалов, отмеченных просмотрено</div>
           </div>
-          <div class="profile_preview-data_box">
+          <div class="profile_preview-data_box"
+            @mouseover="objDataTip.month = true" 
+            @mouseleave="objDataTip.month = false">
             <div class="profile_preview-data_item">
               <div class="DF">
                 <div class="data_item-img">
@@ -165,8 +187,11 @@
               </div>
               <p class="profile_preview-data_item-text">месяцы в клубе</p>
             </div>
+            <div v-if="objDataTip.month" class="profile_preview-data_box-tip">Длительность вашего непрерывного нахождения в клубе</div>
           </div>
-          <div class="profile_preview-data_box">
+          <div class="profile_preview-data_box"
+            @mouseover="objDataTip.balanceStar = true" 
+            @mouseleave="objDataTip.balanceStar = false">
             <div class="profile_preview-data_item">
               <div class="DF">
                 <div class="data_item-img">
@@ -178,8 +203,19 @@
               </div>
               <p class="profile_preview-data_item-text">текущий баланс звезд</p>
             </div>
+            <div v-if="objDataTip.balanceStar" class="profile_preview-data_box-tip">
+              <p>Текущий баланс ― количество звезд, доступных для списывания</p>
+              <div>Звезды присуждаются:</div>
+              <ul>
+                <li>+0.1 ⭐️за пройденный урок</li>
+                <li>+1 ⭐️за любое количество комментариев к одному уроку</li>
+                <li>+2 ️⭐️за любое количество работ к одному уроку</li>
+              </ul>
+            </div>
           </div>
-          <div class="profile_preview-data_box">
+          <div class="profile_preview-data_box"
+            @mouseover="objDataTip.daysEndSubscription = true" 
+            @mouseleave="objDataTip.daysEndSubscription = false">
             <div class="profile_preview-data_item">
               <div class="DF">
                 <div class="data_item-img">
@@ -191,32 +227,33 @@
               </div>
               <p class="profile_preview-data_item-text">дней до конца подписки</p>
             </div>
+            <div v-if="objDataTip.daysEndSubscription" class="profile_preview-data_box-tip">Количество оставшихся дней оплаченного периода подписки</div>
           </div>
-          <div class="profile_preview-data_box">
+          <div class="profile_preview-data_box"
+            @mouseover="objDataTip.discount = true" 
+            @mouseleave="objDataTip.discount = false">
             <div class="profile_preview-data_item">
               <div class="DF">
-                <div class="data_item-img">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_287_5551)"><path d="M11.0002 7.00005C11.2224 7.00005 11.4113 7.07783 11.5669 7.23338C11.7224 7.38894 11.8002 7.57783 11.8002 7.80005V12.6001C11.8002 12.8223 11.7224 13.0112 11.5669 13.1667C11.4113 13.3223 11.2224 13.4001 11.0002 13.4001H3.0002C2.77797 13.4001 2.58908 13.3223 2.43353 13.1667C2.27797 13.0112 2.2002 12.8223 2.2002 12.6001V7.80005C2.2002 7.57783 2.27797 7.38894 2.43353 7.23338C2.58908 7.07783 2.77797 7.00005 3.0002 7.00005H3.26686V4.33338C3.26686 3.30561 3.63214 2.42644 4.36269 1.69589C5.09325 0.96533 5.97242 0.600052 7.00019 0.600052C8.02797 0.600052 8.90714 0.96533 9.63769 1.69589C10.3682 2.42644 10.7335 3.30561 10.7335 4.33338C10.7335 4.47783 10.6807 4.60283 10.5752 4.70838C10.4696 4.81394 10.3446 4.86672 10.2002 4.86672H9.66686C9.52242 4.86672 9.39742 4.81394 9.29186 4.70838C9.18631 4.60283 9.13353 4.47783 9.13353 4.33338C9.13353 3.7445 8.92519 3.24172 8.50853 2.82505C8.09186 2.40839 7.58908 2.20005 7.00019 2.20005C6.41131 2.20005 5.90853 2.40839 5.49186 2.82505C5.07519 3.24172 4.86686 3.7445 4.86686 4.33338V7.00005H11.0002Z" fill="white"></path></g><defs><clipPath id="clip0_287_5551"><rect width="12.8" height="12.8" fill="white" transform="translate(0.600098 0.600052)"></rect></clipPath></defs></svg>
-                </div>
-                <div class="data_item-number">
-                  167
+                <div class="data_item-num">
+                  %
                 </div>
               </div>
-              <p class="profile_preview-data_item-text">дней до конца подписки</p>
+              <p class="profile_preview-data_item-text">персональная скидка</p>
             </div>
+            <div v-if="objDataTip.discount" class="profile_preview-data_box-tip">Ваша персональная скидка, которая действует от вашей базовой стоимости подписки</div>
           </div>
-          <div class="profile_preview-data_box">
+          <div class="profile_preview-data_box"
+            @mouseover="objDataTip.clubPrice = true" 
+            @mouseleave="objDataTip.clubPrice = false">
             <div class="profile_preview-data_item">
               <div class="DF">
-                <div class="data_item-img">
-                  <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.3341 0.0661154V8H0.683787V0.0661154H2.3341ZM8.65815 2.04959L6.57783 8H4.71833L2.63801 2.04959H4.3813L5.61709 6.30708H5.67907L6.911 2.04959H8.65815ZM10.6075 0.0661154V8H8.95723V0.0661154H10.6075ZM12.3487 8.10072C12.093 8.10072 11.8735 8.01033 11.6901 7.82955C11.5093 7.64618 11.4189 7.42665 11.4189 7.17097C11.4189 6.91787 11.5093 6.70093 11.6901 6.52014C11.8735 6.33936 12.093 6.24897 12.3487 6.24897C12.5966 6.24897 12.8136 6.33936 12.9995 6.52014C13.1855 6.70093 13.2784 6.91787 13.2784 7.17097C13.2784 7.34143 13.2345 7.49768 13.1467 7.63972C13.0615 7.77918 12.9492 7.89153 12.8097 7.97676C12.6702 8.0594 12.5166 8.10072 12.3487 8.10072Z" fill="white"></path></svg>
-                </div>
                 <div class="data_item-number">
-                  167
+                  1300₽
                 </div>
               </div>
-              <p class="profile_preview-data_item-text">уровень звездности</p>
+              <p class="profile_preview-data_item-text">базовая цена клуба</p>
             </div>
+            <div v-if="objDataTip.clubPrice" class="profile_preview-data_box-tip">Ваша базовая стоимость подписки без учета скидок и других бонусов</div>
           </div>
         </div>
         <div v-if="objProfileTabs.data"></div>
@@ -224,6 +261,129 @@
       <div class="profile_preview-link">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M21.0295 18.9706C20.4835 18.4248 19.743 18.1182 18.9709 18.1182C18.1988 18.1182 17.4583 18.4248 16.9122 18.9706L14.8529 21.0293C14.3068 21.5754 14 22.316 14 23.0883C14 23.8606 14.3068 24.6012 14.8529 25.1473C15.3989 25.6934 16.1396 26.0002 16.9119 26.0002C17.6841 26.0002 18.4248 25.6934 18.9709 25.1473L20.0002 24.118" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18.9707 21.0293C19.5168 21.5752 20.2573 21.8818 21.0294 21.8818C21.8015 21.8818 22.542 21.5752 23.088 21.0293L25.1474 18.9707C25.6935 18.4246 26.0002 17.6839 26.0002 16.9117C26.0002 16.1394 25.6935 15.3987 25.1474 14.8527C24.6013 14.3066 23.8606 13.9998 23.0884 13.9998C22.3161 13.9998 21.5755 14.3066 21.0294 14.8527L20 15.882" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       </div>
+    </div>
+    <div v-if="windowSizeStore.objAdaptive.mobile" class="profile_preview-modil DF FDC JCC">
+      <div class="preview-modil_card">
+        <input type="file" accept="video/mp4" class="preview-modil_card-input">
+        <p class="preview-modil_card-text">Загрузите видео о себе для посетителей вашей страницы.</p>
+        <p class="preview-modil_card-desc">(mp4, прямоугольный формат 16:9, до 1 минуты)</p>
+        <div class="preview-modil_card-img">
+          <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20.156" cy="20.2919" r="20" fill="white"></circle><path d="M20.156 15.2919V25.2919M15.156 20.2919H25.156" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+      </div>
+      <div class="profile_preview-modil_profile DF AIC">
+        <div class="modil_profile-img">
+          <input type="file" accept="image/png,image/jpeg" class="profile_preview-upload_input">
+          <img src="https://kronadev.ru/local/templates/kronaclub/build/img/avatar2.png" alt="">
+        </div>
+        <div class="modil_profile-text">
+          <div class="modil_profile-text_name">xstapix</div>
+          <div class="modil_profile-text_stark">v.sarafannikov / канареечный старк</div>
+        </div>
+      </div>
+    </div>
+    <div v-if="windowSizeStore.objAdaptive.mobile" class="profile_preview-modil_data DF FW">
+      <div class="profile_preview-data_box"
+        @mouseover="objDataTip.level = true" 
+        @mouseleave="objDataTip.level = false">
+        <div class="profile_preview-data_item">
+          <div class="DF">
+            <div class="data_item-img">
+              <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.3341 0.0661154V8H0.683787V0.0661154H2.3341ZM8.65815 2.04959L6.57783 8H4.71833L2.63801 2.04959H4.3813L5.61709 6.30708H5.67907L6.911 2.04959H8.65815ZM10.6075 0.0661154V8H8.95723V0.0661154H10.6075ZM12.3487 8.10072C12.093 8.10072 11.8735 8.01033 11.6901 7.82955C11.5093 7.64618 11.4189 7.42665 11.4189 7.17097C11.4189 6.91787 11.5093 6.70093 11.6901 6.52014C11.8735 6.33936 12.093 6.24897 12.3487 6.24897C12.5966 6.24897 12.8136 6.33936 12.9995 6.52014C13.1855 6.70093 13.2784 6.91787 13.2784 7.17097C13.2784 7.34143 13.2345 7.49768 13.1467 7.63972C13.0615 7.77918 12.9492 7.89153 12.8097 7.97676C12.6702 8.0594 12.5166 8.10072 12.3487 8.10072Z" fill="white"></path></svg>
+            </div>
+            <div class="data_item-number">
+              167
+            </div>
+          </div>
+          <p class="profile_preview-data_item-text">уровень звездности</p>
+        </div>
+        <div v-if="objDataTip.level" class="profile_preview-data_box-tip">Соответствует количеству материалов, отмеченных просмотрено</div>
+      </div>
+      <div class="profile_preview-data_box"
+        @mouseover="objDataTip.month = true" 
+        @mouseleave="objDataTip.month = false">
+        <div class="profile_preview-data_item">
+          <div class="DF">
+            <div class="data_item-img">
+              <svg width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 3.46875C2 3.20996 2.22396 3 2.5 3H9.5C9.77708 3 10 3.20996 10 3.46875C10 3.72754 9.77708 3.9375 9.5 3.9375H9.33333V4.3082C9.33333 5.0957 8.98125 5.83398 8.40625 6.4082L6.70625 8L8.40625 9.5918C8.98125 10.1484 9.33333 10.9043 9.33333 11.6914V12.0625H9.5C9.77708 12.0625 10 12.2715 10 12.5312C10 12.791 9.77708 13 9.5 13H2.5C2.22396 13 2 12.791 2 12.5312C2 12.2715 2.22396 12.0625 2.5 12.0625H2.66667V11.6914C2.66667 10.9043 3.00021 10.1484 3.59417 9.5918L5.29375 8L3.59417 6.4082C3.00021 5.83398 2.66667 5.0957 2.66667 4.3082V3.9375H2.5C2.22396 3.9375 2 3.72754 2 3.46875ZM4.07875 10.5H7.92083C7.85417 10.4141 7.77917 10.332 7.69792 10.2559L6 8.66211L4.30208 10.2559C4.22083 10.332 4.12708 10.4141 4.07875 10.5ZM7.92083 5.5C8.16875 5.15625 8.33333 4.73887 8.33333 4.3082V3.9375H3.66667V4.3082C3.66667 4.73887 3.8125 5.15625 4.07875 5.5H7.92083Z" fill="white"></path></svg>
+            </div>
+            <div class="data_item-number">
+              167
+            </div>
+          </div>
+          <p class="profile_preview-data_item-text">месяцы в клубе</p>
+        </div>
+        <div v-if="objDataTip.month" class="profile_preview-data_box-tip">Длительность вашего непрерывного нахождения в клубе</div>
+      </div>
+      <div class="profile_preview-data_box"
+        @mouseover="objDataTip.balanceStar = true" 
+        @mouseleave="objDataTip.balanceStar = false">
+        <div class="profile_preview-data_item">
+          <div class="DF">
+            <div class="data_item-img">
+              <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.32804 1.16812C6.71922 0.538152 7.63594 0.538152 8.02712 1.16812L9.43482 3.4351C9.57241 3.65668 9.79112 3.81573 10.0443 3.87834L12.6345 4.5188C13.3535 4.69657 13.6365 5.567 13.1595 6.13359L11.4387 8.17766C11.271 8.37693 11.1876 8.63379 11.2063 8.89359L11.3984 11.5588C11.4517 12.2981 10.7104 12.8364 10.0239 12.5569L7.55468 11.5515C7.31292 11.4531 7.04225 11.4531 6.80048 11.5515L4.33124 12.5569C3.64477 12.8364 2.90343 12.2981 2.95673 11.5588L3.14886 8.89359C3.16759 8.63379 3.08421 8.37693 2.91646 8.17766L1.19565 6.13359C0.718662 5.567 1.00164 4.69657 1.72062 4.5188L4.31084 3.87834C4.56404 3.81573 4.78276 3.65668 4.92035 3.4351L6.32804 1.16812Z" fill="white"></path></svg>
+            </div>
+            <div class="data_item-number">
+              167
+            </div>
+          </div>
+          <p class="profile_preview-data_item-text">текущий баланс звезд</p>
+        </div>
+        <div v-if="objDataTip.balanceStar" class="profile_preview-data_box-tip">
+          <p>Текущий баланс ― количество звезд, доступных для списывания</p>
+          <div>Звезды присуждаются:</div>
+          <ul>
+            <li>+0.1 ⭐️за пройденный урок</li>
+            <li>+1 ⭐️за любое количество комментариев к одному уроку</li>
+            <li>+2 ️⭐️за любое количество работ к одному уроку</li>
+          </ul>
+        </div>
+      </div>
+      <div class="profile_preview-data_box"
+        @mouseover="objDataTip.daysEndSubscription = true" 
+        @mouseleave="objDataTip.daysEndSubscription = false">
+        <div class="profile_preview-data_item">
+          <div class="DF">
+            <div class="data_item-img">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_287_5551)"><path d="M11.0002 7.00005C11.2224 7.00005 11.4113 7.07783 11.5669 7.23338C11.7224 7.38894 11.8002 7.57783 11.8002 7.80005V12.6001C11.8002 12.8223 11.7224 13.0112 11.5669 13.1667C11.4113 13.3223 11.2224 13.4001 11.0002 13.4001H3.0002C2.77797 13.4001 2.58908 13.3223 2.43353 13.1667C2.27797 13.0112 2.2002 12.8223 2.2002 12.6001V7.80005C2.2002 7.57783 2.27797 7.38894 2.43353 7.23338C2.58908 7.07783 2.77797 7.00005 3.0002 7.00005H3.26686V4.33338C3.26686 3.30561 3.63214 2.42644 4.36269 1.69589C5.09325 0.96533 5.97242 0.600052 7.00019 0.600052C8.02797 0.600052 8.90714 0.96533 9.63769 1.69589C10.3682 2.42644 10.7335 3.30561 10.7335 4.33338C10.7335 4.47783 10.6807 4.60283 10.5752 4.70838C10.4696 4.81394 10.3446 4.86672 10.2002 4.86672H9.66686C9.52242 4.86672 9.39742 4.81394 9.29186 4.70838C9.18631 4.60283 9.13353 4.47783 9.13353 4.33338C9.13353 3.7445 8.92519 3.24172 8.50853 2.82505C8.09186 2.40839 7.58908 2.20005 7.00019 2.20005C6.41131 2.20005 5.90853 2.40839 5.49186 2.82505C5.07519 3.24172 4.86686 3.7445 4.86686 4.33338V7.00005H11.0002Z" fill="white"></path></g><defs><clipPath id="clip0_287_5551"><rect width="12.8" height="12.8" fill="white" transform="translate(0.600098 0.600052)"></rect></clipPath></defs></svg>
+            </div>
+            <div class="data_item-number">
+              167
+            </div>
+          </div>
+          <p class="profile_preview-data_item-text">дней до конца подписки</p>
+        </div>
+        <div v-if="objDataTip.daysEndSubscription" class="profile_preview-data_box-tip">Количество оставшихся дней оплаченного периода подписки</div>
+      </div>
+      <div class="profile_preview-data_box"
+        @mouseover="objDataTip.discount = true" 
+        @mouseleave="objDataTip.discount = false">
+        <div class="profile_preview-data_item">
+          <div class="DF">
+            <div class="data_item-num">
+              %
+            </div>
+          </div>
+          <p class="profile_preview-data_item-text">персональная скидка</p>
+        </div>
+        <div v-if="objDataTip.discount" class="profile_preview-data_box-tip">Ваша персональная скидка, которая действует от вашей базовой стоимости подписки</div>
+      </div>
+      <div class="profile_preview-data_box"
+        @mouseover="objDataTip.clubPrice = true" 
+        @mouseleave="objDataTip.clubPrice = false">
+        <div class="profile_preview-data_item">
+          <div class="DF">
+            <div class="data_item-number">
+              1300₽
+            </div>
+          </div>
+          <p class="profile_preview-data_item-text">базовая цена клуба</p>
+        </div>
+        <div v-if="objDataTip.clubPrice" class="profile_preview-data_box-tip">Ваша базовая стоимость подписки без учета скидок и других бонусов</div>
+      </div>
+    </div>
+    <div class="profile_preview-link">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M21.0295 18.9706C20.4835 18.4248 19.743 18.1182 18.9709 18.1182C18.1988 18.1182 17.4583 18.4248 16.9122 18.9706L14.8529 21.0293C14.3068 21.5754 14 22.316 14 23.0883C14 23.8606 14.3068 24.6012 14.8529 25.1473C15.3989 25.6934 16.1396 26.0002 16.9119 26.0002C17.6841 26.0002 18.4248 25.6934 18.9709 25.1473L20.0002 24.118" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18.9707 21.0293C19.5168 21.5752 20.2573 21.8818 21.0294 21.8818C21.8015 21.8818 22.542 21.5752 23.088 21.0293L25.1474 18.9707C25.6935 18.4246 26.0002 17.6839 26.0002 16.9117C26.0002 16.1394 25.6935 15.3987 25.1474 14.8527C24.6013 14.3066 23.8606 13.9998 23.0884 13.9998C22.3161 13.9998 21.5755 14.3066 21.0294 14.8527L20 15.882" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
     </div>
     <div v-if="authStore.data.auth" class="profile_info">
       <nav class="profile_info-nav">
@@ -242,7 +402,7 @@
             :class="objNav.yourData ? 'paragraph_active' : ''">Данные</li>
         </ul>
       </nav>
-      <div :class="objNav.portfolio ? 'DF' : 'DN'">
+      <div v-if="objNav.portfolio" class="DF">
         <div class="profile-body">
           <div class="profile-body_item DF JCC AIC">
             <div class="profile-body_item-text">Здесь не хватает вашей работы! Добавим?</div>
@@ -252,7 +412,7 @@
           </div>
         </div>
       </div>
-      <div :class="objNav.satellites ? 'DF' : 'DN'">
+      <div v-if="objNav.satellites" class="DF">
         <div class="satellites-body">
           <div class="add_post">
             <div class="add_post-tip DF">
@@ -289,7 +449,7 @@
           </div>
         </div>
       </div>
-      <div :class="objNav.yourData ? 'DF' : 'DN'">
+      <div v-if="objNav.yourData" :class="windowSizeStore.objAdaptive.mobile ? 'DB' : 'DF'">
         <div class="info-yourData_block">
           <div class="info-yourData_block_item">
             <p class="item-texts">Имя</p>

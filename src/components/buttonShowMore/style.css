@@ -8,6 +8,7 @@
     border-radius: 8px;
     margin-top: 20px;
     margin-bottom: 20px;
+    border: none;
     background: linear-gradient(90deg, #7000FF 0%, #0500FF 100%);
     color: #fff;
     cursor: pointer;
