@@ -217,9 +217,9 @@
 
   <section v-if="windowSizeStore.objAdaptive.tablet || windowSizeStore.objAdaptive.mobile" 
     class="sidebar_mobil DF JCSB">
-    <div class="DF">
+    <div class="DF AIC">
       <router-link v-if="authStore.data.auth" to="/lk" class="sidebar_top-item sidebar_top-item_user">
-          <img :src="authStore.data.user.account.img" alt="" class="sidebar_top-item_user_img">
+        <img :src="authStore.data.user.account.img" alt="" class="sidebar_top-item_user_img">
       </router-link>
       <router-link v-if="authStore.data.auth" @click="handlerLogOut" to="/login" class="sidebar_top-item sidebar_top-item_singin">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.0002 13.3333H16.0002C15.2668 13.3333 14.6668 13.9333 14.6668 14.6667V25.3333C14.6668 26.0667 15.2668 26.6667 16.0002 26.6667H22.0002C22.7335 26.6667 23.3335 26.0667 23.3335 25.3333V24H22.0002V25.3333H16.0002V14.6667H22.0002V16H23.3335V14.6667C23.3335 13.9333 22.7335 13.3333 22.0002 13.3333Z" fill="white"></path><path d="M21.2733 22.3933L20.3333 23.3333L17 20L20.3333 16.6667L21.2733 17.6067L19.5533 19.3333H26V20.6667H19.5533L21.2733 22.3933Z" fill="white"></path></svg>

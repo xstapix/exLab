@@ -31,6 +31,8 @@
         max-height: 100%;
     }
     .sidebar_top-item_user {
+        width: 32px;
+        height: 32px;
         margin: 0;
     }
     .sidebar_top {
