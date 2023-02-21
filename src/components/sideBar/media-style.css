@@ -41,7 +41,89 @@
     .item_links {
         padding: 0;
     }
+    .item_links-icon{
+        width: 40px;
+        height: 40px;
+    }
+    .icon_active{
+        background: rgba(255,255,255,.15);
+        border-radius: 8px;
+    }
+    .item_tg-modal{
+        position: fixed;
+        top: 57px;
+        left: 0;
+        right: 0;
+        bottom: 56px;
+        z-index: 20;
+        width: 100%;
+        overflow-y: auto;
+        background: #000000;
+        cursor: default;
+    }
+    .item_tg-modal_top{
+        padding: 10px;
+    }
+    .item_tg-modal_top svg{
+        max-width: 40px;
+    }
+
+    .item_tg-modal ul{
+        padding: 10px 0 0;
+        margin: 0 0 0 8px;
+        cursor: default;
+    }
+    .item_tg-modal ul li{
+        margin: 0 0 12px;
+    }
+    .item_tg-modal ul li:nth-child(1){
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 14px;
+        line-height: 17px;
+        color: #fcfcfc;
+    }
+    .item_tg-modal ul li a{
+        text-decoration: none;
+        font-size: 14px;
+        line-height: 17px;
+        color: #fcfcfc80;
+    }
+    .item_tg-modal ul li a:hover{
+        color: #ffffff;
+    }
     .sidebar_down .sidebar_top-item {
         margin: 0 4px 0;
+    }
+    .item_calendar{
+        position: static;
+    }
+    .item_calendar:hover>.item_calendar-box {
+        left: 8px;
+        right: 0;
+        top: auto;
+        bottom: 60px;
+        width: calc(100% - 16px);
+    }
+    .item_tg-modal_bottom_logo{
+        width: 40px;
+        height: 40px;
+    }
+    .item_tg-modal_bottom{
+        border-top: 1px solid #3A3A3A;
+        padding: 8px;
+    }
+    .item_tg-modal_bottom_logo svg{
+        max-width: 100%;
+    }
+    .item_tg-modal_bottom-name{
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 12px;
+        text-decoration-line: underline;
+        color: #fff;
+    }
+    .item_tg-modal_bottom a svg{
+        width: 40px;
     }
 }

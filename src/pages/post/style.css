@@ -80,7 +80,7 @@
 }
 
 .postPrew {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 81px;
     z-index: 10;
@@ -90,7 +90,7 @@
 }
 
 .postNext {
-    position: absolute;
+    position: fixed;
     z-index: 10;
     top: 50%;
     right: 25px;

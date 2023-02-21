@@ -71,7 +71,7 @@
 
 @media (max-width: 600px) {
     .single_post {
-        width: 100%;
+        width: 480px;
     }
     .single_post-body {
         width: 100%;

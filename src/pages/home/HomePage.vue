@@ -16,7 +16,7 @@
   
   const paramsPageStore = useParamsPageStore()
 
-  onBeforeRouteLeave( async () => {
+  onBeforeRouteLeave(async () => {
     paramsPageStore.objParamsPage.page = 1
     paramsPageStore.objParamsPage.active_tags = []
     paramsPageStore.objParamsPage.search = ''
