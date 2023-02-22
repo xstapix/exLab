@@ -126,4 +126,7 @@
     .item_tg-modal_bottom a svg{
         width: 40px;
     }
+    .sidebar-photo{
+        margin: 0;
+    }
 }

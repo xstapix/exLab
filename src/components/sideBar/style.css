@@ -13,7 +13,14 @@
 }
 
 .sidebar_top-item {
+    position: relative;
     display: block;
+    margin: 4px 0 0;
+    cursor: pointer;
+}
+
+.sidebar_bottom .sidebar_top-item {
+    height: 40px;
 }
 
 .item_tg {
@@ -127,12 +134,12 @@
 .sidebar_top-item_singin {
     margin: 7px 0 0;
     padding: 7px 0 0;
+    height: 52px !important;
     border-top: 1px solid #3A3A3A;
     cursor: pointer;
 }
 
 .sidebar_top-item_user {
-    margin: 4px auto 0;
     width: 32px;
     height: 32px;
 }
@@ -183,13 +190,103 @@
 }
 
 .add_post-work {
-    position: relative;
     width: 55px;
     height: 40px;
-    margin: auto;
     cursor: pointer;
 }
 
 .add_post-work svg {
     max-width: 100%;
+}
+
+.sidebar-photo{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin: 4px auto 0;
+}
+
+.sidebar-photo_line-item{
+    position: absolute;
+    width: 18px;
+    height: 19px;
+}
+
+.sidebar-photo_line-item svg{
+    width: 18px;
+    height: 19px;
+}
+
+.sidebar-photo_line-item:nth-child(1){
+    top: 0;
+    right: 0;
+}
+.sidebar-photo_line-item:nth-child(2){
+    bottom: 0;
+    right: 0;
+}
+.sidebar-photo_line-item:nth-child(3){
+    bottom: 0;
+    left: 0;
+}
+.sidebar-photo_line-item:nth-child(4){
+    top: 0;
+    left: 0;
+}
+
+.sidebar-photo_point-item{
+    position: absolute;
+    width: 2px;
+    height: 2px;
+}
+
+.sidebar-photo_point-item svg{
+    width: 2px;
+    height: 2px;
+}
+
+.sidebar-photo_point-item:nth-child(1){
+    right: 0;
+    top: 5px;
+}
+
+.sidebar-photo_point-item:nth-child(2){
+    bottom: 14px;
+    right: 19px;
+}
+.sidebar-photo_point-item:nth-child(3){
+    top: 5px;
+    left: 0;
+}
+.sidebar-photo_point-item:nth-child(4){
+    top: -14px;
+    left: 19px;
+}
+.sidebar_birthday:hover>.birthday{
+    display: flex;
+}
+.birthday{
+    position: absolute;
+    cursor: default;
+    top: -8px;
+    left: 50px;
+    display: none;
+    align-items: center;
+    background: radial-gradient(98.69% 2927.46% at 1.31% 100%,#F53E1A 0%,#AA1DCC 59.34%,#2495FD 100%);
+    padding: 8px 30px 8px 8px;
+    width: 284px;
+    border-radius: 8px;
+}
+.birthday svg{
+width: 40px;
+height: 40px;
+flex-shrink: 0;
+}
+.birthday p{
+    margin: 0 0 0 8px;
+    font-size: 14px;
+    line-height: 15px;
+    letter-spacing: -.03em;
+    color: #fff;
+    text-align: left;
 }

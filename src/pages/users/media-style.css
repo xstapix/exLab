@@ -71,9 +71,6 @@
     }
 }
 @media (max-width: 740px) {
-    .stark_rating-text{
-        margin: 0;
-    }
     .table_body{
         flex-wrap: wrap;
         padding: 16px;
@@ -106,6 +103,9 @@
     }
 }
 @media (max-width: 450px) {
+    .stark_rating-text{
+        margin: 0;
+    }
     .stark_rating{
         flex-direction: column;
         align-items: flex-start;

@@ -14,7 +14,7 @@
   })
 
   const handlerAddComm = () => {
-    console.log(objNewComm.text);
+    console.log(objNewComm);
     objNewComm.activeAddComm = false
   }
   

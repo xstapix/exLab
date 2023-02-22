@@ -60,7 +60,7 @@
 .single_post-body {
     width: 730px;
     min-height: 100vh;
-    padding: 70px 0 0 24px;
+    padding: 70px 0 70px 24px;
     flex-shrink: 0;
 }
 

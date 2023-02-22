@@ -126,12 +126,56 @@
     <TheSideBar/>
     <div v-if="windowSizeStore.objAdaptive.tablet || windowSizeStore.objAdaptive.desktop" class="profile_preview DF FDC JCSB">
       <div>
-        <div class="profile_preview-img">
-          <div class="profile_preview-upload">
-            <input type="file" accept="image/png,image/jpeg" class="profile_preview-upload_input">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6L19 6C19.5523 6 20 5.55228 20 5C20 4.44772 19.5523 4 19 4L5 4C4.44771 4 4 4.44772 4 5C4 5.55228 4.44771 6 5 6Z" fill="white"></path><path d="M20 7V5C20 4.44772 19.5523 4 19 4C18.4477 4 18 4.44772 18 5V7C18 7.55228 18.4477 8 19 8C19.5523 8 20 7.55228 20 7Z" fill="white"></path><path d="M6 7V5C6 4.44772 5.55228 4 5 4C4.44772 4 4 4.44772 4 5V7C4 7.55228 4.44772 8 5 8C5.55228 8 6 7.55228 6 7Z" fill="white"></path><path d="M8 14C7.84476 14 7.69164 13.9639 7.55279 13.8945C7.41393 13.825 7.29315 13.7242 7.2 13.6C7.12121 13.495 7.06388 13.3754 7.03129 13.2482C6.99869 13.121 6.99148 12.9886 7.01005 12.8586C7.02862 12.7286 7.07262 12.6035 7.13953 12.4905C7.20643 12.3775 7.29494 12.2788 7.4 12.2L11.4 9.20004C11.5713 9.07489 11.7779 9.00745 11.99 9.00745C12.2021 9.00745 12.4087 9.07489 12.58 9.20004L16.58 12.02C16.7956 12.173 16.9419 12.405 16.9868 12.6655C17.0318 12.926 16.9718 13.1937 16.82 13.41C16.7442 13.5182 16.6478 13.6103 16.5362 13.6809C16.4246 13.7516 16.3002 13.7995 16.17 13.8218C16.0399 13.8441 15.9066 13.8404 15.7778 13.8109C15.6491 13.7815 15.5275 13.7268 15.42 13.65L12 11.24L8.6 13.8C8.4269 13.9299 8.21637 14 8 14Z" fill="white"></path><path d="M12 21C11.7348 21 11.4804 20.8946 11.2929 20.7071C11.1054 20.5196 11 20.2652 11 20V12C11 11.7348 11.1054 11.4804 11.2929 11.2929C11.4804 11.1054 11.7348 11 12 11C12.2652 11 12.5196 11.1054 12.7071 11.2929C12.8946 11.4804 13 11.7348 13 12V20C13 20.2652 12.8946 20.5196 12.7071 20.7071C12.5196 20.8946 12.2652 21 12 21Z" fill="white"></path></svg>
+        <div class="profile_preview-photo DF JCC AIC">
+          <div class="profile_preview-img">
+            <div class="profile_preview-upload">
+              <input type="file" accept="image/png,image/jpeg" class="profile_preview-upload_input">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6L19 6C19.5523 6 20 5.55228 20 5C20 4.44772 19.5523 4 19 4L5 4C4.44771 4 4 4.44772 4 5C4 5.55228 4.44771 6 5 6Z" fill="white"></path><path d="M20 7V5C20 4.44772 19.5523 4 19 4C18.4477 4 18 4.44772 18 5V7C18 7.55228 18.4477 8 19 8C19.5523 8 20 7.55228 20 7Z" fill="white"></path><path d="M6 7V5C6 4.44772 5.55228 4 5 4C4.44772 4 4 4.44772 4 5V7C4 7.55228 4.44772 8 5 8C5.55228 8 6 7.55228 6 7Z" fill="white"></path><path d="M8 14C7.84476 14 7.69164 13.9639 7.55279 13.8945C7.41393 13.825 7.29315 13.7242 7.2 13.6C7.12121 13.495 7.06388 13.3754 7.03129 13.2482C6.99869 13.121 6.99148 12.9886 7.01005 12.8586C7.02862 12.7286 7.07262 12.6035 7.13953 12.4905C7.20643 12.3775 7.29494 12.2788 7.4 12.2L11.4 9.20004C11.5713 9.07489 11.7779 9.00745 11.99 9.00745C12.2021 9.00745 12.4087 9.07489 12.58 9.20004L16.58 12.02C16.7956 12.173 16.9419 12.405 16.9868 12.6655C17.0318 12.926 16.9718 13.1937 16.82 13.41C16.7442 13.5182 16.6478 13.6103 16.5362 13.6809C16.4246 13.7516 16.3002 13.7995 16.17 13.8218C16.0399 13.8441 15.9066 13.8404 15.7778 13.8109C15.6491 13.7815 15.5275 13.7268 15.42 13.65L12 11.24L8.6 13.8C8.4269 13.9299 8.21637 14 8 14Z" fill="white"></path><path d="M12 21C11.7348 21 11.4804 20.8946 11.2929 20.7071C11.1054 20.5196 11 20.2652 11 20V12C11 11.7348 11.1054 11.4804 11.2929 11.2929C11.4804 11.1054 11.7348 11 12 11C12.2652 11 12.5196 11.1054 12.7071 11.2929C12.8946 11.4804 13 11.7348 13 12V20C13 20.2652 12.8946 20.5196 12.7071 20.7071C12.5196 20.8946 12.2652 21 12 21Z" fill="white"></path></svg>
+            </div>
+            <img src="https://kronadev.ru/local/templates/kronaclub/build/img/avatar2.png" alt="">
           </div>
-          <img src="https://kronadev.ru/local/templates/kronaclub/build/img/avatar2.png" alt="">
+          <div class="profile_preview-photo_line">
+            <div class="preview-photo_line-item">
+              <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.986048 1.10408C1.04378 0.554826 1.53648 0.153807 2.08216 0.238908C6.22738 0.885363 10.0739 2.82118 13.0679 5.78402C16.0619 8.74685 18.0379 12.5729 18.7277 16.7111C18.8185 17.2559 18.4227 17.7527 17.8741 17.8162C17.3255 17.8797 16.8321 17.4856 16.7382 16.9414C16.1026 13.2548 14.3319 9.84862 11.6611 7.20561C8.99029 4.56261 5.56572 2.82767 1.87271 2.2307C1.32751 2.14257 0.928318 1.65334 0.986048 1.10408Z" fill="url(#paint0_angular_221_1472_user)"></path>
+                <defs>
+                <radialGradient id="paint0_angular_221_1472_user" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1 20) rotate(-90) scale(20)">
+                <stop stop-color="#ABAD23"></stop>
+                <stop offset="0.250003" stop-color="#666723"></stop>
+                </radialGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="preview-photo_line-item">
+              <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.2" d="M16.8959 0.986048C17.4452 1.04378 17.8462 1.53648 17.7611 2.08217C17.1146 6.22738 15.1788 10.0739 12.216 13.0679C9.25315 16.0619 5.42713 18.0379 1.28891 18.7277C0.744145 18.8185 0.247274 18.4227 0.183796 17.8741V17.8741C0.120318 17.3255 0.514363 16.8321 1.05862 16.7382C4.74517 16.1026 8.15138 14.3319 10.7944 11.6611C13.4374 8.99029 15.1723 5.56572 15.7693 1.87271C15.8574 1.32751 16.3467 0.928318 16.8959 0.986048V0.986048Z" fill="white"></path>
+              </svg>
+            </div>
+            <div class="preview-photo_line-item">
+              <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.2" d="M18.014 16.8959C17.9562 17.4452 17.4635 17.8462 16.9178 17.7611C12.7726 17.1146 8.92612 15.1788 5.9321 12.216C2.93808 9.25315 0.962091 5.42713 0.272268 1.28891C0.181455 0.744143 0.577295 0.247271 1.12592 0.183794C1.67454 0.120316 2.16792 0.514361 2.26176 1.05862C2.89736 4.74517 4.66807 8.15138 7.33889 10.7944C10.0097 13.4374 13.4343 15.1723 17.1273 15.7693C17.6725 15.8574 18.0717 16.3467 18.014 16.8959Z" fill="white"></path>
+              </svg>
+            </div>
+            <div class="preview-photo_line-item">
+              <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.2" d="M1.10408 18.0142C0.554825 17.9565 0.153806 17.4638 0.238907 16.9181C0.885362 12.7729 2.82118 8.92636 5.78401 5.93234C8.74685 2.93832 12.5729 0.962333 16.7111 0.27251C17.2559 0.181697 17.7527 0.577537 17.8162 1.12616C17.8797 1.67478 17.4856 2.16816 16.9414 2.262C13.2548 2.8976 9.84862 4.66831 7.20561 7.33913C4.56261 10.01 2.82767 13.4345 2.2307 17.1275C2.14257 17.6727 1.65334 18.0719 1.10408 18.0142Z" fill="white"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="profile_preview-photo_point">
+            <div class="preview-photo_point-item">
+              <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
+            </div>
+            <div class="preview-photo_point-item">
+              <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
+            </div>
+            <div class="preview-photo_point-item">
+              <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
+            </div>
+            <div class="preview-photo_point-item">
+              <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
+            </div>
+          </div>
         </div>
         <div class="profile_preview-name">
           <p class="profile_preview-name_text">xstapix</p>

@@ -18,18 +18,24 @@
     password: null
   })
 
+  const objValidation = reactive({
+    errValidation: false
+  })
+
   async function handleLogin() {
     const auth = await useMethod.getAuth()
 
     if (auth.account.email.email_text === state.email && auth.account.password === state.password) {
       authStore.changeAuth(true)
       authStore.changeUser(auth)
+      objValidation.errValidation = false
 
       setCookie('cronaClubUserEmail', state.email, {});
 
       router.push('/')
     } else {
       authStore.changeAuth(false)
+      objValidation.errValidation = true
     }
   }
 
@@ -62,6 +68,7 @@
     <div class="login_body">
       <h1 class="login_body-text">Вход во вселенную закрытого клуба дизайнеров «1000 звёзд»</h1>
       <div class="login_body-form">
+        <div v-if="objValidation.errValidation" class="login_body-form_errValidation">Неверный логин или пароль.</div>
         <div class="login_body-form_field">
           <p class="login_body-form_field_title">Ваш email</p>
           <input v-model="state.email" type="email" class="login_body-form_field_input">

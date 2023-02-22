@@ -37,6 +37,38 @@
     activeModalBlocked: false
   })
 
+  const objMaterialBackground = reactive({
+    currentBkg: 0,
+    allBackgrounds: [
+      {
+        bkg: 'rgb(40, 67, 248)',
+        flash: 'rgb(157, 14, 223)'
+      },
+      {
+        bkg: 'rgb(6, 187, 187)',
+        flash: 'rgb(40, 248, 136)'
+      },
+      {
+        bkg: 'rgb(130, 196, 23)',
+        flash: 'rgb(248, 152, 40)'
+      },
+      {
+        bkg: 'rgb(241, 152, 6)',
+        flash: 'rgb(247, 104, 232)'
+      },
+      {
+        bkg: 'rgb(157, 14, 223)',
+        flash: 'rgb(38, 68, 247)'
+      },
+      {
+        bkg: 'rgb(237, 58, 232)',
+        flash: 'rgb(235, 155, 29)'
+      }
+    ]
+  })
+
+  // let allMaterials = document.querySelectorAll('.post');
+
   watch(authStore.data, (newUser) => {
     objCurrentUser.user = newUser.user;
   })
@@ -45,14 +77,21 @@
     if (objCurrentUser.user.favorites.includes(e.target.id)) {
       let newFavorites = objCurrentUser.user.favorites.filter(id => id != e.target.id)
       objCurrentUser.user.favorites = newFavorites
-    } else objCurrentUser.user.favorites.push(e.target.id)
+    } else {
+      objCurrentUser.user.favorites.push(e.target.id)
+    }
   } 
 
   const handlerCheck = (e) => {
     if (objCurrentUser.user.viewed.includes(e.target.id)) {
       let newFavorites = objCurrentUser.user.viewed.filter(id => id != e.target.id)
       objCurrentUser.user.viewed = newFavorites
-    } else objCurrentUser.user.viewed.push(e.target.id)
+    } else {
+      objCurrentUser.user.viewed.push(e.target.id)
+      // if (objMaterialBackground.currentBkg < 6) {
+      //   objMaterialBackground.currentBkg++
+      // } else objMaterialBackground.currentBkg = 0
+    }
   }
 
   const handlerBlockedPost = () => {
@@ -80,8 +119,6 @@
 
     return `${number} минут`;
   }
-
-  console.log(windowSizeStore.objAdaptive.currentSize);
  </script>
 
 <template>
@@ -100,7 +137,11 @@
         </div>
       </div>
       <div v-for="post in postsStore.data.posts" :key="post.id" class="post" 
-        :class="objCurrentUser.user ? objCurrentUser.user.viewed.includes(post.id) ? 'post_checked' :  '' : ''">
+        :style="
+          objCurrentUser.user ? 
+            objCurrentUser.user.viewed.includes(post.id) ? 
+              {backgroundColor: objMaterialBackground.allBackgrounds[objMaterialBackground.currentBkg].bkg} :
+            '' : ''">
         <router-link 
           @click="handlerBlockedPost" 
           :to="authStore.data.auth && !post.open ? `${post.link}` : ''"
@@ -146,6 +187,13 @@
                 :fill="objCurrentUser.user ? objCurrentUser.user.viewed.includes(post.id) ? 'white' : 'black' : ''"></path>
             </svg>
           </div>
+        </div>
+        <div class="post_gradient" 
+          :style="
+            objCurrentUser.user ? 
+              objCurrentUser.user.viewed.includes(post.id) ? 
+                {backgroundColor: objMaterialBackground.allBackgrounds[objMaterialBackground.currentBkg].flash} :
+              '' : ''">
         </div>
       </div>
     </div>

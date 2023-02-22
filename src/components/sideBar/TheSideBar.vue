@@ -4,7 +4,7 @@
 
   import { reactive, defineAsyncComponent, watch } from 'vue';
   
-  import { onBeforeRouteLeave } from 'vue-router'
+  import { useRoute } from 'vue-router'
 
   import './style.css'
   import './media-style.css'
@@ -19,16 +19,7 @@
 
   const authStore = useAuthStore()
   const windowSizeStore = useWindowSizeStore()
-
-  onBeforeRouteLeave(async (to, from) => {
-    if (to.fullPath.includes('/materials/')) {
-      objShowDownSidebar.showDownSidebar = false
-      console.log(objShowDownSidebar.showDownSidebar)
-    } else {
-      objShowDownSidebar.showDownSidebar = true
-      console.log(objShowDownSidebar.showDownSidebar)
-    }
-  })
+  const route = useRoute()
 
   const objShowDownSidebar = reactive({
     showDownSidebar: true,
@@ -63,6 +54,10 @@
   const objModalMenu = reactive({
     activeModalMenu: false
   })
+
+  if (route.params.link) {
+    objShowDownSidebar.showDownSidebar = false
+  }
 
   const handlerNext = () => {
     if (odjCalendar.currentMeet != odjCalendar.meetings.length - 1) {
@@ -195,6 +190,13 @@
       </div>
     </div>
     <div class="sidebar_bottom">
+      <div v-if="authStore.data.auth" class="sidebar_top-item sidebar_birthday">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_752_6042)"><rect width="40" height="40" rx="20" fill="#8F14EC"></rect><g filter="url(#filter0_f_752_6042)"><circle cx="8.5" cy="13.5" r="17.5" fill="#FF0000"></circle></g><g filter="url(#filter1_f_752_6042)"><circle cx="33.5" cy="13.5" r="17.5" fill="#E508A7"></circle></g><g filter="url(#filter2_f_752_6042)"><circle cx="39.5" cy="26.5" r="17.5" fill="#11B7FD"></circle></g><g filter="url(#filter3_f_752_6042)"><circle cx="17.5" cy="48.5" r="17.5" fill="#111AFD"></circle></g><path d="M18.8189 15.7562C18.6689 15.6091 18.4848 15.5012 18.2831 15.4424C18.0814 15.3835 17.8682 15.3754 17.6626 15.4188C17.4578 15.4644 17.2679 15.5611 17.1105 15.6999C16.9532 15.8387 16.8335 16.015 16.7626 16.2125L13.6626 24.7375C13.593 24.9257 13.57 25.128 13.5956 25.327C13.6211 25.526 13.6944 25.7159 13.8092 25.8805C13.924 26.045 14.077 26.1794 14.255 26.272C14.4329 26.3646 14.6307 26.4128 14.8314 26.4125C14.9783 26.4119 15.1241 26.3866 15.2626 26.3375L23.7876 23.2375C23.9851 23.1666 24.1614 23.0469 24.3002 22.8896C24.439 22.7322 24.5357 22.5423 24.5814 22.3375C24.6247 22.1319 24.6166 21.9187 24.5578 21.717C24.4989 21.5153 24.391 21.3312 24.2439 21.1812L18.8189 15.7562ZM18.5939 23.5312L16.4689 21.4062L16.9689 20.0312L19.9689 23.0312L18.5939 23.5312ZM15.2564 24.7437L15.9001 22.9625L17.0376 24.1L15.2564 24.7437ZM21.5251 22.4625L17.5376 18.475L18.0376 17.0938L22.9064 21.9625L21.5251 22.4625ZM19.7501 14.5V13C19.7501 12.8011 19.8291 12.6103 19.9698 12.4697C20.1104 12.329 20.3012 12.25 20.5001 12.25C20.699 12.25 20.8898 12.329 21.0304 12.4697C21.1711 12.6103 21.2501 12.8011 21.2501 13V14.5C21.2501 14.6989 21.1711 14.8897 21.0304 15.0303C20.8898 15.171 20.699 15.25 20.5001 15.25C20.3012 15.25 20.1104 15.171 19.9698 15.0303C19.8291 14.8897 19.7501 14.6989 19.7501 14.5ZM27.0314 19.9688C27.1013 20.0384 27.1568 20.1212 27.1946 20.2124C27.2325 20.3035 27.2519 20.4013 27.2519 20.5C27.2519 20.5987 27.2325 20.6965 27.1946 20.7876C27.1568 20.8788 27.1013 20.9616 27.0314 21.0312C26.8898 21.1709 26.699 21.2493 26.5001 21.2493C26.3012 21.2493 26.1104 21.1709 25.9689 21.0312L24.9689 20.0312C24.828 19.8904 24.7488 19.6993 24.7488 19.5C24.7488 19.3007 24.828 19.1096 24.9689 18.9688C25.1098 18.8279 25.3008 18.7487 25.5001 18.7487C25.6994 18.7487 25.8905 18.8279 26.0314 18.9688L27.0314 19.9688ZM27.2376 17.4625L25.7376 17.9625C25.6608 17.9871 25.5807 17.9997 25.5001 18C25.3215 18.0008 25.1484 17.9378 25.0121 17.8223C24.8757 17.7069 24.7851 17.5466 24.7565 17.3702C24.7278 17.1939 24.7631 17.0131 24.8559 16.8605C24.9487 16.7078 25.0929 16.5933 25.2626 16.5375L26.7626 16.0375C26.9516 15.9745 27.1578 15.9892 27.336 16.0782C27.5141 16.1673 27.6496 16.3235 27.7126 16.5125C27.7756 16.7015 27.7609 16.9077 27.6719 17.0859C27.5828 17.264 27.4266 17.3995 27.2376 17.4625ZM22.2501 17.5062C22.449 17.5062 22.6398 17.4272 22.7804 17.2866C22.9211 17.1459 23.0001 16.9552 23.0001 16.7562C23.0079 16.5988 23.0506 16.4451 23.1251 16.3063C23.2064 16.1562 23.3439 16 23.7501 16C25.4001 16 26.0001 14.6562 26.0001 13.75C26.0001 13.5511 25.9211 13.3603 25.7804 13.2197C25.6398 13.079 25.449 13 25.2501 13C25.0512 13 24.8604 13.079 24.7198 13.2197C24.5791 13.3603 24.5001 13.5511 24.5001 13.75C24.4923 13.9074 24.4496 14.0611 24.3751 14.2C24.2939 14.35 24.1564 14.5062 23.7501 14.5062C22.8439 14.5062 22.1439 14.9188 21.7689 15.6688C21.6014 16.0052 21.5097 16.3743 21.5001 16.75C21.4993 16.849 21.5181 16.9472 21.5554 17.0389C21.5927 17.1306 21.6478 17.2141 21.7176 17.2844C21.7873 17.3547 21.8702 17.4105 21.9616 17.4486C22.053 17.4866 22.1511 17.5063 22.2501 17.5062Z" fill="white"></path></g><defs><filter id="filter0_f_752_6042" x="-28" y="-23" width="73" height="73" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="9.5" result="effect1_foregroundBlur_752_6042"></feGaussianBlur></filter><filter id="filter1_f_752_6042" x="-3" y="-23" width="73" height="73" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="9.5" result="effect1_foregroundBlur_752_6042"></feGaussianBlur></filter><filter id="filter2_f_752_6042" x="3" y="-10" width="73" height="73" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="9.5" result="effect1_foregroundBlur_752_6042"></feGaussianBlur></filter><filter id="filter3_f_752_6042" x="-19" y="12" width="73" height="73" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="9.5" result="effect1_foregroundBlur_752_6042"></feGaussianBlur></filter><clipPath id="clip0_752_6042"><rect width="40" height="40" rx="20" fill="white"></rect></clipPath></defs></svg>
+        <div class="birthday">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M18.8189 15.7562C18.6689 15.6091 18.4848 15.5012 18.2831 15.4424C18.0814 15.3835 17.8682 15.3754 17.6626 15.4188C17.4578 15.4644 17.2679 15.5611 17.1105 15.6999C16.9532 15.8387 16.8335 16.015 16.7626 16.2125L13.6626 24.7375C13.593 24.9257 13.57 25.128 13.5956 25.327C13.6211 25.526 13.6944 25.7159 13.8092 25.8805C13.924 26.045 14.077 26.1794 14.255 26.272C14.4329 26.3646 14.6307 26.4128 14.8314 26.4125C14.9783 26.4119 15.1241 26.3866 15.2626 26.3375L23.7876 23.2375C23.9851 23.1666 24.1614 23.0469 24.3002 22.8896C24.439 22.7322 24.5357 22.5423 24.5814 22.3375C24.6247 22.1319 24.6166 21.9187 24.5578 21.717C24.4989 21.5153 24.391 21.3312 24.2439 21.1812L18.8189 15.7562ZM18.5939 23.5312L16.4689 21.4062L16.9689 20.0312L19.9689 23.0312L18.5939 23.5312ZM15.2564 24.7437L15.9001 22.9625L17.0376 24.1L15.2564 24.7437ZM21.5251 22.4625L17.5376 18.475L18.0376 17.0938L22.9064 21.9625L21.5251 22.4625ZM19.7501 14.5V13C19.7501 12.8011 19.8291 12.6103 19.9698 12.4697C20.1104 12.329 20.3012 12.25 20.5001 12.25C20.699 12.25 20.8898 12.329 21.0304 12.4697C21.1711 12.6103 21.2501 12.8011 21.2501 13V14.5C21.2501 14.6989 21.1711 14.8897 21.0304 15.0303C20.8898 15.171 20.699 15.25 20.5001 15.25C20.3012 15.25 20.1104 15.171 19.9698 15.0303C19.8291 14.8897 19.7501 14.6989 19.7501 14.5ZM27.0314 19.9688C27.1013 20.0384 27.1568 20.1212 27.1946 20.2124C27.2325 20.3035 27.2519 20.4013 27.2519 20.5C27.2519 20.5987 27.2325 20.6965 27.1946 20.7876C27.1568 20.8788 27.1013 20.9616 27.0314 21.0312C26.8898 21.1709 26.699 21.2493 26.5001 21.2493C26.3012 21.2493 26.1104 21.1709 25.9689 21.0312L24.9689 20.0312C24.828 19.8904 24.7488 19.6993 24.7488 19.5C24.7488 19.3007 24.828 19.1096 24.9689 18.9688C25.1098 18.8279 25.3008 18.7487 25.5001 18.7487C25.6994 18.7487 25.8905 18.8279 26.0314 18.9688L27.0314 19.9688ZM27.2376 17.4625L25.7376 17.9625C25.6608 17.9871 25.5807 17.9997 25.5001 18C25.3215 18.0008 25.1484 17.9378 25.0121 17.8223C24.8757 17.7069 24.7851 17.5466 24.7565 17.3702C24.7278 17.1939 24.7631 17.0131 24.8559 16.8605C24.9487 16.7078 25.0929 16.5933 25.2626 16.5375L26.7626 16.0375C26.9516 15.9745 27.1578 15.9892 27.336 16.0782C27.5141 16.1673 27.6496 16.3235 27.7126 16.5125C27.7756 16.7015 27.7609 16.9077 27.6719 17.0859C27.5828 17.264 27.4266 17.3995 27.2376 17.4625ZM22.2501 17.5062C22.449 17.5062 22.6398 17.4272 22.7804 17.2866C22.9211 17.1459 23.0001 16.9552 23.0001 16.7562C23.0079 16.5988 23.0506 16.4451 23.1251 16.3063C23.2064 16.1562 23.3439 16 23.7501 16C25.4001 16 26.0001 14.6562 26.0001 13.75C26.0001 13.5511 25.9211 13.3603 25.7804 13.2197C25.6398 13.079 25.449 13 25.2501 13C25.0512 13 24.8604 13.079 24.7198 13.2197C24.5791 13.3603 24.5001 13.5511 24.5001 13.75C24.4923 13.9074 24.4496 14.0611 24.3751 14.2C24.2939 14.35 24.1564 14.5062 23.7501 14.5062C22.8439 14.5062 22.1439 14.9188 21.7689 15.6688C21.6014 16.0052 21.5097 16.3743 21.5001 16.75C21.4993 16.849 21.5181 16.9472 21.5554 17.0389C21.5927 17.1306 21.6478 17.2141 21.7176 17.2844C21.7873 17.3547 21.8702 17.4105 21.9616 17.4486C22.053 17.4866 22.1511 17.5063 22.2501 17.5062Z" fill="#E33739"></path></svg>
+          <p>Поздравляем тебя, дорогой старк, с днём рождения 😘</p>
+        </div>
+      </div>
       <router-link v-if="authStore.data.auth" to="/payclub" class="sidebar_top-item">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="20" fill="url(#paint0_linear_752_6055)"></rect><path d="M17.5 15C17.0391 15 16.6667 15.383 16.6667 15.8571V21H15.8333C15.3724 21 15 21.383 15 21.8571C15 22.3313 15.3724 22.7143 15.8333 22.7143H16.6667V23.5714H15.8333C15.3724 23.5714 15 23.9545 15 24.4286C15 24.9027 15.3724 25.2857 15.8333 25.2857H16.6667V26.1429C16.6667 26.617 17.0391 27 17.5 27C17.9609 27 18.3333 26.617 18.3333 26.1429V25.2857H22.5C22.9609 25.2857 23.3333 24.9027 23.3333 24.4286C23.3333 23.9545 22.9609 23.5714 22.5 23.5714H18.3333V22.7143H21.25C23.3203 22.7143 25 20.9866 25 18.8571C25 16.7277 23.3203 15 21.25 15H17.5ZM21.25 21H18.3333V16.7143H21.25C22.401 16.7143 23.3333 17.6732 23.3333 18.8571C23.3333 20.0411 22.401 21 21.25 21Z" fill="white"></path><defs><linearGradient id="paint0_linear_752_6055" x1="0" y1="40" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#7000FF"></stop><stop offset="1" stop-color="#0500FF"></stop></linearGradient></defs></svg>
       </router-link>
@@ -210,8 +212,54 @@
           </ul>
         </div>
       </div>
-      <router-link v-if="authStore.data.auth" to="/lk" class="sidebar_top-item sidebar_top-item_user">
-        <img :src="authStore.data.user.account.img" alt="" class="sidebar_top-item_user_img">
+      <router-link v-if="authStore.data.auth" to="/lk" class="sidebar_top-item">
+        <div class="sidebar-photo DF JCC AIC">
+          <div class="sidebar_top-item_user">
+            <img class="sidebar_top-item_user_img" src="https://kronadev.ru/local/templates/kronaclub/build/img/avatar2.png" alt="">
+          </div>
+          <div>
+            <div class="sidebar-photo_line-item">
+              <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.986048 1.10408C1.04378 0.554826 1.53648 0.153807 2.08216 0.238908C6.22738 0.885363 10.0739 2.82118 13.0679 5.78402C16.0619 8.74685 18.0379 12.5729 18.7277 16.7111C18.8185 17.2559 18.4227 17.7527 17.8741 17.8162C17.3255 17.8797 16.8321 17.4856 16.7382 16.9414C16.1026 13.2548 14.3319 9.84862 11.6611 7.20561C8.99029 4.56261 5.56572 2.82767 1.87271 2.2307C1.32751 2.14257 0.928318 1.65334 0.986048 1.10408Z" fill="url(#paint0_angular_221_1472_user)"></path>
+                <defs>
+                <radialGradient id="paint0_angular_221_1472_user" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1 20) rotate(-90) scale(20)">
+                <stop stop-color="#ABAD23"></stop>
+                <stop offset="0.250003" stop-color="#666723"></stop>
+                </radialGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="sidebar-photo_line-item">
+              <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.2" d="M16.8959 0.986048C17.4452 1.04378 17.8462 1.53648 17.7611 2.08217C17.1146 6.22738 15.1788 10.0739 12.216 13.0679C9.25315 16.0619 5.42713 18.0379 1.28891 18.7277C0.744145 18.8185 0.247274 18.4227 0.183796 17.8741V17.8741C0.120318 17.3255 0.514363 16.8321 1.05862 16.7382C4.74517 16.1026 8.15138 14.3319 10.7944 11.6611C13.4374 8.99029 15.1723 5.56572 15.7693 1.87271C15.8574 1.32751 16.3467 0.928318 16.8959 0.986048V0.986048Z" fill="white"></path>
+              </svg>
+            </div>
+            <div class="sidebar-photo_line-item">
+              <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.2" d="M18.014 16.8959C17.9562 17.4452 17.4635 17.8462 16.9178 17.7611C12.7726 17.1146 8.92612 15.1788 5.9321 12.216C2.93808 9.25315 0.962091 5.42713 0.272268 1.28891C0.181455 0.744143 0.577295 0.247271 1.12592 0.183794C1.67454 0.120316 2.16792 0.514361 2.26176 1.05862C2.89736 4.74517 4.66807 8.15138 7.33889 10.7944C10.0097 13.4374 13.4343 15.1723 17.1273 15.7693C17.6725 15.8574 18.0717 16.3467 18.014 16.8959Z" fill="white"></path>
+              </svg>
+            </div>
+            <div class="sidebar-photo_line-item">
+              <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.2" d="M1.10408 18.0142C0.554825 17.9565 0.153806 17.4638 0.238907 16.9181C0.885362 12.7729 2.82118 8.92636 5.78401 5.93234C8.74685 2.93832 12.5729 0.962333 16.7111 0.27251C17.2559 0.181697 17.7527 0.577537 17.8162 1.12616C17.8797 1.67478 17.4856 2.16816 16.9414 2.262C13.2548 2.8976 9.84862 4.66831 7.20561 7.33913C4.56261 10.01 2.82767 13.4345 2.2307 17.1275C2.14257 17.6727 1.65334 18.0719 1.10408 18.0142Z" fill="white"></path>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <div class="sidebar-photo_point-item">
+              <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
+            </div>
+            <div class="sidebar-photo_point-item">
+              <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
+            </div>
+            <div class="sidebar-photo_point-item">
+              <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
+            </div>
+            <div class="sidebar-photo_point-item">
+              <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
+            </div>
+          </div>
+        </div>
       </router-link>
       <router-link v-if="authStore.data.auth" @click="handlerLogOut" to="/login" class="sidebar_top-item sidebar_top-item_singin">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.0002 13.3333H16.0002C15.2668 13.3333 14.6668 13.9333 14.6668 14.6667V25.3333C14.6668 26.0667 15.2668 26.6667 16.0002 26.6667H22.0002C22.7335 26.6667 23.3335 26.0667 23.3335 25.3333V24H22.0002V25.3333H16.0002V14.6667H22.0002V16H23.3335V14.6667C23.3335 13.9333 22.7335 13.3333 22.0002 13.3333Z" fill="white"></path><path d="M21.2733 22.3933L20.3333 23.3333L17 20L20.3333 16.6667L21.2733 17.6067L19.5533 19.3333H26V20.6667H19.5533L21.2733 22.3933Z" fill="white"></path></svg>
@@ -225,8 +273,54 @@
   <section v-if="windowSizeStore.objAdaptive.tablet || windowSizeStore.objAdaptive.mobile" 
     class="sidebar_mobil DF JCSB">
     <div class="DF AIC">
-      <router-link v-if="authStore.data.auth" to="/lk" class="sidebar_top-item sidebar_top-item_user">
-        <img :src="authStore.data.user.account.img" alt="" class="sidebar_top-item_user_img">
+      <router-link v-if="authStore.data.auth" to="/lk" class="sidebar_top-item">
+        <div class="sidebar-photo DF JCC AIC">
+          <div class="sidebar_top-item_user">
+            <img class="sidebar_top-item_user_img" src="https://kronadev.ru/local/templates/kronaclub/build/img/avatar2.png" alt="">
+          </div>
+          <div>
+            <div class="sidebar-photo_line-item">
+              <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.986048 1.10408C1.04378 0.554826 1.53648 0.153807 2.08216 0.238908C6.22738 0.885363 10.0739 2.82118 13.0679 5.78402C16.0619 8.74685 18.0379 12.5729 18.7277 16.7111C18.8185 17.2559 18.4227 17.7527 17.8741 17.8162C17.3255 17.8797 16.8321 17.4856 16.7382 16.9414C16.1026 13.2548 14.3319 9.84862 11.6611 7.20561C8.99029 4.56261 5.56572 2.82767 1.87271 2.2307C1.32751 2.14257 0.928318 1.65334 0.986048 1.10408Z" fill="url(#paint0_angular_221_1472_user)"></path>
+                <defs>
+                <radialGradient id="paint0_angular_221_1472_user" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1 20) rotate(-90) scale(20)">
+                <stop stop-color="#ABAD23"></stop>
+                <stop offset="0.250003" stop-color="#666723"></stop>
+                </radialGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="sidebar-photo_line-item">
+              <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.2" d="M16.8959 0.986048C17.4452 1.04378 17.8462 1.53648 17.7611 2.08217C17.1146 6.22738 15.1788 10.0739 12.216 13.0679C9.25315 16.0619 5.42713 18.0379 1.28891 18.7277C0.744145 18.8185 0.247274 18.4227 0.183796 17.8741V17.8741C0.120318 17.3255 0.514363 16.8321 1.05862 16.7382C4.74517 16.1026 8.15138 14.3319 10.7944 11.6611C13.4374 8.99029 15.1723 5.56572 15.7693 1.87271C15.8574 1.32751 16.3467 0.928318 16.8959 0.986048V0.986048Z" fill="white"></path>
+              </svg>
+            </div>
+            <div class="sidebar-photo_line-item">
+              <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.2" d="M18.014 16.8959C17.9562 17.4452 17.4635 17.8462 16.9178 17.7611C12.7726 17.1146 8.92612 15.1788 5.9321 12.216C2.93808 9.25315 0.962091 5.42713 0.272268 1.28891C0.181455 0.744143 0.577295 0.247271 1.12592 0.183794C1.67454 0.120316 2.16792 0.514361 2.26176 1.05862C2.89736 4.74517 4.66807 8.15138 7.33889 10.7944C10.0097 13.4374 13.4343 15.1723 17.1273 15.7693C17.6725 15.8574 18.0717 16.3467 18.014 16.8959Z" fill="white"></path>
+              </svg>
+            </div>
+            <div class="sidebar-photo_line-item">
+              <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.2" d="M1.10408 18.0142C0.554825 17.9565 0.153806 17.4638 0.238907 16.9181C0.885362 12.7729 2.82118 8.92636 5.78401 5.93234C8.74685 2.93832 12.5729 0.962333 16.7111 0.27251C17.2559 0.181697 17.7527 0.577537 17.8162 1.12616C17.8797 1.67478 17.4856 2.16816 16.9414 2.262C13.2548 2.8976 9.84862 4.66831 7.20561 7.33913C4.56261 10.01 2.82767 13.4345 2.2307 17.1275C2.14257 17.6727 1.65334 18.0719 1.10408 18.0142Z" fill="white"></path>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <div class="sidebar-photo_point-item">
+              <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
+            </div>
+            <div class="sidebar-photo_point-item">
+              <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
+            </div>
+            <div class="sidebar-photo_point-item">
+              <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
+            </div>
+            <div class="sidebar-photo_point-item">
+              <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
+            </div>
+          </div>
+        </div>
       </router-link>
       <router-link v-if="authStore.data.auth" @click="handlerLogOut" to="/login" class="sidebar_top-item sidebar_top-item_singin">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.0002 13.3333H16.0002C15.2668 13.3333 14.6668 13.9333 14.6668 14.6667V25.3333C14.6668 26.0667 15.2668 26.6667 16.0002 26.6667H22.0002C22.7335 26.6667 23.3335 26.0667 23.3335 25.3333V24H22.0002V25.3333H16.0002V14.6667H22.0002V16H23.3335V14.6667C23.3335 13.9333 22.7335 13.3333 22.0002 13.3333Z" fill="white"></path><path d="M21.2733 22.3933L20.3333 23.3333L17 20L20.3333 16.6667L21.2733 17.6067L19.5533 19.3333H26V20.6667H19.5533L21.2733 22.3933Z" fill="white"></path></svg>
@@ -272,7 +366,7 @@
 
   <section 
     v-if="objShowDownSidebar.showDownSidebar && (windowSizeStore.objAdaptive.tablet || windowSizeStore.objAdaptive.mobile)" 
-    class="sidebar_down DF JCC">
+    class="sidebar_down DF JCC" id='sidebar_down'>
     <router-link to="/users" class="sidebar_top-item" v-if="authStore.data.auth">
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.1806 13.4291L15.1719 13.8582L13.5859 13.8669L12 13.8756V14.2565C12 17.8432 13.7835 20.2628 16.4415 20.2823L16.9612 20.2861L17.1634 20.5553C17.631 21.1777 18.2384 21.7096 18.8017 21.9899L19.0625 22.1196V23.3483V24.5769H17.9062H16.75V25.351V26.125H16.3594H15.9688V26.5625V27H20H24.0312V26.5625V26.125H23.6406H23.25V25.351V24.5769H22.0938H20.9375V23.3483V22.1196L21.1983 21.9899C21.7616 21.7096 22.369 21.1777 22.8366 20.5553L23.0388 20.2861L23.5585 20.2823C26.2153 20.2628 28 17.8415 28 14.2565V13.8756L26.4141 13.8669L24.8281 13.8582L24.8194 13.4291L24.8106 13H20H15.1894L15.1806 13.4291ZM15.2881 15.4736C15.4324 16.7399 15.6981 17.7772 16.1261 18.7464L16.3082 19.1587H16.2044C15.3927 19.1587 14.475 18.6058 13.9701 17.8125C13.5367 17.1316 13.0953 15.7371 13.0939 15.044C13.0938 14.9883 13.1594 14.9852 14.1641 14.9936L15.2344 15.0024L15.2881 15.4736ZM26.9062 15.0496C26.9062 17.1124 25.356 19.1587 23.7931 19.1587H23.6869L23.824 18.8642C24.2734 17.8993 24.5903 16.6752 24.7194 15.4062C24.7401 15.2026 24.7633 15.0247 24.771 15.0108C24.8075 14.9448 26.9062 14.9828 26.9062 15.0496Z" fill="white"></path></svg>
     </router-link>
