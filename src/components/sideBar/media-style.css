@@ -1,4 +1,7 @@
 @media (max-width: 1000px) {
+    .item_links{
+        margin: 0;
+    }
     .sidebar_mobil,
     .sidebar_down {
         position: fixed;
@@ -20,6 +23,7 @@
     .sidebar_top-item_singin {
         margin: 0;
         padding: 0;
+        height: 40px !important;
         border-top: none;
     }
     .sidebar_top-item {

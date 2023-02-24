@@ -113,7 +113,7 @@
       <div v-if="objMaterials.showTagsAdaptive || windowSizeStore.objAdaptive.currentSize > 1200">
         <div class="tag" 
           v-for="(tag, index) in objMaterials.arrTags"
-          :class="{active: tag.active}"
+          :class="{active: tag.active, 'tag-for_junior': tag.tag === 'Для новеньких'}"
           :key="tag.id"
           @click="handlerTag(tag.id, index)">
           {{tag.tag}}

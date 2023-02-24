@@ -425,9 +425,9 @@
         </div>
         <div v-if="objDataTip.clubPrice" class="profile_preview-data_box-tip">Ваша базовая стоимость подписки без учета скидок и других бонусов</div>
       </div>
-    </div>
-    <div class="profile_preview-link">
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M21.0295 18.9706C20.4835 18.4248 19.743 18.1182 18.9709 18.1182C18.1988 18.1182 17.4583 18.4248 16.9122 18.9706L14.8529 21.0293C14.3068 21.5754 14 22.316 14 23.0883C14 23.8606 14.3068 24.6012 14.8529 25.1473C15.3989 25.6934 16.1396 26.0002 16.9119 26.0002C17.6841 26.0002 18.4248 25.6934 18.9709 25.1473L20.0002 24.118" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18.9707 21.0293C19.5168 21.5752 20.2573 21.8818 21.0294 21.8818C21.8015 21.8818 22.542 21.5752 23.088 21.0293L25.1474 18.9707C25.6935 18.4246 26.0002 17.6839 26.0002 16.9117C26.0002 16.1394 25.6935 15.3987 25.1474 14.8527C24.6013 14.3066 23.8606 13.9998 23.0884 13.9998C22.3161 13.9998 21.5755 14.3066 21.0294 14.8527L20 15.882" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <div class="profile_preview-link">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M21.0295 18.9706C20.4835 18.4248 19.743 18.1182 18.9709 18.1182C18.1988 18.1182 17.4583 18.4248 16.9122 18.9706L14.8529 21.0293C14.3068 21.5754 14 22.316 14 23.0883C14 23.8606 14.3068 24.6012 14.8529 25.1473C15.3989 25.6934 16.1396 26.0002 16.9119 26.0002C17.6841 26.0002 18.4248 25.6934 18.9709 25.1473L20.0002 24.118" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18.9707 21.0293C19.5168 21.5752 20.2573 21.8818 21.0294 21.8818C21.8015 21.8818 22.542 21.5752 23.088 21.0293L25.1474 18.9707C25.6935 18.4246 26.0002 17.6839 26.0002 16.9117C26.0002 16.1394 25.6935 15.3987 25.1474 14.8527C24.6013 14.3066 23.8606 13.9998 23.0884 13.9998C22.3161 13.9998 21.5755 14.3066 21.0294 14.8527L20 15.882" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
     </div>
     <div v-if="authStore.data.auth" class="profile_info">
       <nav class="profile_info-nav">
@@ -493,7 +493,7 @@
           </div>
         </div>
       </div>
-      <div v-if="objNav.yourData" :class="windowSizeStore.objAdaptive.mobile ? 'DB' : 'DF'">
+      <div v-if="objNav.yourData" :class="windowSizeStore.objAdaptive.mobile || windowSizeStore.objAdaptive.currentSize < 1330 ? 'DB' : 'DF'">
         <div class="info-yourData_block">
           <div class="info-yourData_block_item">
             <p class="item-texts">Имя</p>

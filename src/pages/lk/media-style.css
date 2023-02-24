@@ -1,14 +1,28 @@
+@media (max-width: 1330px) {
+    .profile_info{
+        height: 100%;
+    }
+    .info-yourData_block:nth-child(2){
+        margin: 40px 0 0;
+    }
+}
 @media (max-width: 1000px) {
     .profile_preview {
+        position: static;
+        flex-shrink: 0;
+        height: auto;
         margin: 0;
         padding: 74px 24px 74px;
     }
     .profile_info {
-        margin: 0 0 0 263px;
+        margin: 0;
         padding: 74px 24px 74px;
     }
     .satellites-body {
         grid-template-columns: repeat(auto-fit, minmax(332px, 1fr));
+    }
+    .profile_preview-link {
+        margin: 30px 0 0;
     }
 }
 
@@ -26,9 +40,6 @@
     }
     .info-yourData_block:nth-child(2) {
         margin: 48px 0 0;
-    }
-    .info-yourData_save {
-        border: none;
     }
     .profile_preview-modil {
         position: relative;
@@ -117,8 +128,5 @@
     }
     .profile_preview-modil_data {
         padding: 24px;
-    }
-    .profile_preview-link {
-        margin-left: 24px;
     }
 }
