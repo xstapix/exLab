@@ -1,5 +1,5 @@
 <script setup>
-  import TheSideBar from '@/components/sideBar/TheSideBar.vue'
+  import SideBar from '@/components/SideBar/SideBar.vue'
   import {getMethods} from '@/methods.js'
   import { useAuthStore } from '@/stores/authStore' 
 
@@ -64,7 +64,7 @@
 
 <template>
   <div class="DF background_space">
-    <TheSideBar/>
+    <SideBar/>
     <div class="login_body">
       <h1 class="login_body-text">Вход во вселенную закрытого клуба дизайнеров «1000 звёзд»</h1>
       <div class="login_body-form">

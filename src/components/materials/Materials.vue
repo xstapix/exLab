@@ -4,23 +4,17 @@
   import { useParamsPageStore } from '@/stores/paramsPageStore'
   import { useWindowSizeStore } from '@/stores/windowSizeStore' 
 
-  import VButtonShowMore from '@/components/buttonShowMore/VButtonShowMore.vue'
-  import Filter from '@/components/tagFilter/Filter.vue'
+  import VButtonShowMore from '@/components/VButtonShowMore/VButtonShowMore.vue'
+  import Filter from '@/components/TagFilter/Filter.vue'
   
   import {getMethods} from '@/methods.js'
 
-  import {watch, reactive, defineAsyncComponent} from 'vue'
+  import {watch, reactive} from 'vue'
 
   import './style.css'
   import './media-style.css'
-
-  const ModalAddMaterial = defineAsyncComponent(
-    () => import('@/components/modalAddMaterial/ModalAddMaterial.vue')
-  )
-
-  const ModalBlockedPost = defineAsyncComponent(
-    () => import('@/components/modalBlockedPost/ModalBlockedPost.vue')
-  )
+  
+  const emit = defineEmits(['showBlockedModal'])
 
   const postsStore = useStore()
   const authStore = useAuthStore()
@@ -33,7 +27,6 @@
   })
 
   const objModal = reactive({
-    activeModalAddPost: false,
     activeModalBlocked: false
   })
 
@@ -101,7 +94,7 @@
 
   const handlerBlockedPost = () => {
     if (!authStore.data.auth) {
-      objModal.activeModalBlocked = true
+      emit('showBlockedModal', true)
     }
   }
 
@@ -206,12 +199,4 @@
     <VButtonShowMore v-if="postsStore.data.next" @click="handlerShowMore"/>
   </div>
   <Filter v-if="windowSizeStore.objAdaptive.currentSize > 1200"/>
-  <ModalAddMaterial 
-    v-if="objModal.activeModalAddPost"
-    @closeModal="(close) => objModal.activeModalAddPost = close"
-    :activeModal="objModal.activeModalAddPost"/>
-  <ModalBlockedPost
-    v-if="objModal.activeModalBlocked"
-    @closeModal="(close) => objModal.activeModalBlocked = close"
-    :activeModal="objModal.activeModalBlocked"/>
 </template>

@@ -1,6 +1,6 @@
 <script setup>
-  import TheSideBar from '@/components/sideBar/TheSideBar.vue'
-  import VButtonShowMore from '@/components/buttonShowMore/VButtonShowMore.vue'
+  import SideBar from '@/components/SideBar/SideBar.vue'
+  import VButtonShowMore from '@/components/VButtonShowMore/VButtonShowMore.vue'
 
   import { useWorkStore } from '@/stores/workStore'
   import {getMethods} from '@/methods.js'
@@ -59,7 +59,7 @@
 
 <template>
   <div class="DF">
-    <TheSideBar/>
+    <SideBar/>
     <section class="works-body" v-if="workStore.data.works">
       <div class="works-content">
         <div v-for="item in workStore.data.works" 

@@ -14,7 +14,7 @@
   import './style.css'
   
   const ModalUnsavedChanges = defineAsyncComponent(
-    () => import('@/components/modalUnsavedChanges/ModalUnsavedChanges.vue')
+    () => import('@/components/ModalUnsavedChanges/ModalUnsavedChanges.vue')
   )
 
   const editor = new EditorJS({
@@ -128,18 +128,9 @@
   })
   
   watch(objNewPost.post, () => {
-    let point = 0
-
-    if ((objNewPost.post.name.length >= 10) && (objNewPost.post.name.length < 100)) {
-      point++
-    }
-    if ((objNewPost.post.desc.length >= 10) && (objNewPost.post.desc.length < 150)) {
-      point++
-    }
-    if (objNewPost.post.tags.length >= 1) {
-      point++
-    }
-    if (point == 3) {
+    if (((objNewPost.post.name.length >= 10) && (objNewPost.post.name.length < 100))
+      && (objNewPost.post.desc.length >= 10) && (objNewPost.post.desc.length < 150)
+      && (objNewPost.post.tags.length >= 1)) {
       objCheckPost.successPost = true
     } else {
       objCheckPost.successPost = false

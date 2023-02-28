@@ -5,7 +5,7 @@ export default createRouter({
     routes: [{
             path: '/',
             component: () =>
-                import ('@/pages/home/HomePage.vue'),
+                import ('@/pages/materials/MaterialsPage.vue'),
             alias: '/'
         },
         {
@@ -41,7 +41,7 @@ export default createRouter({
         {
             path: '/materials/:link',
             component: () =>
-                import ('@/pages/post/Post.vue')
+                import ('@/pages/detailMaterial/detailMaterial.vue')
         },
         {
             path: '/:not_page(.*)*',

@@ -1,11 +1,11 @@
 <script setup>
-  import TheSideBar from '@/components/sideBar/TheSideBar.vue'
+  import SideBar from '@/components/SideBar/SideBar.vue'
   import {getMethods} from '@/methods.js'
   import { useAuthStore } from '@/stores/authStore' 
   import { useUserStore } from '@/stores/userStore' 
   import { useWindowSizeStore } from '@/stores/windowSizeStore' 
 
-  import VButtonShowMore from '@/components/buttonShowMore/VButtonShowMore.vue'
+  import VButtonShowMore from '@/components/VButtonShowMore/VButtonShowMore.vue'
   
   import {reactive} from 'vue'
   import { useRouter } from 'vue-router'
@@ -93,7 +93,7 @@
 </script>
 <template>
   <div class="DF">
-    <TheSideBar/>
+    <SideBar/>
     <section class="users_body">
       <div class="stark_rating DF AIC">
         <p class="stark_rating-text">Pейтинг старков</p>

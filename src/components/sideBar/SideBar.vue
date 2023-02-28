@@ -2,20 +2,14 @@
   import { useAuthStore } from '@/stores/authStore' 
   import { useWindowSizeStore } from '@/stores/windowSizeStore' 
 
-  import { reactive, defineAsyncComponent, watch } from 'vue';
+  import { reactive } from 'vue';
   
   import { useRoute } from 'vue-router'
 
   import './style.css'
   import './media-style.css'
 
-  const ModalAddMaterial = defineAsyncComponent(
-    () => import('@/components/modalAddMaterial/ModalAddMaterial.vue')
-  )
-
-  const ModalAddWork = defineAsyncComponent(
-    () => import('@/components/modalAddWork/ModalAddWork.vue')
-  )
+  const emit = defineEmits(['showMaterialModal', 'showWorkModal'])
 
   const authStore = useAuthStore()
   const windowSizeStore = useWindowSizeStore()
@@ -46,11 +40,6 @@
     currentMeet: 0
   })
 
-  const objModal = reactive({
-    activePostModal: false,
-    activeWorkModal: false
-  })
-
   const objModalMenu = reactive({
     activeModalMenu: false
   })
@@ -75,14 +64,10 @@
     authStore.changeAuth(false)
     authStore.changeUser(null)
 
-    deleteCookie('cronaClubUserEmail')
+    deleteCookie('cronaClubUserEmail', "", {})
   }
 
-  function deleteCookie(name) {
-    setCookie(name, "", {})
-  }
-
-  function setCookie(name, value, options = {}) {
+  function deleteCookie(name, value, options = {}) {
     options = {
       ...options
     };
@@ -102,10 +87,6 @@
     }
 
     document.cookie = updatedCookie;
-  }
-
-  const handlerMobilMenu = () => {
-
   }
 
 </script>
@@ -207,8 +188,8 @@
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="#333333"></circle><path d="M20 15V25M15 20H25" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
         <div class="item_tg-box DN">
           <ul>
-            <li class="item_tg-box_text" @click="objModal.activePostModal = true">Опубликовать новый материал</li>
-            <li class="item_tg-box_text" @click="objModal.activeWorkModal = true">Добавить работу в портфолио</li>
+            <li class="item_tg-box_text" @click="emit('showMaterialModal', true)">Опубликовать новый материал</li>
+            <li class="item_tg-box_text" @click="emit('showWorkModal', true)">Добавить работу в портфолио</li>
           </ul>
         </div>
       </div>
@@ -402,13 +383,4 @@
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="20" fill="url(#paint0_linear_668_9319)"></rect><path d="M17.5 15C17.0391 15 16.6667 15.383 16.6667 15.8571V21H15.8333C15.3724 21 15 21.383 15 21.8571C15 22.3313 15.3724 22.7143 15.8333 22.7143H16.6667V23.5714H15.8333C15.3724 23.5714 15 23.9545 15 24.4286C15 24.9027 15.3724 25.2857 15.8333 25.2857H16.6667V26.1429C16.6667 26.617 17.0391 27 17.5 27C17.9609 27 18.3333 26.617 18.3333 26.1429V25.2857H22.5C22.9609 25.2857 23.3333 24.9027 23.3333 24.4286C23.3333 23.9545 22.9609 23.5714 22.5 23.5714H18.3333V22.7143H21.25C23.3203 22.7143 25 20.9866 25 18.8571C25 16.7277 23.3203 15 21.25 15H17.5ZM21.25 21H18.3333V16.7143H21.25C22.401 16.7143 23.3333 17.6732 23.3333 18.8571C23.3333 20.0411 22.401 21 21.25 21Z" fill="white"></path><defs><linearGradient id="paint0_linear_668_9319" x1="0" y1="40" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#7000FF"></stop><stop offset="1" stop-color="#0500FF"></stop></linearGradient></defs></svg>
     </a>
   </section>
-  
-  <ModalAddMaterial 
-    v-if="objModal.activePostModal"
-    @closeModal="(close) => objModal.activePostModal = close"
-    :activeModal="objModal.activePostModal"/>
-  <ModalAddWork 
-    v-if="objModal.activeWorkModal"
-    @closeModal="(close) => objModal.activeWorkModal = close"
-    :activeModal="objModal.activeWorkModal"/>
 </template>

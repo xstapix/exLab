@@ -1,12 +1,12 @@
 <script setup>
   import {reactive, defineAsyncComponent} from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
+  import { useRoute } from 'vue-router'
 
   import {getMethods} from '@/methods.js'
 
-  import TheSideBar from '@/components/sideBar/TheSideBar.vue'
-  import Carousel from '@/components/swiper/Carousel.vue'
-  import TheNotes from '@/components/notes/TheNotes.vue'
+  import SideBar from '@/components/SideBar/SideBar.vue'
+  import Carousel from '@/components/Swiper/Carousel.vue'
+  import TheNotes from '@/components/Notes/TheNotes.vue'
 
   import { useAuthStore } from '@/stores/authStore' 
   import {useStore} from '@/stores/postStore'
@@ -14,22 +14,21 @@
 
   import './style.css'
   import './media-style.css'
-  import '@/components/modalBlockedPost/style.css'
+  import '@/components/ModalBlockedPost/style.css'
 
   const UsefulMaterials = defineAsyncComponent(
-    () => import('@/components/usefulMaterials/UsefulMaterials.vue')
+    () => import('@/components/UsefulMaterials/UsefulMaterials.vue')
   )
 
   const ModalAddWork = defineAsyncComponent(
-    () => import('@/components/modalAddWork/ModalAddWork.vue')
+    () => import('@/components/ModalAddWork/ModalAddWork.vue')
   )
 
   const WorkForLesson = defineAsyncComponent(
-    () => import('@/components/workForLesson/WorkForLesson.vue')
+    () => import('@/components/WorkForLesson/WorkForLesson.vue')
   )
   
   const route = useRoute()
-  const router = useRouter()
 
   const useMethod = getMethods()
   const authStore = useAuthStore()
@@ -58,6 +57,11 @@
     activeWorkModal: false
   })
 
+  const objAdaptation = reactive({
+    mobilAdaptation: 620,
+    deskAdaptation: 1300,
+  })
+
   setObjPost()
 
   async function setObjPost() {
@@ -78,14 +82,13 @@
   const handlerSidebarScroll = (id) => {
     document.getElementById(id).scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
   }
-
 </script>
 
 <template>
   <div class="DF" id="top">
-    <TheSideBar/>
+    <SideBar/>
     <div class="post-body">
-      <router-link v-if="windowSizeStore.objAdaptive.currentSize > 620"
+      <router-link v-if="windowSizeStore.objAdaptive.currentSize > objAdaptation.mobilAdaptation"
         :to="`/post/${Number(objPost.postViewed.id) - 1}`" 
         @click="prevPost" 
         class="postPrew">
@@ -93,7 +96,7 @@
       </router-link>
       <div v-else></div>
       <div class="DF JCC single_post">
-        <div v-if="authStore.data.auth && windowSizeStore.objAdaptive.currentSize > 620" 
+        <div v-if="authStore.data.auth && windowSizeStore.objAdaptive.currentSize > objAdaptation.mobilAdaptation" 
           class="single_post-side_bar">
           <div class="single_post-side_bar-inner">
             <div class="post-side_bar-actions DF FDC AIC">
@@ -224,7 +227,7 @@
             <p v-if="authStore.data.auth" class="single_post-content_main_text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum id quibusdam eveniet sunt quas accusantium repellendus ullam nesciunt iure exercitationem, sit reprehenderit ratione officiis impedit doloremque expedita debitis nam vitae. Дайджест материалов за январь 2023</p>
           </div>
           <TheNotes 
-            v-if="authStore.data.auth && windowSizeStore.objAdaptive.currentSize < 1300"
+            v-if="authStore.data.auth && windowSizeStore.objAdaptive.currentSize < objAdaptation.deskAdaptation"
             id="notes"/>
           <UsefulMaterials
             v-if="authStore.data.auth"
@@ -247,9 +250,9 @@
             </div>
           </div>
         </div>
-        <TheNotes v-if="authStore.data.auth && windowSizeStore.objAdaptive.currentSize > 1300"/>
+        <TheNotes v-if="authStore.data.auth && windowSizeStore.objAdaptive.currentSize > objAdaptation.deskAdaptation"/>
       </div>
-      <router-link v-if="route.params.id != postsStore.data.posts.length - 1 && windowSizeStore.objAdaptive.currentSize > 620"
+      <router-link v-if="route.params.id != postsStore.data.posts.length - 1 && windowSizeStore.objAdaptive.currentSize > objAdaptation.mobilAdaptation"
         :to="`/post/${Number(objPost.postViewed.id) + 1}`" 
         @click="nextPost" 
         class="postNext">

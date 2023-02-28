@@ -1,6 +1,6 @@
 <script setup>
   import { useAuthStore } from '@/stores/authStore' 
-  import TheSideBar from '@/components/sideBar/TheSideBar.vue'
+  import SideBar from '@/components/SideBar/SideBar.vue'
 
   import { reactive } from 'vue';
 
@@ -54,7 +54,7 @@
 
 <template>
   <div class="DF">
-    <TheSideBar/>
+    <SideBar/>
     <div class="pay-body" v-if="authStore.data.auth">
       <p class="pay-body_title">Клуб. Оплата подписки</p>
       <div class="pay-body_desc">

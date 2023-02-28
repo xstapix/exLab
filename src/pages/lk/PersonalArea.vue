@@ -1,5 +1,5 @@
 <script setup>
-  import TheSideBar from '@/components/sideBar/TheSideBar.vue'
+  import SideBar from '@/components/SideBar/SideBar.vue'
 
   import { useAuthStore } from '@/stores/authStore'
   import { useWindowSizeStore } from '@/stores/windowSizeStore' 
@@ -15,11 +15,11 @@
   import '@/components/materials/style.css'
   
   const ModalAddMaterial = defineAsyncComponent(
-    () => import('@/components/modalAddMaterial/ModalAddMaterial.vue')
+    () => import('@/components/ModalAddMaterial/ModalAddMaterial.vue')
   )
 
   const ModalAddWork = defineAsyncComponent(
-    () => import('@/components/modalAddWork/ModalAddWork.vue')
+    () => import('@/components/ModalAddWork/ModalAddWork.vue')
   )
 
   const authStore = useAuthStore()
@@ -43,8 +43,8 @@
     user: authStore.data.user
   })
 
-  const odjButton = reactive({
-    buttonActive: false
+  const objButtonSave = reactive({
+    buttonSave: false
   })
 
   const objModal = reactive({
@@ -83,7 +83,7 @@
   }
 
   watch(objAuth.user, () => {
-    odjButton.buttonActive = true
+    objButtonSave.buttonSave = true
   })
 
   const handlerSave = async () => {
@@ -94,7 +94,7 @@
 
     authStore.changeUser(objAuth.user)
 
-    odjButton.buttonActive = false
+    objButtonSave.buttonSave = false
 
     await useMethod.sendWork(formData)
       .then((res) => console.log(res))
@@ -123,7 +123,7 @@
 
 <template>
   <div v-if="authStore.data.auth" :class="windowSizeStore.objAdaptive.mobile ? 'DB' : 'DF'">
-    <TheSideBar/>
+    <SideBar/>
     <div v-if="windowSizeStore.objAdaptive.tablet || windowSizeStore.objAdaptive.desktop" class="profile_preview DF FDC JCSB">
       <div>
         <div class="profile_preview-photo DF JCC AIC">
@@ -522,7 +522,7 @@
             <p class="item-texts">День рождения</p>
             <input type="text" v-model="objAuth.user.account.account_name" class="item-input">
           </div>
-          <button @click="handlerSave" :class="odjButton.buttonActive ? 'info-yourData_save' : 'DN'">Сохранить изменения</button>
+          <button @click="handlerSave" :class="objButtonSave.buttonSave ? 'info-yourData_save' : 'DN'">Сохранить изменения</button>
         </div>
         <div class="info-yourData_block">
           <div class="info-yourData_block_item">
