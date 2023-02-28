@@ -34,6 +34,11 @@ export default createRouter({
                 import ('@/pages/works/Works.vue')
         },
         {
+            path: '/works/:workId',
+            component: () =>
+                import ('@/pages/detailWork/DetailWork.vue')
+        },
+        {
             path: '/user/:userId',
             component: () =>
                 import ('@/pages/404/NotFound.vue')
@@ -41,7 +46,7 @@ export default createRouter({
         {
             path: '/materials/:link',
             component: () =>
-                import ('@/pages/detailMaterial/detailMaterial.vue')
+                import ('@/pages/detailMaterial/DetailMaterial.vue')
         },
         {
             path: '/:not_page(.*)*',

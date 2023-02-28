@@ -25,7 +25,7 @@ export const getMethods = () => {
         return posts.data.materials
     }
 
-    async function getPost(currentPostId) {
+    async function getDetailMaterial(currentPostId) {
         const post = await axios.get(`https://63385f16937ea77bfdbf1257.mockapi.io/kronaPostsList/${currentPostId}`)
 
         return post.data
@@ -56,9 +56,17 @@ export const getMethods = () => {
         })
 
         workStore.changeWorksList(works.data)
-        console.log(works);
 
         return works.data
+    }
+
+    async function getDetailWork(idWork) {
+        const work = await axios({
+            method: "get",
+            url: `https://6392fd90ab513e12c5ff47f0.mockapi.io/properties/${idWork}`,
+        })
+
+        return work.data
     }
 
     async function sendWork(formData) {
@@ -70,10 +78,11 @@ export const getMethods = () => {
     return {
         getTags,
         getMaterials,
-        getPost,
+        getDetailMaterial,
         getUsers,
         getAuth,
         getWorks,
+        getDetailWork,
         sendWork,
     }
 }

@@ -65,17 +65,19 @@
   setObjPost()
 
   async function setObjPost() {
-    objPost.postViewed = await useMethod.getPost(route.params.link)
+    objPost.postViewed = await useMethod.getDetailMaterial(route.params.link)
     objPost.renderKey++
+
+    console.log(objPost);
   }
   
   const nextPost = async () => {
-    objPost.postViewed = await useMethod.getPost(route.params.link) //next
+    objPost.postViewed = await useMethod.getDetailMaterial(route.params.link) //next
     objPost.renderKey++
   }
 
   const prevPost = async () => {
-    objPost.postViewed = await useMethod.getPost(route.params.link) //prew
+    objPost.postViewed = await useMethod.getDetailMaterial(route.params.link) //prew
     objPost.renderKey++
   }
 
@@ -89,7 +91,7 @@
     <SideBar/>
     <div class="post-body">
       <router-link v-if="windowSizeStore.objAdaptive.currentSize > objAdaptation.mobilAdaptation"
-        :to="`/post/${Number(objPost.postViewed.id) - 1}`" 
+        :to="`/post/NaN`" 
         @click="prevPost" 
         class="postPrew">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M22 14L16 20L22 26" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -253,7 +255,7 @@
         <TheNotes v-if="authStore.data.auth && windowSizeStore.objAdaptive.currentSize > objAdaptation.deskAdaptation"/>
       </div>
       <router-link v-if="route.params.id != postsStore.data.posts.length - 1 && windowSizeStore.objAdaptive.currentSize > objAdaptation.mobilAdaptation"
-        :to="`/post/${Number(objPost.postViewed.id) + 1}`" 
+        :to="`/post/NaN`" 
         @click="nextPost" 
         class="postNext">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle r="20" transform="matrix(-1 0 0 1 20 20)" fill="white"></circle><path d="M18 14L24 20L18 26" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>

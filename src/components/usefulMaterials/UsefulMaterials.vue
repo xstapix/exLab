@@ -2,7 +2,7 @@
   import { reactive } from 'vue';
 
   import './style.css'
-  import '@/pages/works/style.css'
+  import '@/pages/detailWork/style.css'
 
   const props = defineProps({
     postViewed: Object
@@ -30,16 +30,16 @@
     <p class="single_post-content_title">Полезные материалы</p>
     <div class="useful-post_content-comments">
       <div class="comments-item_body">
-        <a href="/" class="DF AIC works-modal_author-info">
-          <div class="works-modal_author">
-            <img src="https://kronadev.ru/upload/resize_cache/main/8ac/128_128_2/75zqimqppc76ug0dtzo4tsabpr7r5o8r.png" class="works-modal_author-img"/>
+        <a href="/" class="DF AIC detail-work_author-info">
+          <div class="detail-work_author">
+            <img src="https://kronadev.ru/upload/resize_cache/main/8ac/128_128_2/75zqimqppc76ug0dtzo4tsabpr7r5o8r.png" class="detail-work_author-img"/>
           </div>
           <div>
-            <div class="works-modal_author-nl DF AIC">
+            <div class="detail-work_author-nl DF AIC">
               kisenkonastya
-              <span class="works-modal_author-level">lvl. 55</span>
+              <span class="detail-work_author-level">lvl. 55</span>
             </div>
-            <div class="works-modal_author-stark">канареечный старк</div>
+            <div class="detail-work_author-stark">канареечный старк</div>
           </div>
         </a>
         <div class="comments-item_body-desc">
