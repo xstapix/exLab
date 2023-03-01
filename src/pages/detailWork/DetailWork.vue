@@ -9,6 +9,8 @@
   import './media-style.css'
   import '@/components/Materials/style.css'
 
+  document.body.style.backgroundColor = '#f0f0f0'
+
   const useMethod = getMethods()
   const route = useRoute()
   const router = useRouter()
@@ -19,22 +21,38 @@
     renderKey: 0
   })
 
-  setDetailWork()
+  setDetailWork(null, route.params.workId)
 
-  async function setDetailWork() {
-    objWork.work = await useMethod.getDetailWork(route.params.workId)
+  async function setDetailWork(direction, workId) {
+    if (direction === '+') {   
+      objWork.work = await useMethod.getDetailWork(`${Number(workId) + 1}`)
+    } else if (direction === '-') {   
+      objWork.work = await useMethod.getDetailWork(`${Number(workId) - 1}`)
+    } else {
+      objWork.work = await useMethod.getDetailWork(`${workId}`)
+    }
   }
 
   const handlerNextWork = () => {
-    router.push(`/works/${Number(objWork.work.id) + 1}`)
-    objWork.work = workStore.data.works.find(item => item.id == Number(objWork.work.id) + 1)
+    if (route.params.link) {
+      router.push(`/materials/${route.params.link}/work/${Number(objWork.work.id) + 1}`)
+    } else {
+      router.push(`/works/${Number(objWork.work.id) + 1}`)
+    }
 
+    setDetailWork('+', objWork.work.id)
+    
     objWork.renderKey++
   }
 
   const handlerPrewWork = () => {
-    router.push(`/works/${Number(objWork.work.id) - 1}`)
-    objWork.work = workStore.data.works.find(item => item.id == Number(objWork.work.id) - 1)
+    if (route.params.link) {
+      router.push(`/materials/${route.params.link}/work/${Number(objWork.work.id) - 1}`)
+    } else {
+      router.push(`/works/${Number(objWork.work.id) - 1}`)
+    }
+
+    setDetailWork('-', objWork.work.id)
 
     objWork.renderKey++
   }
@@ -42,10 +60,10 @@
 
 <template>
   <section v-if="objWork.work" :key="objWork.renderKey" class="detail-work_active" >
-    <div v-if="objWork.work.id !== '0'" class="detail-work_arrow-left" @click="handlerPrewWork" >
+    <div v-if="objWork.work.prev" class="detail-work_arrow-left" @click="handlerPrewWork" >
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M22 14L16 20L22 26" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
     </div>
-    <div v-if="objWork.work.id !== workStore.data.works.length - 1" class="detail-work_arrow-right" @click="handlerNextWork">
+    <div v-if="objWork.work.next" class="detail-work_arrow-right" @click="handlerNextWork">
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle r="20" transform="matrix(-1 0 0 1 20 20)" fill="white"></circle><path d="M18 14L24 20L18 26" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
     </div>
     <div class="DF FDC detail-work_content">
@@ -86,9 +104,9 @@
           <img :src="objWork.work.imgFull" class="detail-work_img" alt="">
         </div>
       </div>
-      <div class="more_work DF FW">
-        <div v-for="work in workStore.data.works" class="more_work-item">
-          <div class="more_work-item_bg" :style="{backgroundImage: work.imgPreview}"></div>
+      <div class="more_work DF FWW">
+        <div v-for="work in objWork.work.more_work" class="more_work-item">
+          <div class="more_work-item_bg" :style="{backgroundImage: `url(${work.img_preview})`}"></div>
         </div>
       </div>
     </div>

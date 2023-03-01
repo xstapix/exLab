@@ -1,1 +1,9 @@
-@media (max-width: 860px) {}
+@media (max-width: 860px) {
+    .detail-work_content {
+        width: 80%;
+    }
+    .more_work-item {
+        width: 175px;
+        height: 175px;
+    }
+}

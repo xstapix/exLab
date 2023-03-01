@@ -2,11 +2,13 @@ import axios from 'axios';
 import { useStore } from '@/stores/postStore'
 import { useUserStore } from '@/stores/userStore'
 import { useWorkStore } from '@/stores/workStore'
+import { useAuthStore } from '@/stores/authStore'
 
 export const getMethods = () => {
     const postsStore = useStore()
     const userStore = useUserStore()
     const workStore = useWorkStore()
+    const authStore = useAuthStore()
 
     async function getTags() {
         const tags = await axios.get('https://63385f16937ea77bfdbf1257.mockapi.io/kronaTags')
@@ -43,16 +45,34 @@ export const getMethods = () => {
         return users.data
     }
 
-    async function getAuth() {
-        const auth = await axios.get('https://6392fd90ab513e12c5ff47f0.mockapi.io/peopleVSU/0')
+    async function getAuth(email, pass) {
+        const auth = await axios({
+            method: "get",
+            url: 'https://63385f16937ea77bfdbf1257.mockapi.io/kronaPostsList/0',
+            data: {
+                email: email,
+                password: pass
+            }
+        })
 
         return auth.data
+    }
+
+    async function getAuthFullData(userId) {
+        const auth = await axios({
+            method: "get",
+            url: 'https://6392fd90ab513e12c5ff47f0.mockapi.io/peopleVSU/0',
+            data: userId
+        })
+
+        authStore.data.user = auth.data
     }
 
     async function getWorks(objParam) {
         const works = await axios({
             method: "get",
             url: "https://6392fd90ab513e12c5ff47f0.mockapi.io/properties",
+            data: objParam
         })
 
         workStore.changeWorksList(works.data)
@@ -63,7 +83,7 @@ export const getMethods = () => {
     async function getDetailWork(idWork) {
         const work = await axios({
             method: "get",
-            url: `https://6392fd90ab513e12c5ff47f0.mockapi.io/properties/${idWork}`,
+            url: `https://6392fd90ab513e12c5ff47f0.mockapi.io/location/${0}`,
         })
 
         return work.data
@@ -81,6 +101,7 @@ export const getMethods = () => {
         getDetailMaterial,
         getUsers,
         getAuth,
+        getAuthFullData,
         getWorks,
         getDetailWork,
         sendWork,

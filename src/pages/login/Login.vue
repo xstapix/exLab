@@ -13,7 +13,7 @@
   const authStore = useAuthStore()
   const router = useRouter()
 
-  const state = reactive({
+  const objAuthInfo = reactive({
     email: null,
     password: null
   })
@@ -23,21 +23,28 @@
   })
 
   async function handleLogin() {
-    const auth = await useMethod.getAuth()
+    const auth = await useMethod.getAuth(objAuthInfo.email, objAuthInfo.password)
 
-    if (auth.account.email.email_text === state.email && auth.account.password === state.password) {
+    if (auth.success_login) {
       authStore.changeAuth(true)
       authStore.changeUser(auth)
       objValidation.errValidation = false
 
-      setCookie('cronaClubUserEmail', state.email, {});
+      let saveUp = new Date()
+      saveUp.setFullYear(saveUp.getFullYear() + 1)
+
+      setCookie('__upi_cronaClubUserEmail', objAuthInfo.email, {
+        expires: saveUp
+      });
 
       router.push('/')
     } else {
       authStore.changeAuth(false)
       objValidation.errValidation = true
+      console.log(auth);
     }
   }
+
 
   function setCookie(name, value, options = {}) {
     options = {
@@ -71,11 +78,11 @@
         <div v-if="objValidation.errValidation" class="login_body-form_errValidation">Неверный логин или пароль.</div>
         <div class="login_body-form_field">
           <p class="login_body-form_field_title">Ваш email</p>
-          <input v-model="state.email" type="email" class="login_body-form_field_input">
+          <input v-model="objAuthInfo.email" type="email" class="login_body-form_field_input">
         </div>
         <div class="login_body-form_field">
           <p class="login_body-form_field_title">Ваш пароль</p>
-          <input v-model="state.password" type="password" class="login_body-form_field_input">
+          <input v-model="objAuthInfo.password" type="password" class="login_body-form_field_input">
         </div>
         <button class="login_body-form_button" @click="handleLogin">Войти</button>
         <div class="login_body-form_offert">Нажимая на кнопку «Войти» вы соглашаетесь с <a href="https://drive.google.com/file/d/1XpdivgLw8zeZymkKffI33vxb15GziuKu/view" target="_blank">договором оферты и даете согласие на обработку персональных данных</a></div>

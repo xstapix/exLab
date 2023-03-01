@@ -95,8 +95,7 @@
           "InlineCode": "Моноширинный",
         }
       }
-    },
-    // data: JSON.parse(this.model.tags.show[this.model.tags.current_show]['detail_text'])
+    }
   });
 
   const postsStore = useStore()

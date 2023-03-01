@@ -64,7 +64,13 @@
     authStore.changeAuth(false)
     authStore.changeUser(null)
 
-    deleteCookie('cronaClubUserEmail', "", {})
+    let yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    console.log(yesterday);
+
+    deleteCookie('__upi_cronaClubUserEmail', "", {
+      expires: yesterday
+    })
   }
 
   function deleteCookie(name, value, options = {}) {

@@ -1,22 +1,29 @@
 <script setup>
   import { onBeforeMount } from 'vue';
+  import { useRouter } from 'vue-router'
+
   import { useAuthStore } from '@/stores/authStore' 
   import {getMethods} from '@/methods.js'
 
   onBeforeMount( () => {
     const authStore = useAuthStore()
     const useMethod = getMethods()
+    const router = useRouter()
 
+    setUser()
+    
     async function setUser() {
-      const user = await useMethod.getAuth()
-      
-      authStore.changeUser(user)
-      authStore.changeAuth(true)
-    }
+      let currentEmail = getCookie('__upi_cronaClubUserEmail')
 
-    if(getCookie('cronaClubUserEmail')){
-      setUser()
-    } 
+      if (currentEmail) {
+        const user = await useMethod.getAuth(currentEmail, null)
+        
+        authStore.changeUser(user)
+        authStore.changeAuth(true)
+      } else {
+        router.push('/login')
+      }
+    }
 
     function getCookie(name) {
       let matches = document.cookie.match(new RegExp(
