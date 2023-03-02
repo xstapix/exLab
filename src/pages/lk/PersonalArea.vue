@@ -1,5 +1,8 @@
 <script setup>
   import SideBar from '@/components/SideBar/SideBar.vue'
+  import flatPickr from 'vue-flatpickr-component';
+  import 'flatpickr/dist/flatpickr.css';
+  import { Russian } from "flatpickr/dist/l10n/ru.js"
 
   import { useAuthStore } from '@/stores/authStore'
   import { useWindowSizeStore } from '@/stores/windowSizeStore' 
@@ -62,6 +65,18 @@
     clubPrice: false
   })
 
+  const objCountry = reactive({
+    countryList: [],
+    countryListActive: false
+  })
+
+  const config = reactive({
+    altInput: true,
+    altFormat: "d.m.Y",
+    dateFormat: "d.m.Y",
+    locale: Russian,         
+  });
+
   setFullDataForUser()
 
   async function setFullDataForUser() {
@@ -85,11 +100,6 @@
     }
   }
 
-  watch(objAuth.user, () => {
-    objButtonSave.buttonSave = true
-    console.log(1);
-  })
-
   const handlerSave = async () => {
     authStore.changeUser(objAuth.user)
 
@@ -97,11 +107,13 @@
   }
 
   const handlerTgShowBox = () => {
-
+    objAuth.user.account.tg_account.show = !objAuth.user.account.tg_account.show
+    objButtonSave.buttonSave = true
   }
 
   const handlerEmailShowBox = () => {
-    
+    objAuth.user.account.email.show = !objAuth.user.account.email.show
+    objButtonSave.buttonSave = true
   }
 
   const handlerProfileTabs = (tabs) => {
@@ -112,6 +124,16 @@
       objProfileTabs.data = false
       objProfileTabs.card = true
     }
+  }
+
+  const handlerNewCountry = (flag, name) => {
+    objAuth.user.account.country.flag = flag
+    objAuth.user.account.country.name = name
+
+    authStore.changeUser(objAuth.user)
+
+    objCountry.countryListActive = false
+    objButtonSave.buttonSave = true
   }
 
 </script>
@@ -195,6 +217,7 @@
             <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20.156" cy="20.2919" r="20" fill="white"></circle><path d="M20.156 15.2919V25.2919M15.156 20.2919H25.156" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
           </div>
         </div>
+        <div v-if="objProfileTabs.card" class="profile_preview-about_you">{{ objAuth.user.account.about_you }}</div>
         <div v-if="objProfileTabs.data" class="profile_preview-data DF FWW">
           <div class="profile_preview-data_box"
             @mouseover="objDataTip.level = true" 
@@ -492,57 +515,112 @@
         <div class="info-yourData_block">
           <div class="info-yourData_block_item">
             <p class="item-texts">Имя</p>
-            <input type="text" v-model="objAuth.user.account.login" @input="objButtonSave.buttonSave = true" class="item-input">
+            <input type="text" v-model="objAuth.user.account.name" @input="objButtonSave.buttonSave = true" class="item-input">
           </div>
           <div class="info-yourData_block_item">
             <p class="item-texts">Фамилия</p>
             <input type="text" v-model="objAuth.user.account.surname" @input="objButtonSave.buttonSave = true" class="item-input">
           </div>
           <div class="info-yourData_block_item">
-            <p class="item-texts">Название аккаунта</p>
-            <input type="text" v-model="objAuth.user.account.login" @input="objButtonSave.buttonSave = true" class="item-input">
+            <div class="DF JCSB">
+              <p class="item-texts">Название аккаунта</p>
+              <div class="item-texts">{{ 15 - objAuth.user.account.login.length }}/15</div>
+            </div>
+            <input type="text" maxlength="15" 
+              v-model="objAuth.user.account.login" 
+              @input="objButtonSave.buttonSave = true" 
+              class="item-input">
           </div>
-          <div class="info-yourData_block_item">
+          <div class="info-yourData_block_item info-yourData_country">
             <p class="item-texts">Страна проживания</p>
-            <input type="text" v-model="objAuth.user.account.login" @input="objButtonSave.buttonSave = true" class="item-input">
+            <div class="item-country DF JCE AIC" @click="objCountry.countryListActive = !objCountry.countryListActive">
+              <div class="item-country-box DF AIC">
+                <div class="country_list-box-item_flag" :style="{backgroundImage: `url(${objAuth.user.account.country.flag})`}"></div>
+                <div class="country_list-box-item_text">{{ objAuth.user.account.country.name }}</div>
+              </div>
+              <div class="choice DF AIC">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+            <div v-if="objCountry.countryListActive" class="item-country_list">
+              <div class="item-country_list-box">
+                <div class="country_list-box-item DF AIC" 
+                  @click="handlerNewCountry('https://kronadev.ru/upload/iblock/8a5/lp6n20rlm4tqsp5vf86tr4urvptewb9x.png', 'Австралия')">
+                  <div class="country_list-box-item_flag" style="background-image: url(https://kronadev.ru/upload/iblock/8a5/lp6n20rlm4tqsp5vf86tr4urvptewb9x.png);"></div>
+                  <div class="country_list-box-item_text">Австралия</div>
+                </div>
+                <div class="country_list-box-item DF AIC">
+                  <div class="country_list-box-item_flag" style="background-image: url(https://kronadev.ru/upload/iblock/8a5/lp6n20rlm4tqsp5vf86tr4urvptewb9x.png);"></div>
+                  <div class="country_list-box-item_text">Австралия</div>
+                </div>
+                <div class="country_list-box-item DF AIC">
+                  <div class="country_list-box-item_flag" style="background-image: url(https://kronadev.ru/upload/iblock/8a5/lp6n20rlm4tqsp5vf86tr4urvptewb9x.png);"></div>
+                  <div class="country_list-box-item_text">Австралия</div>
+                </div>
+                <div class="country_list-box-item DF AIC">
+                  <div class="country_list-box-item_flag" style="background-image: url(https://kronadev.ru/upload/iblock/8a5/lp6n20rlm4tqsp5vf86tr4urvptewb9x.png);"></div>
+                  <div class="country_list-box-item_text">Австралия</div>
+                </div>
+                <div class="country_list-box-item DF AIC">
+                  <div class="country_list-box-item_flag" style="background-image: url(https://kronadev.ru/upload/iblock/8a5/lp6n20rlm4tqsp5vf86tr4urvptewb9x.png);"></div>
+                  <div class="country_list-box-item_text">Австралия</div>
+                </div>
+                <div class="country_list-box-item DF AIC">
+                  <div class="country_list-box-item_flag" style="background-image: url(https://kronadev.ru/upload/iblock/8a5/lp6n20rlm4tqsp5vf86tr4urvptewb9x.png);"></div>
+                  <div class="country_list-box-item_text">Австралия</div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="info-yourData_block_item">
             <p class="item-texts">Город проживания</p>
-            <input type="text" v-model="objAuth.user.account.login" @input="objButtonSave.buttonSave = true" class="item-input">
+            <input type="text" v-model="objAuth.user.account.city" @input="objButtonSave.buttonSave = true" class="item-input">
           </div>
           <div class="info-yourData_block_item">
             <p class="item-texts">День рождения</p>
-            <input type="text" v-model="objAuth.user.account.login" @input="objButtonSave.buttonSave = true" class="item-input">
+            <flat-pickr 
+              v-model="objAuth.user.account.birthday" 
+              class="item-input"
+              :config="config"
+              @on-change="objButtonSave.buttonSave = true"/>
           </div>
           <button @click="handlerSave" :class="objButtonSave.buttonSave ? 'info-yourData_save' : 'DN'">Сохранить изменения</button>
         </div>
         <div class="info-yourData_block">
           <div class="info-yourData_block_item">
             <p class="item-texts">Ваш telegram-аккаунт</p>
-            <input type="text" class="item-input">
-            <div class="field_show DF">
-              <div class="field_show-box" @click="handlerTgShowBox">
+            <input disabled type="text" v-model="objAuth.user.account.tg_account.tg_name" @input="objButtonSave.buttonSave = true" class="item-input input-disabled">
+            <div class="field_show DF" @click="handlerTgShowBox">
+              <div v-if="objAuth.user.account.tg_account.show" class="field_show-box">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="16" height="16" rx="2" fill="url(#paint0_linear_287_7764)"></rect><path d="M4 8.04545L6.97143 11L12 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><linearGradient id="paint0_linear_287_7764" x1="0" y1="16" x2="16" y2="16" gradientUnits="userSpaceOnUse"><stop stop-color="#7000FF"></stop><stop offset="1" stop-color="#0500FF"></stop></linearGradient></defs></svg>
               </div>
+              <div v-else class="field_show-box"></div>
               <p class="field_show-text">Показать в профиле</p>
             </div>
           </div>
           <div class="info-yourData_block_item">
             <p class="item-texts">Ваша почта</p>
-            <input type="text" class="item-input">
-            <div class="field_show DF">
-              <div class="field_show-box" @click="handlerEmailShowBox">
+            <input disabled type="text" v-model="objAuth.user.account.email.email_text" @input="objButtonSave.buttonSave = true" class="item-input input-disabled">
+            <div class="field_show DF" @click="handlerEmailShowBox">
+              <div v-if="objAuth.user.account.email.show" class="field_show-box">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="16" height="16" rx="2" fill="url(#paint0_linear_287_7764)"></rect><path d="M4 8.04545L6.97143 11L12 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><linearGradient id="paint0_linear_287_7764" x1="0" y1="16" x2="16" y2="16" gradientUnits="userSpaceOnUse"><stop stop-color="#7000FF"></stop><stop offset="1" stop-color="#0500FF"></stop></linearGradient></defs></svg>
               </div>
+              <div v-else class="field_show-box"></div>
               <p class="field_show-text">Показать в профиле</p>
             </div>
           </div>
           <div class="info-yourData_block_item">
-            <p class="item-texts">Ваше описание о себе</p>
+            <div class="DF JCSB">
+              <p class="item-texts">Ваше описание о себе</p>
+              <div class="item-texts">{{ 500 - objAuth.user.account.about_you.length }} / 500</div>
+            </div>
             <textarea 
+              maxlength="500"
               class="info-yourData_block_item-aboutYou" 
-              
-              @input="(e) => {objNewPost.post.desc = e.target.textContent}">
+              v-model="objAuth.user.account.about_you"
+              @input="objButtonSave.buttonSave = true">
             </textarea>
           </div>
         </div>

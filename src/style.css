@@ -37,6 +37,10 @@ a {
     justify-content: center;
 }
 
+.JCE {
+    justify-content: end;
+}
+
 .AIC {
     align-items: center;
 }

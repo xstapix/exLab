@@ -7,66 +7,71 @@
     border-right: 1px solid #3A3A3A;
 }
 
-.profile_preview-photo{
+.profile_preview-photo {
     position: relative;
     width: 80px;
     height: 80px;
     margin: 0 auto;
 }
 
-.preview-photo_line-item{
+.preview-photo_line-item {
     position: absolute;
     width: 37px;
     height: 36px;
 }
 
-.preview-photo_line-item svg{
+.preview-photo_line-item svg {
     width: 37px;
     height: 36px;
 }
 
-.preview-photo_line-item:nth-child(1){
+.preview-photo_line-item:nth-child(1) {
     top: 0;
     right: 0;
 }
-.preview-photo_line-item:nth-child(2){
+
+.preview-photo_line-item:nth-child(2) {
     bottom: 0;
     right: 0;
 }
-.preview-photo_line-item:nth-child(3){
+
+.preview-photo_line-item:nth-child(3) {
     bottom: 0;
     left: 0;
 }
-.preview-photo_line-item:nth-child(4){
+
+.preview-photo_line-item:nth-child(4) {
     top: 0;
     left: 0;
 }
 
-.preview-photo_point-item{
+.preview-photo_point-item {
     position: absolute;
     width: 4px;
     height: 4px;
 }
 
-.preview-photo_point-item svg{
+.preview-photo_point-item svg {
     width: 4px;
     height: 4px;
 }
 
-.preview-photo_point-item:nth-child(1){
+.preview-photo_point-item:nth-child(1) {
     right: 0;
     top: 26.5px;
 }
 
-.preview-photo_point-item:nth-child(2){
+.preview-photo_point-item:nth-child(2) {
     bottom: 12px;
     right: 38px;
 }
-.preview-photo_point-item:nth-child(3){
+
+.preview-photo_point-item:nth-child(3) {
     top: 25px;
     left: 0;
 }
-.preview-photo_point-item:nth-child(4){
+
+.preview-photo_point-item:nth-child(4) {
     top: -12px;
     left: 38px;
 }
@@ -172,6 +177,15 @@
     border-radius: 8px;
     text-align: center;
     cursor: pointer;
+}
+
+.profile_preview-about_you {
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #ffffffb3;
+    margin-top: 24px;
 }
 
 .profile_preview-card_text {
@@ -356,7 +370,8 @@
     color: #fff;
 }
 
-.item-input {
+.item-input,
+.item-country {
     width: 100%;
     height: 53px;
     border: 0;
@@ -368,6 +383,66 @@
     line-height: 17px;
     outline: none;
     color: #fff;
+}
+
+.item-country_list {
+    background-color: #fff;
+    border-radius: 8px;
+    top: 82px;
+    height: 150px;
+    width: 100%;
+    position: absolute;
+    overflow: hidden;
+}
+
+.item-country_list-box {
+    padding: 10px 20px;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.choice div {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #fff;
+    margin-right: 2px;
+}
+
+.info-yourData_country {
+    position: relative;
+}
+
+.item-country {
+    cursor: pointer;
+}
+
+.item-country-box {
+    margin-right: auto;
+}
+
+.country_list-box-item {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.country_list-box-item_flag {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+    margin-right: 5px;
+}
+
+.country_list-box-item_text {
+    font-size: 14px;
+}
+
+.input-disabled {
+    color: #fff3;
 }
 
 .field_show {
@@ -549,4 +624,13 @@
 
 .blur_action-margin_fix {
     margin: 0 0 0 8px;
+}
+
+.field-box {
+    width: 16px;
+    height: 16px;
+    background-color: #262626;
+    border-radius: 2px;
+    margin-right: 8px;
+    flex-shrink: 0;
 }
