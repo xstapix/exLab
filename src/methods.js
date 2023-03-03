@@ -45,6 +45,16 @@ export const getMethods = () => {
         return users.data
     }
 
+    async function getDetailUser(userId) {
+        const user = await axios({
+            method: "get",
+            url: "https://6392fd90ab513e12c5ff47f0.mockapi.io/peopleVSU/1",
+            data: userId,
+        })
+
+        return user.data
+    }
+
     async function getAuth(email, pass) {
         const auth = await axios({
             method: "get",
@@ -100,6 +110,7 @@ export const getMethods = () => {
         getMaterials,
         getDetailMaterial,
         getUsers,
+        getDetailUser,
         getAuth,
         getAuthFullData,
         getWorks,

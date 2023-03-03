@@ -15,33 +15,23 @@
         "mainContent": ""
     }],
     "user": {
-        "id": "0",
-        "account": {
-            "img": "/yyhqfinwoon1yvcb6hm7jam67nnus0ec.png",
-            "email": "test@mail.ru",
-            "stark": "канареечный старк",
-            "star": 10.3,
-            "level": 14,
-            "inClub": 1
-        },
-        "favorites": [
-            "0",
-            "1",
-            "2",
-            "3"
-        ],
-        "viewed": [{
-                "id": "17635",
-                "gradient": "rgb(40, 67, 248)",
-                "right_blur": "rgb(157, 14, 223)"
-            },
-            {
-                "id": "17802",
-                "gradient": "rgb(6, 187, 187)",
-                "right_blur": "rgb(40, 248, 136)"
-            }
-        ]
+        "id": "1",
+        "login": "sv_g79333",
+        "name": "Lora",
+        "img": "/yyhqfinwoon1yvcb6hm7jam67nnus0ec.png",
+        "email_text": "test@mail.ru",
+        "tg_name": "ds",
+        "about_you": "jui",
+        "stark": "канареечный старк",
+        "city": "Florida",
+        "country": "USA",
+        "portfolio": [{
+            "img": "https://kronadev.ru/upload/resize_cache/iblock/8b8/500_500_2/mbukeulj0npgbd6aden4kx1j4i7pmf1u.png"
+        }],
+        "material": [],
+        "video": null
     },
+
     "works": [{
         "id": 0,
         "img": "",

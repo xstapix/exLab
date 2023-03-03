@@ -14,7 +14,7 @@
         "@editorjs/list": "^1.8.0",
         "@vueuse/core": "^9.12.0",
         "axios": "^1.2.1",
-        "flatpickr": "^4.6.13",
+        "locomotive-scroll": "^4.1.4",
         "pinia": "^2.0.28",
         "swiper": "^8.4.6",
         "vue": "^3.2.45",

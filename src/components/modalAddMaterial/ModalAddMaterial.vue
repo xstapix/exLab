@@ -3,6 +3,8 @@
 
   import { reactive, defineAsyncComponent, watch } from 'vue';
 
+  import {getMethods} from '@/methods.js'
+
   import EditorJS from '@editorjs/editorjs';
   import Header from '@editorjs/header';
   import ImageTool from '@editorjs/image';
@@ -16,6 +18,8 @@
   const ModalUnsavedChanges = defineAsyncComponent(
     () => import('@/components/ModalUnsavedChanges/ModalUnsavedChanges.vue')
   )
+  
+  const useMethod = getMethods()
 
   const editor = new EditorJS({
     holder: 'editorjs',
@@ -114,9 +118,14 @@
   })
 
   const objTags = reactive({
-    tags: JSON.parse(JSON.stringify(postsStore.data.tags))
+    tags: null
   })
 
+  setTags()
+
+  async function setTags() {
+    objTags.tags = await useMethod.getTags()
+  }
   
   const objModal = reactive({
     activeModalUnsavedChanges: false

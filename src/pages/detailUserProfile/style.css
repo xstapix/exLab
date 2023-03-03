@@ -1,0 +1,26 @@
+.detail_user-data {
+    margin: 25px 0 0;
+}
+
+.user-data_item {
+    margin: 0 0 8px;
+}
+
+.user-data_item-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    margin-right: 8px;
+}
+
+.user-data_item-icon svg {
+    max-width: 100%;
+}
+
+.user-data_item-text {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    word-break: break-all;
+    color: #fff;
+}

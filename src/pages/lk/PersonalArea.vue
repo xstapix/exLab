@@ -11,7 +11,7 @@
 
   import { useRouter } from 'vue-router'
 
-  import { reactive, watch, defineAsyncComponent } from 'vue';
+  import { reactive, defineAsyncComponent } from 'vue';
 
   import './style.css'
   import './media-style.css'
@@ -47,7 +47,7 @@
   })
 
   const objModal = reactive({
-    activeModalAddPost: false,
+    activeMaterialModal: false,
     activeWorkModal: false
   })
 
@@ -136,11 +136,14 @@
     objButtonSave.buttonSave = true
   }
 
+
 </script>
 
 <template>
   <div v-if="authStore.data.auth" :class="windowSizeStore.objAdaptive.mobile ? 'DB' : 'DF'">
-    <SideBar/>
+    <SideBar
+      @showMaterialModal="(active) => objModal.activeMaterialModal = active"
+      @showWorkModal="(active) => objModal.activeWorkModal = active"/>
     <div v-if="windowSizeStore.objAdaptive.tablet || windowSizeStore.objAdaptive.desktop" class="profile_preview DF FDC JCSB">
       <div>
         <div class="profile_preview-photo DF JCC AIC">
@@ -153,51 +156,37 @@
           </div>
           <div class="profile_preview-photo_line">
             <div class="preview-photo_line-item">
-              <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.986048 1.10408C1.04378 0.554826 1.53648 0.153807 2.08216 0.238908C6.22738 0.885363 10.0739 2.82118 13.0679 5.78402C16.0619 8.74685 18.0379 12.5729 18.7277 16.7111C18.8185 17.2559 18.4227 17.7527 17.8741 17.8162C17.3255 17.8797 16.8321 17.4856 16.7382 16.9414C16.1026 13.2548 14.3319 9.84862 11.6611 7.20561C8.99029 4.56261 5.56572 2.82767 1.87271 2.2307C1.32751 2.14257 0.928318 1.65334 0.986048 1.10408Z" fill="url(#paint0_angular_221_1472_user)"></path>
-                <defs>
-                <radialGradient id="paint0_angular_221_1472_user" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1 20) rotate(-90) scale(20)">
-                <stop stop-color="#ABAD23"></stop>
-                <stop offset="0.250003" stop-color="#666723"></stop>
-                </radialGradient>
-                </defs>
-              </svg>
+              <span v-html="objAuth.user.account.line[0]"></span>
             </div>
             <div class="preview-photo_line-item">
-              <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path opacity="0.2" d="M16.8959 0.986048C17.4452 1.04378 17.8462 1.53648 17.7611 2.08217C17.1146 6.22738 15.1788 10.0739 12.216 13.0679C9.25315 16.0619 5.42713 18.0379 1.28891 18.7277C0.744145 18.8185 0.247274 18.4227 0.183796 17.8741V17.8741C0.120318 17.3255 0.514363 16.8321 1.05862 16.7382C4.74517 16.1026 8.15138 14.3319 10.7944 11.6611C13.4374 8.99029 15.1723 5.56572 15.7693 1.87271C15.8574 1.32751 16.3467 0.928318 16.8959 0.986048V0.986048Z" fill="white"></path>
-              </svg>
+              <span v-html="objAuth.user.account.line[1]"></span>
             </div>
             <div class="preview-photo_line-item">
-              <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path opacity="0.2" d="M18.014 16.8959C17.9562 17.4452 17.4635 17.8462 16.9178 17.7611C12.7726 17.1146 8.92612 15.1788 5.9321 12.216C2.93808 9.25315 0.962091 5.42713 0.272268 1.28891C0.181455 0.744143 0.577295 0.247271 1.12592 0.183794C1.67454 0.120316 2.16792 0.514361 2.26176 1.05862C2.89736 4.74517 4.66807 8.15138 7.33889 10.7944C10.0097 13.4374 13.4343 15.1723 17.1273 15.7693C17.6725 15.8574 18.0717 16.3467 18.014 16.8959Z" fill="white"></path>
-              </svg>
+              <span v-html="objAuth.user.account.line[2]"></span>
             </div>
             <div class="preview-photo_line-item">
-              <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path opacity="0.2" d="M1.10408 18.0142C0.554825 17.9565 0.153806 17.4638 0.238907 16.9181C0.885362 12.7729 2.82118 8.92636 5.78401 5.93234C8.74685 2.93832 12.5729 0.962333 16.7111 0.27251C17.2559 0.181697 17.7527 0.577537 17.8162 1.12616C17.8797 1.67478 17.4856 2.16816 16.9414 2.262C13.2548 2.8976 9.84862 4.66831 7.20561 7.33913C4.56261 10.01 2.82767 13.4345 2.2307 17.1275C2.14257 17.6727 1.65334 18.0719 1.10408 18.0142Z" fill="white"></path>
-              </svg>
+              <span v-html="objAuth.user.account.line[3]"></span>
             </div>
           </div>
           <div class="profile_preview-photo_point">
-            <div class="preview-photo_point-item">
+            <div class="preview-photo_point-item" :class="{point_active: objAuth.user.account.points[0]}">
               <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
             </div>
-            <div class="preview-photo_point-item">
+            <div class="preview-photo_point-item" :class="{point_active: objAuth.user.account.points[1]}">
               <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
             </div>
-            <div class="preview-photo_point-item">
+            <div class="preview-photo_point-item" :class="{point_active: objAuth.user.account.points[2]}">
               <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
             </div>
-            <div class="preview-photo_point-item">
+            <div class="preview-photo_point-item" :class="{point_active: objAuth.user.account.points[3]}">
               <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
             </div>
           </div>
         </div>
         <div class="profile_preview-name">
-          <p class="profile_preview-name_text">xstapix</p>
+          <p class="profile_preview-name_text">{{objAuth.user.account.name}}</p>
           <p class="profile_preview-name_desc">
-            v.sarafannikov / канареечный старк
+            {{objAuth.user.account.login}} / {{objAuth.user.account.stark}}
           </p>
         </div>
         <div class="profile_preview-tabs DF">
@@ -318,7 +307,6 @@
             <div v-if="objDataTip.clubPrice" class="profile_preview-data_box-tip">Ваша базовая стоимость подписки без учета скидок и других бонусов</div>
           </div>
         </div>
-        <div v-if="objProfileTabs.data"></div>
       </div>
       <div class="profile_preview-link">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M21.0295 18.9706C20.4835 18.4248 19.743 18.1182 18.9709 18.1182C18.1988 18.1182 17.4583 18.4248 16.9122 18.9706L14.8529 21.0293C14.3068 21.5754 14 22.316 14 23.0883C14 23.8606 14.3068 24.6012 14.8529 25.1473C15.3989 25.6934 16.1396 26.0002 16.9119 26.0002C17.6841 26.0002 18.4248 25.6934 18.9709 25.1473L20.0002 24.118" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18.9707 21.0293C19.5168 21.5752 20.2573 21.8818 21.0294 21.8818C21.8015 21.8818 22.542 21.5752 23.088 21.0293L25.1474 18.9707C25.6935 18.4246 26.0002 17.6839 26.0002 16.9117C26.0002 16.1394 25.6935 15.3987 25.1474 14.8527C24.6013 14.3066 23.8606 13.9998 23.0884 13.9998C22.3161 13.9998 21.5755 14.3066 21.0294 14.8527L20 15.882" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -464,14 +452,24 @@
             :class="objNav.yourData ? 'paragraph_active' : ''">Данные</li>
         </ul>
       </nav>
-      <div v-if="objNav.portfolio" class="DF">
-        <div class="profile-body">
-          <div class="profile-body_item DF JCC AIC">
-            <div class="profile-body_item-text">Здесь не хватает вашей работы! Добавим?</div>
-            <div class="profile-body_item-img" @click="objModal.activeWorkModal = true">
-              <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20.7364" cy="20.3966" r="20" fill="white"></circle><circle cx="20.8925" cy="20.2921" r="20" fill="white"></circle><path d="M20.8925 15.2921V25.2921M15.8925 20.2921H25.8925" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            </div>
+      <div v-if="objNav.portfolio" class="profile-body">
+        <div class="profile-body_item-add  DF JCC AIC FDC">
+          <div class="profile-body_item-text">Здесь не хватает вашей работы! Добавим?</div>
+          <div class="profile-body_item-img" @click="objModal.activeWorkModal = true">
+            <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20.7364" cy="20.3966" r="20" fill="white"></circle><circle cx="20.8925" cy="20.2921" r="20" fill="white"></circle><path d="M20.8925 15.2921V25.2921M15.8925 20.2921H25.8925" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
           </div>
+        </div>
+        <div class="profile-body_item">
+          <div class="profile-body_item-bgk" style="background-image: url('https://kronadev.ru/upload/resize_cache/iblock/8b8/500_500_2/mbukeulj0npgbd6aden4kx1j4i7pmf1u.png')"></div>
+        </div>
+        <div class="profile-body_item">
+          <div class="profile-body_item-bgk" style="background-image: url('https://kronadev.ru/upload/resize_cache/iblock/8b8/500_500_2/mbukeulj0npgbd6aden4kx1j4i7pmf1u.png')"></div>
+        </div>
+        <div class="profile-body_item">
+          <div class="profile-body_item-bgk" style="background-image: url('https://kronadev.ru/upload/resize_cache/iblock/8b8/500_500_2/mbukeulj0npgbd6aden4kx1j4i7pmf1u.png')"></div>
+        </div>
+        <div class="profile-body_item">
+          <div class="profile-body_item-bgk" style="background-image: url('https://kronadev.ru/upload/resize_cache/iblock/8b8/500_500_2/mbukeulj0npgbd6aden4kx1j4i7pmf1u.png')"></div>
         </div>
       </div>
       <div v-if="objNav.satellites" class="DF">
@@ -483,7 +481,7 @@
               за материал
             </div>
             <p class="add_post-text">Вы можете опубликовать свой материал! Опубликуем?</p>
-            <div @click="objModal.activeModalAddPost = true" class="add_post-img">
+            <div @click="objModal.activeMaterialModal = true" class="add_post-img">
               <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20.5" cy="20.3966" r="20" fill="white"></circle><circle cx="20.6562" cy="20.2921" r="20" fill="white"></circle><path d="M20.6562 15.2921V25.2921M15.6562 20.2921H25.6562" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
             </div>
           </div>
@@ -628,9 +626,9 @@
     </div>
   </div>
   <ModalAddMaterial
-    v-if="objModal.activeModalAddPost"
-    @closeModal="(close) => objModal.activeModalAddPost = close"
-    :activeModal="objModal.activeModalAddPost"/>
+    v-if="objModal.activeMaterialModal"
+    @closeModal="(close) => objModal.activeMaterialModal = close"
+    :activeModal="objModal.activeMaterialModal"/>
   <ModalAddWork 
     v-if="objModal.activeWorkModal"
     @closeModal="(close) => objModal.activeWorkModal = close"

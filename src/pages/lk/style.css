@@ -61,6 +61,10 @@
     top: 26.5px;
 }
 
+.point_active svg circle {
+    fill: #ffffff;
+}
+
 .preview-photo_point-item:nth-child(2) {
     bottom: 12px;
     right: 38px;
@@ -509,20 +513,31 @@
     padding: 0;
 }
 
-.profile-body_item {
-    width: 300px;
-    height: 300px;
+.profile-body_item-add {
     border: 2px dashed #fff;
     border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+}
+
+.profile-body_item {
+    position: relative;
+    padding: 50%;
+    border-radius: 8px;
     text-align: center;
 }
 
+.profile-body_item-bgk {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .profile-body_item-text {
-    width: 167px;
+    text-align: center;
     font-size: 14px;
     color: #fff;
     margin-bottom: 15px
@@ -633,4 +648,8 @@
     border-radius: 2px;
     margin-right: 8px;
     flex-shrink: 0;
+}
+
+.flatpickr-calendar {
+    top: 324px !important;
 }

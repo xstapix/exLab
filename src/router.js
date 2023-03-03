@@ -39,9 +39,9 @@ export default createRouter({
                 import ('@/pages/detailWork/DetailWork.vue')
         },
         {
-            path: '/user/:userId',
+            path: '/users/:userId',
             component: () =>
-                import ('@/pages/404/NotFound.vue')
+                import ('@/pages/detailUserProfile/detailUserProfile.vue')
         },
         {
             path: '/materials/:link',
