@@ -2,6 +2,8 @@
     width: 100%;
     margin: 0 0 0 56px;
     padding: 16px;
+    background-color:#000;
+    min-height: 100vh;
 }
 
 .stark_rating {

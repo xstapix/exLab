@@ -9,8 +9,7 @@
 
   import './style.css'
   import '@/pages/lk/style.css'
-
-  document.body.style.backgroundColor = '#000'
+  import '@/pages/lk/media-style.css'
   
   const windowSizeStore = useWindowSizeStore()
   const useMethod = getMethods()
@@ -52,6 +51,8 @@
 <template>
   <div v-if="objDetailUser.detailUser" :class="windowSizeStore.objAdaptive.mobile ? 'DB' : 'DF'">
     <SideBar/>
+    <div class="detail_user"
+    :class="windowSizeStore.objAdaptive.currentSize > 1000 ? 'DB' : windowSizeStore.objAdaptive.currentSize > 680 ? 'DF' : 'DF FDC'">
     <div v-if="windowSizeStore.objAdaptive.tablet || windowSizeStore.objAdaptive.desktop" class="profile_preview DF FDC JCSB">
       <div>
         <div class="profile_preview-photo DF JCC AIC">
@@ -139,6 +140,21 @@
         </div>
       </div>
     </div>
+    <div v-if="windowSizeStore.objAdaptive.mobile && objDetailUser.detailUser.video" class="profile_preview-modil DF FDC JCC">
+      <div class="preview-modil_card">
+      </div>
+      <div class="profile_preview-modil_profile DF AIC">
+        <div class="modil_profile-img">
+          <img :src="objDetailUser.detailUser.img" alt="">
+        </div>
+        <div class="modil_profile-text">
+          <div class="modil_profile-text_name">{{ objDetailUser.detailUser.name }}</div>
+          <div class="modil_profile-text_stark">{{ objDetailUser.detailUser.login }} / {{ objDetailUser.detailUser.stark }}</div>
+        </div>
+      </div>
+    </div>
+    <div v-else> fdfdfd</div>
+    <div class="profile_preview-about_you">{{ objDetailUser.detailUser.about_you }}</div>
     <div v-if="objDetailUser.detailUser" class="profile_info">
       <nav class="profile_info-nav">
         <ul class="DF">
@@ -153,6 +169,12 @@
         </ul>
       </nav>
       <div v-if="objNav.portfolio" class="profile-body">
+        <div class="profile-body_item">
+          <div class="profile-body_item-bgk" style="background-image: url('https://kronadev.ru/upload/resize_cache/iblock/8b8/500_500_2/mbukeulj0npgbd6aden4kx1j4i7pmf1u.png')"></div>
+        </div>
+        <div class="profile-body_item">
+          <div class="profile-body_item-bgk" style="background-image: url('https://kronadev.ru/upload/resize_cache/iblock/8b8/500_500_2/mbukeulj0npgbd6aden4kx1j4i7pmf1u.png')"></div>
+        </div>
         <div class="profile-body_item">
           <div class="profile-body_item-bgk" style="background-image: url('https://kronadev.ru/upload/resize_cache/iblock/8b8/500_500_2/mbukeulj0npgbd6aden4kx1j4i7pmf1u.png')"></div>
         </div>
@@ -196,5 +218,5 @@
       </div>
     </div>
   </div>
-ds
+  </div>
 </template>

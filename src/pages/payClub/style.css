@@ -1,3 +1,8 @@
+.pay-wrapper{
+    width: 100%;
+    background-color: #000;
+}
+
 .pay-body {
     width: 700px;
     margin: 0 auto;
@@ -119,6 +124,7 @@
     color: #fff;
     font-size: 12px;
     margin-top: 10px;
+    padding: 0 0 50px;
 }
 
 .pay-body_oferta a {

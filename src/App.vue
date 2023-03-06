@@ -21,7 +21,11 @@
         authStore.changeUser(user)
         authStore.changeAuth(true)
       } else {
-        router.push('/login')
+        if (router.currentRoute.value.fullPath === '/') {
+          router.push('/')
+        } else {
+          router.push('/login')
+        }
       }
     }
 

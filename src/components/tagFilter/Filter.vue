@@ -32,8 +32,6 @@
     const allPosts = await useMethod.getMaterials(paramsPageStore.objParamsPage)
     objMaterials.arrPosts = JSON.parse(JSON.stringify(allPosts))
 
-    console.log(objMaterials.arrPosts);
-
     objMaterials.arrTags.unshift({ id: 30, tag: 'Все', active: true })
   }
 

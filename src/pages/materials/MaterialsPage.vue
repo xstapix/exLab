@@ -22,8 +22,6 @@
     () => import('@/components/ModalBlockedPost/ModalBlockedPost.vue')
   )
   
-  document.body.style.backgroundColor = '#000'
-  
   const paramsPageStore = useParamsPageStore()
 
   onBeforeRouteLeave(async () => {

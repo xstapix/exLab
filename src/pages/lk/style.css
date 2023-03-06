@@ -1,3 +1,8 @@
+.lk{
+    min-width: 100%;
+    min-height: 100vh;
+    background-color: #000;
+}
 .profile_preview {
     position: fixed;
     width: 290px;
@@ -228,6 +233,31 @@
     padding-right: 4px;
 }
 
+.profile_preview-data_point{
+    margin: 25px 0 0;
+}
+
+.data_point-item{
+    margin-bottom: 8px;
+}
+
+.data_point-item p{
+    margin-left: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    word-break: break-all;
+    color: #fff;
+}
+
+.data_point-item_icon{
+    width: 40px;
+}
+
+.data_point-item_icon svg{
+    max-width: 100%;
+}
+
 .data_item-img {
     flex-shrink: 0;
     background: #7000FF;
@@ -316,7 +346,7 @@
 }
 
 .profile_info {
-    width: 100%;
+    max-width: 100vw;
     height: 100vh;
     padding: 24px;
     margin: 0 0 0 347px;
@@ -378,14 +408,14 @@
 .item-country {
     width: 100%;
     height: 53px;
-    border: 0;
+    border: 0 !important;
     border-radius: 8px;
-    background: rgba(255, 255, 255, .15);
+    background: rgba(255, 255, 255, .15) !important;
     padding: 10px 20px;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
-    outline: none;
+    outline: none !important;
     color: #fff;
 }
 
@@ -505,8 +535,7 @@
 }
 
 .profile-body {
-    width: 100%;
-    grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)) !important;
     grid-gap: 40px;
     gap: 10px;
     display: grid !important;
@@ -514,6 +543,7 @@
 }
 
 .profile-body_item-add {
+    height: 300px;
     border: 2px dashed #fff;
     border-radius: 8px;
 }

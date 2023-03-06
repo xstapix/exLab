@@ -19,8 +19,6 @@ export const useStore = defineStore('postsStore', () => {
             let totalList = data.posts.concat(newList)
             data.posts = totalList
         }
-        console.log(data.posts);
-        console.log(paramsPageStore.objParamsPage);
 
     }
 

@@ -1,7 +1,9 @@
 .works-body {
     width: 100%;
+    min-height: 100vh;
     padding: 8px;
     margin: 0 0 0 56px;
+    background-color: #000;
 }
 
 .post_info_author {

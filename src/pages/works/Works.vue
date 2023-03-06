@@ -18,8 +18,6 @@
     idLastMaterial: null
   })
 
-  document.body.style.backgroundColor = '#000'
-
   setWorks()
 
   async function setWorks() {
@@ -38,7 +36,7 @@
 <template>
   <div class="DF">
     <SideBar/>
-    <section class="works-body" v-if="workStore.data.works">
+    <section v-if="workStore.data.works" class="works-body">
       <div class="works-content">
         <router-link :to="`/works/${item.id}`" v-for="item in workStore.data.works" 
           :key="item.id"
@@ -47,7 +45,6 @@
         </router-link>
       </div>
       <VButtonShowMore @click="handlerShowMore"/>
-    </section> 
-    <div v-else></div>
+    </section>
   </div>
 </template>
