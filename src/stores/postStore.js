@@ -1,10 +1,10 @@
-import { useParamsPageStore } from '@/stores/paramsPageStore'
+import { getParamsPageStore } from '@/stores/paramsPageStore'
 
 import { defineStore } from 'pinia'
 import { reactive } from 'vue';
 
 export const useStore = defineStore('postsStore', () => {
-    const paramsPageStore = useParamsPageStore()
+    const paramsPageStore = getParamsPageStore()
 
     const data = reactive({
         posts: [],

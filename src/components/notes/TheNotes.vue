@@ -1,5 +1,5 @@
 <script setup>
-  import {reactive} from 'vue'
+  import { reactive } from 'vue'
 
   import './style.css'
   import './media-style.css'

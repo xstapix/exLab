@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue';
 
-export const useWindowSizeStore = defineStore('windowSizeStore', () => {
+export const getWindowSizeStore = defineStore('getWindowSizeStore', () => {
     const objAdaptive = reactive({
         mobile: false,
         tablet: false,

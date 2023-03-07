@@ -5,5 +5,5 @@
 </script>
 
 <template>
-  <button class="VButtonShowMore">Показать ещё +</button>
+  <button class="v-button_show-more">Показать ещё +</button>
 </template>

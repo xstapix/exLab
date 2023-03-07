@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue';
 
-export const useWorkStore = defineStore('worksStore', () => {
+export const getWorkStore = defineStore('getWorkStore', () => {
     const data = reactive({
         works: []
     })
 
     const changeWorksList = (newList) => {
-        data.works = newList //добавить spread ...
+        data.works = newList
     }
 
     return {

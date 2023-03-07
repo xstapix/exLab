@@ -2,7 +2,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url('/bgauth.358ce0f5.jpg');
+    background-image: url('/src/assets/bgauth.358ce0f5.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top right
@@ -28,7 +28,7 @@
     margin-top: 32px;
 }
 
-.login_body-form_errValidation{
+.login_body-form_errValidation {
     color: #a94442;
     background-color: #f2dede;
     border-color: #ebccd1;

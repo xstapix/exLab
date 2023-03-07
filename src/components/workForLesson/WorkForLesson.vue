@@ -1,6 +1,6 @@
 <script setup>
-  import {reactive, defineAsyncComponent} from 'vue'
-  import { useWindowSizeStore } from '@/stores/windowSizeStore' 
+  import { reactive, defineAsyncComponent } from 'vue'
+  import { getWindowSizeStore } from '@/stores/windowSizeStore' 
   import { useRoute } from 'vue-router'
 
   import './style.css'
@@ -10,7 +10,7 @@
     () => import('@/components/modalAddWork/ModalAddWork.vue')
   )
 
-  const windowSizeStore = useWindowSizeStore()
+  const windowSizeStore = getWindowSizeStore()
   const route = useRoute()
 
   const objModal = reactive({

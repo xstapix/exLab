@@ -1,9 +1,9 @@
 <script setup>
   import SideBar from '@/components/SideBar/SideBar.vue'
 
-  import { useParamsPageStore } from '@/stores/paramsPageStore'
+  import { getParamsPageStore } from '@/stores/paramsPageStore'
 
-  import {defineAsyncComponent, reactive} from 'vue'
+  import { defineAsyncComponent, reactive } from 'vue'
   import { onBeforeRouteLeave } from 'vue-router'
 
   const Materials = defineAsyncComponent(
@@ -22,7 +22,9 @@
     () => import('@/components/ModalBlockedPost/ModalBlockedPost.vue')
   )
   
-  const paramsPageStore = useParamsPageStore()
+  window.scrollTo(0,0);
+
+  const paramsPageStore = getParamsPageStore()
 
   onBeforeRouteLeave(async () => {
     paramsPageStore.objParamsPage.page = 1
@@ -38,7 +40,6 @@
     activeWorkModal: false,
     activeModalBlocked: false
   })
-
 </script>
 <template lang="">
   <div class="DF">

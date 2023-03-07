@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { useStore } from '@/stores/postStore'
-import { useUserStore } from '@/stores/userStore'
-import { useWorkStore } from '@/stores/workStore'
-import { useAuthStore } from '@/stores/authStore'
+import { getUserStore } from '@/stores/userStore'
+import { getWorkStore } from '@/stores/workStore'
+import { getAuthStore } from '@/stores/AuthStore'
 
-export const getMethods = () => {
+export const getApi = () => {
     const postsStore = useStore()
-    const userStore = useUserStore()
-    const workStore = useWorkStore()
-    const authStore = useAuthStore()
+    const userStore = getUserStore()
+    const useWorkStore = getWorkStore()
+    const authStore = getAuthStore()
 
     async function getTags() {
         const tags = await axios.get('https://63385f16937ea77bfdbf1257.mockapi.io/kronaTags')
@@ -85,7 +85,7 @@ export const getMethods = () => {
             data: objParam
         })
 
-        workStore.changeWorksList(works.data)
+        useWorkStore.changeWorksList(works.data)
 
         return works.data
     }
@@ -93,7 +93,7 @@ export const getMethods = () => {
     async function getDetailWork(idWork) {
         const work = await axios({
             method: "get",
-            url: `https://6392fd90ab513e12c5ff47f0.mockapi.io/location/${0}`,
+            url: `https://6392fd90ab513e12c5ff47f0.mockapi.io/location/${idWork}`,
         })
 
         return work.data

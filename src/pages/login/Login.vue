@@ -1,16 +1,18 @@
 <script setup>
   import SideBar from '@/components/SideBar/SideBar.vue'
-  import {getMethods} from '@/methods.js'
-  import { useAuthStore } from '@/stores/authStore' 
+  import { getApi } from '@/API/api.js'
+  import { getAuthStore } from '@/stores/authStore' 
 
   import { reactive } from 'vue';
   import { useRouter } from 'vue-router'
 
   import './style.css'
   import './media-style.css'
+
+  window.scrollTo(0,0);
   
-  const useMethod = getMethods()
-  const authStore = useAuthStore()
+  const useApi = getApi()
+  const authStore = getAuthStore()
   const router = useRouter()
 
   const objAuthInfo = reactive({
@@ -23,7 +25,7 @@
   })
 
   async function handleLogin() {
-    const auth = await useMethod.getAuth(objAuthInfo.email, objAuthInfo.password)
+    const auth = await useApi.getAuth(objAuthInfo.email, objAuthInfo.password)
 
     if (auth.success_login) {
       authStore.changeAuth(true)
@@ -91,7 +93,7 @@
         <div class="login_body-register_text">
           Если у вас нет аккаунта, то вы можете записаться в клуб на официальном сайте
         </div>
-        <a href="/" class="login_body-register_button">Перейти на сайт</a>
+        <a href="https://school.krona.studio/club-1000-stars" target="_blank" class="login_body-register_button">Перейти на сайт</a>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <script setup>
-  import { useAuthStore } from '@/stores/authStore' 
-  import { useWindowSizeStore } from '@/stores/windowSizeStore' 
+  import { getAuthStore } from '@/stores/AuthStore' 
+  import { getWindowSizeStore } from '@/stores/windowSizeStore' 
 
   import { reactive } from 'vue';
   
@@ -11,8 +11,8 @@
 
   const emit = defineEmits(['showMaterialModal', 'showWorkModal'])
 
-  const authStore = useAuthStore()
-  const windowSizeStore = useWindowSizeStore()
+  const authStore = getAuthStore()
+  const windowSizeStore = getWindowSizeStore()
   const route = useRoute()
 
   const objShowDownSidebar = reactive({

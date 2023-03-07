@@ -1,8 +1,9 @@
-.lk{
+.lk {
     min-width: 100%;
     min-height: 100vh;
     background-color: #000;
 }
+
 .profile_preview {
     position: fixed;
     width: 290px;
@@ -99,36 +100,45 @@
 }
 
 .profile_preview-upload {
-    display: none;
-}
-
-.profile_preview-img:hover>.profile_preview-upload {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 10;
     width: 64px;
     height: 64px;
-    display: block;
+    overflow: hidden;
     border-radius: 50%;
+    cursor: pointer;
+}
+
+.profile_preview-upload:hover {
     background-color: rgba(0, 0, 0, .6);
 }
 
 .profile_preview-upload svg {
+    display: none;
+}
+
+.profile_preview-upload:hover>svg {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     margin: auto;
+    width: 24px;
+    height: 24px;
+    z-index: 11;
+    display: block;
 }
 
 .profile_preview-upload_input {
     position: absolute;
-    z-index: 10;
-    top: 0;
+    z-index: 12;
+    bottom: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 64px;
+    height: 85px;
     opacity: 0;
     border-radius: 50%;
     cursor: pointer;
@@ -233,15 +243,15 @@
     padding-right: 4px;
 }
 
-.profile_preview-data_point{
+.profile_preview-data_point {
     margin: 25px 0 0;
 }
 
-.data_point-item{
+.data_point-item {
     margin-bottom: 8px;
 }
 
-.data_point-item p{
+.data_point-item p {
     margin-left: 8px;
     font-weight: 500;
     font-size: 14px;
@@ -250,11 +260,11 @@
     color: #fff;
 }
 
-.data_point-item_icon{
+.data_point-item_icon {
     width: 40px;
 }
 
-.data_point-item_icon svg{
+.data_point-item_icon svg {
     max-width: 100%;
 }
 
@@ -543,7 +553,7 @@
 }
 
 .profile-body_item-add {
-    height: 300px;
+    min-height: 300px;
     border: 2px dashed #fff;
     border-radius: 8px;
 }

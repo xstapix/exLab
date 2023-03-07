@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue';
 
-export const useAuthStore = defineStore('authStore', () => {
+export const getAuthStore = defineStore('getAuthStore', () => {
     const data = reactive({
         auth: false,
         user: null

@@ -3,7 +3,7 @@ import { reactive } from 'vue';
 
 import { useStore } from '@/stores/postStore'
 
-export const useParamsPageStore = defineStore('useParamsPageStore', () => {
+export const getParamsPageStore = defineStore('getParamsPageStore', () => {
     const postsStore = useStore()
 
     const objParamsPage = reactive({

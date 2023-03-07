@@ -1,26 +1,26 @@
 <script setup>
-  import {useStore} from '@/stores/postStore'
-  import { useAuthStore } from '@/stores/authStore'
-  import { useParamsPageStore } from '@/stores/paramsPageStore'
-  import { useWindowSizeStore } from '@/stores/windowSizeStore' 
+  import { useStore } from '@/stores/postStore'
+  import { getAuthStore } from '@/stores/authStore'
+  import { getParamsPageStore } from '@/stores/paramsPageStore'
+  import { getWindowSizeStore } from '@/stores/windowSizeStore' 
 
   import VButtonShowMore from '@/components/VButtonShowMore/VButtonShowMore.vue'
   import Filter from '@/components/TagFilter/Filter.vue'
   
-  import {getMethods} from '@/methods.js'
+  import { getApi } from '@/API/api.js'
 
-  import {watch, reactive} from 'vue'
+  import { watch, reactive } from 'vue'
 
   import './style.css'
   import './media-style.css'
   
-  const emit = defineEmits(['showBlockedModal'])
+  const emit = defineEmits(['showBlockedModal', 'showMaterialModal'])
 
   const postsStore = useStore()
-  const authStore = useAuthStore()
-  const paramsPageStore = useParamsPageStore()
-  const windowSizeStore = useWindowSizeStore()
-  const useMethod = getMethods()
+  const authStore = getAuthStore()
+  const paramsPageStore = getParamsPageStore()
+  const windowSizeStore = getWindowSizeStore()
+  const useApi = getApi()
 
   const objCurrentUser = reactive({
     user: authStore.data.user
@@ -102,7 +102,7 @@
     paramsPageStore.changePage()
     paramsPageStore.changeLastId()
 
-    await useMethod.getMaterials(paramsPageStore.objParamsPage)
+    await useApi.getMaterials(paramsPageStore.objParamsPage)
   }
 
   const addWordMinute = (number) => {
@@ -130,7 +130,7 @@
           за материал
         </div>
         <p class="add_post-text">Вы можете опубликовать свой материал! Опубликуем?</p>
-        <div @click="objModal.activeModalAddPost = true" class="add_post-img">
+        <div @click="emit('showMaterialModal', true)" class="add_post-img">
           <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20.5" cy="20.3966" r="20" fill="white"></circle><circle cx="20.6562" cy="20.2921" r="20" fill="white"></circle><path d="M20.6562 15.2921V25.2921M15.6562 20.2921H25.6562" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
         </div>
       </div>

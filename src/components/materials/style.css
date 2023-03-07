@@ -115,6 +115,7 @@
 
 .post_close {
     position: relative;
+    z-index: 1;
     width: 16px;
     height: 16px;
 }
@@ -186,7 +187,8 @@
     height: 40px;
     cursor: pointer;
 }
-.post_gradient{
+
+.post_gradient {
     width: 120px;
     height: 188px;
     right: -50px;

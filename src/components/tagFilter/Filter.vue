@@ -1,21 +1,21 @@
 <script setup>
-  import {reactive} from 'vue'
+  import { reactive } from 'vue'
   
-  import {getMethods} from '@/methods.js'
+  import { getApi } from '@/API/api.js'
   
-  import { useParamsPageStore } from '@/stores/paramsPageStore'
-  import {useStore} from '@/stores/postStore'
-  import { useAuthStore } from '@/stores/authStore'
-  import { useWindowSizeStore } from '@/stores/windowSizeStore' 
+  import { getParamsPageStore } from '@/stores/paramsPageStore'
+  import { useStore } from '@/stores/postStore'
+  import { getAuthStore } from '@/stores/authStore'
+  import { getWindowSizeStore } from '@/stores/windowSizeStore' 
   
   import './style.css'
   import './media-style.css'
 
-  const useMethod = getMethods()
+  const useApi = getApi()
   const postsStore = useStore()
-  const authStore = useAuthStore()
-  const paramsPageStore = useParamsPageStore()
-  const windowSizeStore = useWindowSizeStore()
+  const authStore = getAuthStore()
+  const paramsPageStore = getParamsPageStore()
+  const windowSizeStore = getWindowSizeStore()
 
   const objMaterials = reactive({
     arrTags: [],
@@ -26,10 +26,10 @@
   setState()
   
   async function setState() {
-    const allTags = await useMethod.getTags()
+    const allTags = await useApi.getTags()
     objMaterials.arrTags = JSON.parse(JSON.stringify(allTags))
     
-    const allPosts = await useMethod.getMaterials(paramsPageStore.objParamsPage)
+    const allPosts = await useApi.getMaterials(paramsPageStore.objParamsPage)
     objMaterials.arrPosts = JSON.parse(JSON.stringify(allPosts))
 
     objMaterials.arrTags.unshift({ id: 30, tag: 'Все', active: true })
@@ -62,7 +62,7 @@
         postsStore.changePostsList(objMaterials.arrPosts)
       } 
 
-      const newMaterials = await useMethod.getMaterials(paramsPageStore.objParamsPage)
+      const newMaterials = await useApi.getMaterials(paramsPageStore.objParamsPage)
 
       objMaterials.arrPosts = JSON.parse(JSON.stringify(newMaterials))
     }
@@ -70,7 +70,7 @@
 
   async function handlerEnter(e) {
     if (e.code == 'Enter') {
-      const newMaterials = await useMethod.getMaterials(paramsPageStore.objParamsPage)
+      const newMaterials = await useApi.getMaterials(paramsPageStore.objParamsPage)
 
       objMaterials.arrPosts = JSON.parse(JSON.stringify(newMaterials))
     }
@@ -78,12 +78,12 @@
 
   async function handlerActionFavorite() {
     paramsPageStore.changeToggleFavorite()
-    await useMethod.getMaterials(paramsPageStore.objParamsPage)
+    await useApi.getMaterials(paramsPageStore.objParamsPage)
   }
 
   async function handlerActionUnfinished() {
     paramsPageStore.changeToggleUnfinished()
-    await useMethod.getMaterials(paramsPageStore.objParamsPage)
+    await useApi.getMaterials(paramsPageStore.objParamsPage)
   }
 </script>
 

@@ -102,14 +102,21 @@
     display: block;
 }
 
-.detail-work_fromLesson {
-    margin: 0;
+.detail-work_fromLesson,
+.detail-work_fromAccount {
     font-weight: 700;
     font-size: 24px;
     line-height: 130%;
     letter-spacing: -.02em;
     color: #000;
-    margin-bottom: 15px;
+}
+
+.detail-work_fromLesson {
+    margin: 0 0 15px;
+}
+
+.detail-work_fromAccount {
+    margin: 15px 0 0;
 }
 
 .detail-work_post-preview {

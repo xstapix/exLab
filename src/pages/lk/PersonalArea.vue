@@ -4,10 +4,10 @@
   import 'flatpickr/dist/flatpickr.css';
   import { Russian } from "flatpickr/dist/l10n/ru.js"
 
-  import { useAuthStore } from '@/stores/authStore'
-  import { useWindowSizeStore } from '@/stores/windowSizeStore' 
+  import { getAuthStore } from '@/stores/authStore'
+  import { getWindowSizeStore } from '@/stores/windowSizeStore' 
 
-  import {getMethods} from '@/methods.js'
+  import { getApi } from '@/API/api.js'
 
   import { useRouter } from 'vue-router'
 
@@ -24,15 +24,13 @@
   const ModalAddWork = defineAsyncComponent(
     () => import('@/components/ModalAddWork/ModalAddWork.vue')
   )
+  
+  window.scrollTo(0,0);
 
-  const authStore = useAuthStore()
-  const windowSizeStore = useWindowSizeStore()
+  const authStore = getAuthStore()
+  const windowSizeStore = getWindowSizeStore()
   const router = useRouter()
-  const useMethod = getMethods()
-
-  if (!authStore.data.auth) {
-    router.push('/login')
-  }
+  const useApi = getApi()
 
   const objNav = reactive({
     portfolio: true, 
@@ -82,7 +80,7 @@
   setFullDataForUser()
 
   async function setFullDataForUser() {
-    await useMethod.getAuthFullData(authStore.data.user)
+    await useApi.getAuthFullData(authStore.data.user)
     objAuth.user = JSON.parse(JSON.stringify(authStore.data.user))
   }
 
@@ -335,7 +333,7 @@
           </div>
         </div>
       </div>
-      <div class="profile_preview-about_you">{{ objAuth.user.account.about_you }}</div>
+      <div v-if="windowSizeStore.objAdaptive.mobile" class="profile_preview-about_you">{{ objAuth.user.account.about_you }}</div>
       <div v-if="windowSizeStore.objAdaptive.mobile" class="profile_preview-modil_data">
         <div class="DF FWW">
           <div class="profile_preview-data_box"

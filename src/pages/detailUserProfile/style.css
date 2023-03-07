@@ -1,5 +1,5 @@
-.detail_user{
-    min-width: 100vw;
+.detail_user {
+    min-width: 100%;
     min-height: 100vh;
     background-color: black;
 }
@@ -8,7 +8,7 @@
     margin: 25px 0 0;
 }
 
-.detail_user-photo{
+.detail_user-photo {
     position: relative;
     width: 80px;
     height: 80px;

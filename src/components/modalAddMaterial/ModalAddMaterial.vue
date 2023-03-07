@@ -1,9 +1,9 @@
 <script setup>
-  import {useStore} from '@/stores/postStore'
+  import { useStore } from '@/stores/postStore'
 
   import { reactive, defineAsyncComponent, watch } from 'vue';
 
-  import {getMethods} from '@/methods.js'
+  import { getApi } from '@/API/api.js'
 
   import EditorJS from '@editorjs/editorjs';
   import Header from '@editorjs/header';
@@ -19,7 +19,7 @@
     () => import('@/components/ModalUnsavedChanges/ModalUnsavedChanges.vue')
   )
   
-  const useMethod = getMethods()
+  const useApi = getApi()
 
   const editor = new EditorJS({
     holder: 'editorjs',
@@ -124,7 +124,7 @@
   setTags()
 
   async function setTags() {
-    objTags.tags = await useMethod.getTags()
+    objTags.tags = await useApi.getTags()
   }
   
   const objModal = reactive({

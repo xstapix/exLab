@@ -1,13 +1,15 @@
 <script setup>
-  import { useAuthStore } from '@/stores/authStore' 
+  import { getAuthStore } from '@/stores/authStore' 
   import SideBar from '@/components/SideBar/SideBar.vue'
 
   import { reactive } from 'vue';
 
   import './style.css'
   import './media-style.css'
+  
+  window.scrollTo(0,0);
 
-  const authStore = useAuthStore()
+  const authStore = getAuthStore()
 
   const objPrice = reactive({
     toggleActive: false,
@@ -35,7 +37,7 @@
     }
 
     if (objPrice.toggleActive) {
-      objPrice.totalPrice = objPrice.totalPrice - Math.floor(Number(authStore.data.user.star)) * 20
+      objPrice.totalPrice = objPrice.totalPrice - Math.floor(Number(authStore.data.user.account.star)) * 20
     }
   }
 
@@ -43,10 +45,9 @@
     objPrice.toggleActive = !objPrice.toggleActive
 
     if (objPrice.toggleActive) {
-      objPrice.totalPrice = objPrice.totalPrice - Math.floor(Number(authStore.data.user.star)) * 20
-    } else objPrice.totalPrice = objPrice.totalPrice + Math.floor(Number(authStore.data.user.star)) * 20
+      objPrice.totalPrice = objPrice.totalPrice - Math.floor(Number(authStore.data.user.account.star)) * 20
+    } else objPrice.totalPrice = objPrice.totalPrice + Math.floor(Number(authStore.data.user.account.star)) * 20
   }
-
 
 </script>
 
@@ -54,7 +55,7 @@
   <div class="DF">
     <SideBar/>
     <div class="pay-wrapper">
-      <div class="pay-body" v-if="authStore.data.auth">
+      <div v-if="authStore.data.auth" class="pay-body">
         <p class="pay-body_title">Клуб. Оплата подписки</p>
         <div class="pay-body_desc">
           Вы можете продлить участие в клубе в любой момент. Если у вас есть действующая подписка, то к действующему периоду прибавится оплаченный период.
@@ -93,7 +94,7 @@
               <div class="pay-body_bonus_toggle" @click="handlerToggle">
                 <div class="pay-body_bonus_toggle_dot" :class="objPrice.toggleActive ? 'bonus_toggle-active' : ''"></div>
               </div>
-              <p class="pay-body_bonus_toggle_text">Списать доступные звезды ({{Math.floor(Number(authStore.data.user.star))}}⭐️ = {{Math.floor(Number(authStore.data.user.star)) * 20}}₽)</p>
+              <p class="pay-body_bonus_toggle_text">Списать доступные звезды ({{Math.floor(Number(authStore.data.user.account.star))}}⭐️ = {{Math.floor(Number(authStore.data.user.account.star)) * 20}}₽)</p>
             </div>
             <p class="pay-body_bonus_desc">Звезды списываются при переходе к оплате. Если вы после перехода к оплате в течение 10 минут не произведете оплату, то напишие нам и мы вернем вам звезды</p>
           </div>

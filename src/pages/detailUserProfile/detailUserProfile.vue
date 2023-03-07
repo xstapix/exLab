@@ -1,18 +1,20 @@
 <script setup>
   import SideBar from '@/components/SideBar/SideBar.vue'
 
-  import { useWindowSizeStore } from '@/stores/windowSizeStore' 
+  import { getWindowSizeStore } from '@/stores/windowSizeStore' 
   
-  import {getMethods} from '@/methods.js'
+  import { getApi } from '@/API/api.js'
 
   import { reactive } from 'vue';
 
   import './style.css'
   import '@/pages/lk/style.css'
   import '@/pages/lk/media-style.css'
+
+  window.scrollTo(0,0);
   
-  const windowSizeStore = useWindowSizeStore()
-  const useMethod = getMethods()
+  const windowSizeStore = getWindowSizeStore()
+  const useApi = getApi()
 
   const objProfileTabs = reactive({
     card: true,
@@ -32,8 +34,8 @@
   setDetailUser()
 
   async function setDetailUser() {
-    await useMethod.getDetailUser(null)
-    objDetailUser.detailUser = await useMethod.getDetailUser(null)
+    await useApi.getDetailUser(null)
+    objDetailUser.detailUser = await useApi.getDetailUser(null)
     console.log(objDetailUser.detailUser);
   }
 
@@ -57,11 +59,7 @@
       <div>
         <div class="profile_preview-photo DF JCC AIC">
           <div class="profile_preview-img">
-            <div class="profile_preview-upload">
-              <input type="file" accept="image/png,image/jpeg" class="profile_preview-upload_input">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6L19 6C19.5523 6 20 5.55228 20 5C20 4.44772 19.5523 4 19 4L5 4C4.44771 4 4 4.44772 4 5C4 5.55228 4.44771 6 5 6Z" fill="white"></path><path d="M20 7V5C20 4.44772 19.5523 4 19 4C18.4477 4 18 4.44772 18 5V7C18 7.55228 18.4477 8 19 8C19.5523 8 20 7.55228 20 7Z" fill="white"></path><path d="M6 7V5C6 4.44772 5.55228 4 5 4C4.44772 4 4 4.44772 4 5V7C4 7.55228 4.44772 8 5 8C5.55228 8 6 7.55228 6 7Z" fill="white"></path><path d="M8 14C7.84476 14 7.69164 13.9639 7.55279 13.8945C7.41393 13.825 7.29315 13.7242 7.2 13.6C7.12121 13.495 7.06388 13.3754 7.03129 13.2482C6.99869 13.121 6.99148 12.9886 7.01005 12.8586C7.02862 12.7286 7.07262 12.6035 7.13953 12.4905C7.20643 12.3775 7.29494 12.2788 7.4 12.2L11.4 9.20004C11.5713 9.07489 11.7779 9.00745 11.99 9.00745C12.2021 9.00745 12.4087 9.07489 12.58 9.20004L16.58 12.02C16.7956 12.173 16.9419 12.405 16.9868 12.6655C17.0318 12.926 16.9718 13.1937 16.82 13.41C16.7442 13.5182 16.6478 13.6103 16.5362 13.6809C16.4246 13.7516 16.3002 13.7995 16.17 13.8218C16.0399 13.8441 15.9066 13.8404 15.7778 13.8109C15.6491 13.7815 15.5275 13.7268 15.42 13.65L12 11.24L8.6 13.8C8.4269 13.9299 8.21637 14 8 14Z" fill="white"></path><path d="M12 21C11.7348 21 11.4804 20.8946 11.2929 20.7071C11.1054 20.5196 11 20.2652 11 20V12C11 11.7348 11.1054 11.4804 11.2929 11.2929C11.4804 11.1054 11.7348 11 12 11C12.2652 11 12.5196 11.1054 12.7071 11.2929C12.8946 11.4804 13 11.7348 13 12V20C13 20.2652 12.8946 20.5196 12.7071 20.7071C12.5196 20.8946 12.2652 21 12 21Z" fill="white"></path></svg>
-            </div>
-            <img src="https://kronadev.ru/local/templates/kronaclub/build/img/avatar2.png" alt="">
+            <img :src="objDetailUser.detailUser.img" alt="">
           </div>
           <div class="profile_preview-photo_line">
             <div class="preview-photo_line-item">
@@ -99,16 +97,15 @@
           </p>
         </div>
         <div class="profile_preview-tabs DF">
-          <div v-if="objDetailUser.detailUser.video"
-            class="profile_preview-tabs_item" 
+          <div class="profile_preview-tabs_item" 
             :class="{tabs_item_active: objProfileTabs.card}"
             @click="handlerProfileTabs('card')">Визитка</div>
           <div 
             class="profile_preview-tabs_item" 
-            :class="{tabs_item_active: objProfileTabs.data || !objDetailUser.detailUser.video}"
+            :class="{tabs_item_active: objProfileTabs.data}"
             @click="handlerProfileTabs('data')">Данные</div>
         </div>
-        <div v-if="objProfileTabs.card && objDetailUser.detailUser.video">
+        <div v-if="objProfileTabs.card">
           <div class="profile_preview-card DF FDC JCC AIC">
             <p class="profile_preview-card_text">Загрузите видео о себе для посетителей вашей страницы.</p>
             <p class="profile_preview-card_text card_text-tip">(mp4, прямоугольный формат 16:9, до 1 минуты)</p>
@@ -153,13 +150,10 @@
         </div>
       </div>
     </div>
-    <div v-else>
+    <div v-if="windowSizeStore.objAdaptive.mobile && objDetailUser.detailUser.video" class="profile_preview-about_you">{{ objDetailUser.detailUser.about_you }}</div>
+    <div v-if="windowSizeStore.objAdaptive.mobile && !objDetailUser.detailUser.video">
       <div class="detail_user-photo DF JCC AIC">
         <div class="profile_preview-img">
-          <div class="profile_preview-upload">
-            <input type="file" accept="image/png,image/jpeg" class="profile_preview-upload_input">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6L19 6C19.5523 6 20 5.55228 20 5C20 4.44772 19.5523 4 19 4L5 4C4.44771 4 4 4.44772 4 5C4 5.55228 4.44771 6 5 6Z" fill="white"></path><path d="M20 7V5C20 4.44772 19.5523 4 19 4C18.4477 4 18 4.44772 18 5V7C18 7.55228 18.4477 8 19 8C19.5523 8 20 7.55228 20 7Z" fill="white"></path><path d="M6 7V5C6 4.44772 5.55228 4 5 4C4.44772 4 4 4.44772 4 5V7C4 7.55228 4.44772 8 5 8C5.55228 8 6 7.55228 6 7Z" fill="white"></path><path d="M8 14C7.84476 14 7.69164 13.9639 7.55279 13.8945C7.41393 13.825 7.29315 13.7242 7.2 13.6C7.12121 13.495 7.06388 13.3754 7.03129 13.2482C6.99869 13.121 6.99148 12.9886 7.01005 12.8586C7.02862 12.7286 7.07262 12.6035 7.13953 12.4905C7.20643 12.3775 7.29494 12.2788 7.4 12.2L11.4 9.20004C11.5713 9.07489 11.7779 9.00745 11.99 9.00745C12.2021 9.00745 12.4087 9.07489 12.58 9.20004L16.58 12.02C16.7956 12.173 16.9419 12.405 16.9868 12.6655C17.0318 12.926 16.9718 13.1937 16.82 13.41C16.7442 13.5182 16.6478 13.6103 16.5362 13.6809C16.4246 13.7516 16.3002 13.7995 16.17 13.8218C16.0399 13.8441 15.9066 13.8404 15.7778 13.8109C15.6491 13.7815 15.5275 13.7268 15.42 13.65L12 11.24L8.6 13.8C8.4269 13.9299 8.21637 14 8 14Z" fill="white"></path><path d="M12 21C11.7348 21 11.4804 20.8946 11.2929 20.7071C11.1054 20.5196 11 20.2652 11 20V12C11 11.7348 11.1054 11.4804 11.2929 11.2929C11.4804 11.1054 11.7348 11 12 11C12.2652 11 12.5196 11.1054 12.7071 11.2929C12.8946 11.4804 13 11.7348 13 12V20C13 20.2652 12.8946 20.5196 12.7071 20.7071C12.5196 20.8946 12.2652 21 12 21Z" fill="white"></path></svg>
-          </div>
           <img :src="objDetailUser.detailUser.img" alt="">
         </div>
       </div>
@@ -169,8 +163,8 @@
           {{objDetailUser.detailUser.login}} / {{objDetailUser.detailUser.stark}}
         </p>
       </div>
+      <div class="profile_preview-about_you">{{ objDetailUser.detailUser.about_you }}</div>
     </div>
-    <div class="profile_preview-about_you">{{ objDetailUser.detailUser.about_you }}</div>
     <div v-if="windowSizeStore.objAdaptive.mobile && objDetailUser.detailUser" class="profile_preview-modil_data">
       <div class="data_point-item DF AIC">
         <div class="data_point-item_icon">

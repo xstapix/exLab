@@ -1,23 +1,25 @@
 <script setup>
   import SideBar from '@/components/SideBar/SideBar.vue'
-  import {getMethods} from '@/methods.js'
-  import { useAuthStore } from '@/stores/authStore' 
-  import { useUserStore } from '@/stores/userStore' 
-  import { useWindowSizeStore } from '@/stores/windowSizeStore' 
+  import { getApi } from '@/API/api.js'
+  import { getAuthStore } from '@/stores/authStore' 
+  import { getUserStore } from '@/stores/userStore' 
+  import { getWindowSizeStore } from '@/stores/windowSizeStore' 
 
   import VButtonShowMore from '@/components/VButtonShowMore/VButtonShowMore.vue'
   
-  import {reactive} from 'vue'
+  import { reactive } from 'vue'
   import { useRouter } from 'vue-router'
 
   import './style.css'
   import './media-style.css'
 
-  const useMethod = getMethods()
+  window.scrollTo(0,0);
+
+  const useApi = getApi()
   const router = useRouter()
-  const authStore = useAuthStore()
-  const userStore = useUserStore()
-  const windowSizeStore = useWindowSizeStore()
+  const authStore = getAuthStore()
+  const userStore = getUserStore()
+  const windowSizeStore = getWindowSizeStore()
   
   const objUsers = reactive({
     users: [],
@@ -42,7 +44,7 @@
   setState()
 
   async function setState() {
-    objUsers.users = await useMethod.getUsers()
+    objUsers.users = await useApi.getUsers()
   }
 
   const handlerSort = (sortBy) => {
@@ -74,13 +76,13 @@
       objParamsPage.selectedPeriod = 'all'
     } else objParamsPage.selectedPeriod = 'month'
 
-    await useMethod.getUsers(objParamsPage)
+    await useApi.getUsers(objParamsPage)
   }
 
   async function handlerShowMore() {
     objParamsPage.page++
     objParamsPage.idLastUser = userStore.data.users[userStore.data.users.length - 1].id
-    await useMethod.getUsers(objParamsPage)
+    await useApi.getUsers(objParamsPage)
   }
 
 </script>
