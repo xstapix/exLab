@@ -1,6 +1,6 @@
 <script setup>
   import SideBar from '@/components/SideBar/SideBar.vue'
-  import { getApi } from '@/API/api.js'
+  import { getApi } from '@/shared/API/api.js'
   import { getAuthStore } from '@/stores/authStore' 
 
   import { reactive } from 'vue';
@@ -11,7 +11,7 @@
 
   window.scrollTo(0,0);
   
-  const useApi = getApi()
+  const api = getApi()
   const authStore = getAuthStore()
   const router = useRouter()
 
@@ -25,7 +25,7 @@
   })
 
   async function handleLogin() {
-    const auth = await useApi.getAuth(objAuthInfo.email, objAuthInfo.password)
+    const auth = await api.getAuth(objAuthInfo.email, objAuthInfo.password)
 
     if (auth.success_login) {
       authStore.changeAuth(true)

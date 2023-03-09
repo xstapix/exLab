@@ -3,7 +3,7 @@
 
   import { reactive, defineAsyncComponent, watch } from 'vue';
 
-  import { getApi } from '@/API/api.js'
+  import { getApi } from '@/shared/API/api.js'
 
   import EditorJS from '@editorjs/editorjs';
   import Header from '@editorjs/header';
@@ -19,7 +19,7 @@
     () => import('@/components/ModalUnsavedChanges/ModalUnsavedChanges.vue')
   )
   
-  const useApi = getApi()
+  const api = getApi()
 
   const editor = new EditorJS({
     holder: 'editorjs',
@@ -124,7 +124,7 @@
   setTags()
 
   async function setTags() {
-    objTags.tags = await useApi.getTags()
+    objTags.tags = await api.getTags()
   }
   
   const objModal = reactive({

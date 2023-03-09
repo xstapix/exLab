@@ -2,7 +2,7 @@
   import { reactive, defineAsyncComponent } from 'vue'
   import { useRoute } from 'vue-router'
 
-  import { getApi } from '@/API/api.js'
+  import { getApi } from '@/shared/API/api.js'
 
   import SideBar from '@/components/SideBar/SideBar.vue'
   import Carousel from '@/components/Swiper/Carousel.vue'
@@ -32,12 +32,10 @@
   
   const route = useRoute()
 
-  const useApi = getApi()
+  const api = getApi()
   const authStore = getAuthStore()
   const postsStore = useStore()
   const windowSizeStore = getWindowSizeStore()
-
-  document.body.style.backgroundColor = '#E5E5E5'
   
   const objPost = reactive({
     postViewed: {},
@@ -67,19 +65,17 @@
   setObjPost()
 
   async function setObjPost() {
-    objPost.postViewed = await useApi.getDetailMaterial(route.params.link)
+    objPost.postViewed = await api.getDetailMaterial(route.params.link)
     objPost.renderKey++
-
-    console.log(objPost);
   }
   
   const nextPost = async () => {
-    objPost.postViewed = await useApi.getDetailMaterial(route.params.link) //next
+    objPost.postViewed = await api.getDetailMaterial(route.params.link) //next
     objPost.renderKey++
   }
 
   const prevPost = async () => {
-    objPost.postViewed = await useApi.getDetailMaterial(route.params.link) //prew
+    objPost.postViewed = await api.getDetailMaterial(route.params.link) //prew
     objPost.renderKey++
   }
 

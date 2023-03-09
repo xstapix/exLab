@@ -7,7 +7,7 @@
   import VButtonShowMore from '@/components/VButtonShowMore/VButtonShowMore.vue'
   import Filter from '@/components/TagFilter/Filter.vue'
   
-  import { getApi } from '@/API/api.js'
+  import { getApi } from '@/shared/API/api.js'
 
   import { watch, reactive } from 'vue'
 
@@ -20,7 +20,7 @@
   const authStore = getAuthStore()
   const paramsPageStore = getParamsPageStore()
   const windowSizeStore = getWindowSizeStore()
-  const useApi = getApi()
+  const api = getApi()
 
   const objCurrentUser = reactive({
     user: authStore.data.user
@@ -102,7 +102,7 @@
     paramsPageStore.changePage()
     paramsPageStore.changeLastId()
 
-    await useApi.getMaterials(paramsPageStore.objParamsPage)
+    await api.getMaterials(paramsPageStore.objParamsPage)
   }
 
   const addWordMinute = (number) => {

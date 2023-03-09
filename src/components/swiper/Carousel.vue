@@ -3,13 +3,13 @@
   import { Navigation, Pagination, A11y } from 'swiper';
 
   import { reactive } from 'vue';
-  import { getApi } from '@/API/api.js'
+  import { getApi } from '@/shared/API/api.js'
 
   import './style.css'
   import '@/components/materials/style.css'
   import './media-style.css'
 
-  const useApi = getApi()
+  const api = getApi()
   const props = defineProps({
     activePost: Object
   })
@@ -21,7 +21,7 @@
   setState()
 
   async function setState() {
-    const allPosts = await useApi.getMaterials()
+    const allPosts = await api.getMaterials()
     
     let filteredPosts = []
     let idСontributedPosts = []

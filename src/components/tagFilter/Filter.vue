@@ -1,7 +1,7 @@
 <script setup>
   import { reactive } from 'vue'
   
-  import { getApi } from '@/API/api.js'
+  import { getApi } from '@/shared/API/api.js'
   
   import { getParamsPageStore } from '@/stores/paramsPageStore'
   import { useStore } from '@/stores/postStore'
@@ -11,7 +11,7 @@
   import './style.css'
   import './media-style.css'
 
-  const useApi = getApi()
+  const api = getApi()
   const postsStore = useStore()
   const authStore = getAuthStore()
   const paramsPageStore = getParamsPageStore()
@@ -26,10 +26,10 @@
   setState()
   
   async function setState() {
-    const allTags = await useApi.getTags()
+    const allTags = await api.getTags()
     objMaterials.arrTags = JSON.parse(JSON.stringify(allTags))
     
-    const allPosts = await useApi.getMaterials(paramsPageStore.objParamsPage)
+    const allPosts = await api.getMaterials(paramsPageStore.objParamsPage)
     objMaterials.arrPosts = JSON.parse(JSON.stringify(allPosts))
 
     objMaterials.arrTags.unshift({ id: 30, tag: 'Все', active: true })
@@ -62,15 +62,14 @@
         postsStore.changePostsList(objMaterials.arrPosts)
       } 
 
-      const newMaterials = await useApi.getMaterials(paramsPageStore.objParamsPage)
-
+      const newMaterials = await api.getMaterials(paramsPageStore.objParamsPage)
       objMaterials.arrPosts = JSON.parse(JSON.stringify(newMaterials))
     }
   }
 
   async function handlerEnter(e) {
     if (e.code == 'Enter') {
-      const newMaterials = await useApi.getMaterials(paramsPageStore.objParamsPage)
+      const newMaterials = await api.getMaterials(paramsPageStore.objParamsPage)
 
       objMaterials.arrPosts = JSON.parse(JSON.stringify(newMaterials))
     }
@@ -78,12 +77,12 @@
 
   async function handlerActionFavorite() {
     paramsPageStore.changeToggleFavorite()
-    await useApi.getMaterials(paramsPageStore.objParamsPage)
+    await api.getMaterials(paramsPageStore.objParamsPage)
   }
 
   async function handlerActionUnfinished() {
     paramsPageStore.changeToggleUnfinished()
-    await useApi.getMaterials(paramsPageStore.objParamsPage)
+    await api.getMaterials(paramsPageStore.objParamsPage)
   }
 </script>
 

@@ -1,6 +1,5 @@
 <script setup>
-  import { getApi } from '@/API/api.js'
-  import { getWorkStore } from '@/stores/workStore'
+  import { getApi } from '@/shared/API/api.js'
   
   import { useRoute, useRouter } from 'vue-router'
   import { reactive } from 'vue'
@@ -9,13 +8,11 @@
   import './media-style.css'
   import '@/components/Materials/style.css'
 
-  document.body.style.backgroundColor = '#f0f0f0'
   window.scrollTo(0,0);
 
-  const useApi = getApi()
+  const api = getApi()
   const route = useRoute()
   const router = useRouter()
-  const useWorkStore = getWorkStore()
 
   const objWork = reactive({
     work: null,
@@ -26,14 +23,12 @@
 
   async function setDetailWork(direction, workId) {
     if (direction === '+') {   
-      objWork.work = await useApi.getDetailWork(`${Number(workId) + 1}`)
+      objWork.work = await api.getDetailWork(`${Number(workId) + 1}`)
     } else if (direction === '-') {   
-      objWork.work = await useApi.getDetailWork(`${Number(workId) - 1}`)
+      objWork.work = await api.getDetailWork(`${Number(workId) - 1}`)
     } else {
-      objWork.work = await useApi.getDetailWork(`${workId}`)
+      objWork.work = await api.getDetailWork(`${workId}`)
     }
-
-    console.log( objWork.work);
   }
 
   const handlerNextWork = () => {

@@ -3,7 +3,7 @@
   import VButtonShowMore from '@/components/VButtonShowMore/VButtonShowMore.vue'
 
   import { getWorkStore } from '@/stores/workStore'
-  import { getApi } from '@/API/api.js'
+  import { getApi } from '@/shared/API/api.js'
 
   import { reactive } from 'vue'
  
@@ -11,7 +11,7 @@
   import './media-style.css'
   
   const useWorkStore = getWorkStore()
-  const useApi = getApi()
+  const api = getApi()
 
   window.scrollTo(0,0);
 
@@ -23,14 +23,14 @@
   setWorks()
 
   async function setWorks() {
-    await useApi.getWorks(objParamsPage)
+    await api.getWorks(objParamsPage)
   }
 
   async function handlerShowMore() {
     objParamsPage.page++
     objParamsPage.idLastMaterial = useWorkStore.data.works[useWorkStore.data.works.length - 1].id
 
-    await useApi.getWorks(objParamsPage)
+    await api.getWorks(objParamsPage)
   }
 </script>
 

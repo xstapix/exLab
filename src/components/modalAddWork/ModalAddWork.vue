@@ -1,6 +1,6 @@
 <script setup>
   import { reactive } from 'vue';
-  import { getApi } from '@/API/api.js'
+  import { getApi } from '@/shared/API/api.js'
   
   import './style.css'
 
@@ -9,7 +9,7 @@
   })
   const emit = defineEmits(['closeModal'])
 
-  const useApi = getApi()
+  const api = getApi()
 
   const objModal = reactive({
     loadedImg: false,
@@ -71,7 +71,7 @@
     objModal.newWork.preview = null
 
     async function sendWork() {
-      await useApi.sendWork(formData)
+      await api.sendWork(formData)
         .then((res) => console.log(res))
         .catch((rej) => console.log(rej))
     }

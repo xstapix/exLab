@@ -3,11 +3,11 @@
   import { useRouter } from 'vue-router'
 
   import { getAuthStore } from '@/stores/AuthStore' 
-  import { getApi } from '@/API/api.js'
+  import { getApi } from '@/shared/API/api.js'
 
   onBeforeMount( () => {
     const authStore = getAuthStore()
-    const useApi = getApi()
+    const api = getApi()
     const router = useRouter()
 
     setUser()
@@ -16,7 +16,7 @@
       let currentEmail = getCookie('__upi_cronaClubUserEmail')
 
       if (currentEmail) {
-        const user = await useApi.getAuth(currentEmail, null)
+        const user = await api.getAuth(currentEmail, null)
         
         authStore.changeUser(user)
         authStore.changeAuth(true)

@@ -3,7 +3,7 @@
 
   import { getWindowSizeStore } from '@/stores/windowSizeStore' 
   
-  import { getApi } from '@/API/api.js'
+  import { getApi } from '@/shared/API/api.js'
 
   import { reactive } from 'vue';
 
@@ -14,7 +14,7 @@
   window.scrollTo(0,0);
   
   const windowSizeStore = getWindowSizeStore()
-  const useApi = getApi()
+  const api = getApi()
 
   const objProfileTabs = reactive({
     card: true,
@@ -34,19 +34,14 @@
   setDetailUser()
 
   async function setDetailUser() {
-    await useApi.getDetailUser(null)
-    objDetailUser.detailUser = await useApi.getDetailUser(null)
+    await api.getDetailUser(null)
+    objDetailUser.detailUser = await api.getDetailUser(null)
     console.log(objDetailUser.detailUser);
   }
 
-  const handlerProfileTabs = (tabs) => {
-    if (tabs === 'data') {
-      objProfileTabs.data = true
-      objProfileTabs.card = false
-    } else {
-      objProfileTabs.data = false
-      objProfileTabs.card = true
-    }
+  const handlerProfileTabs = (booleanCard, booleanData) => {
+    objProfileTabs.card = booleanCard
+    objProfileTabs.data = booleanData
   }
 </script>
 
@@ -99,11 +94,11 @@
         <div class="profile_preview-tabs DF">
           <div class="profile_preview-tabs_item" 
             :class="{tabs_item_active: objProfileTabs.card}"
-            @click="handlerProfileTabs('card')">Визитка</div>
+            @click="handlerProfileTabs(true, false)">Визитка</div>
           <div 
             class="profile_preview-tabs_item" 
             :class="{tabs_item_active: objProfileTabs.data}"
-            @click="handlerProfileTabs('data')">Данные</div>
+            @click="handlerProfileTabs(false, true)">Данные</div>
         </div>
         <div v-if="objProfileTabs.card">
           <div class="profile_preview-card DF FDC JCC AIC">

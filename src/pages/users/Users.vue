@@ -1,6 +1,6 @@
 <script setup>
   import SideBar from '@/components/SideBar/SideBar.vue'
-  import { getApi } from '@/API/api.js'
+  import { getApi } from '@/shared/API/api.js'
   import { getAuthStore } from '@/stores/authStore' 
   import { getUserStore } from '@/stores/userStore' 
   import { getWindowSizeStore } from '@/stores/windowSizeStore' 
@@ -15,7 +15,7 @@
 
   window.scrollTo(0,0);
 
-  const useApi = getApi()
+  const api = getApi()
   const router = useRouter()
   const authStore = getAuthStore()
   const userStore = getUserStore()
@@ -44,7 +44,7 @@
   setState()
 
   async function setState() {
-    objUsers.users = await useApi.getUsers()
+    objUsers.users = await api.getUsers()
   }
 
   const handlerSort = (sortBy) => {
@@ -76,13 +76,13 @@
       objParamsPage.selectedPeriod = 'all'
     } else objParamsPage.selectedPeriod = 'month'
 
-    await useApi.getUsers(objParamsPage)
+    await api.getUsers(objParamsPage)
   }
 
   async function handlerShowMore() {
     objParamsPage.page++
     objParamsPage.idLastUser = userStore.data.users[userStore.data.users.length - 1].id
-    await useApi.getUsers(objParamsPage)
+    await api.getUsers(objParamsPage)
   }
 
 </script>
