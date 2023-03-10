@@ -20,8 +20,12 @@
     () => import('@/components/UsefulMaterials/UsefulMaterials.vue')
   )
 
+  const ModalAddMaterial = defineAsyncComponent(
+    () => import('@/components/ModalAddMaterial/ModalAddMaterial.vue')
+  )
+
   const ModalAddWork = defineAsyncComponent(
-    () => import('@/components/ModalAddWork/ModalAddWork.vue')
+    () => import('@/components/modalAddWork/ModalAddWork.vue')
   )
 
   const WorkForLesson = defineAsyncComponent(
@@ -54,6 +58,7 @@
   })
 
   const objModal = reactive({
+    activeMaterialModal: false,
     activeWorkModal: false
   })
 
@@ -67,6 +72,7 @@
   async function setObjPost() {
     objPost.postViewed = await api.getDetailMaterial(route.params.link)
     objPost.renderKey++
+    console.log(objPost.postViewed);
   }
   
   const nextPost = async () => {
@@ -86,7 +92,9 @@
 
 <template>
   <div class="DF" id="top">
-    <SideBar/>
+    <SideBar
+      @showMaterialModal="(active) => objModal.activeMaterialModal = active"
+      @showWorkModal="(active) => objModal.activeWorkModal = active"/>
     <div class="post-body">
       <router-link v-if="windowSizeStore.objAdaptive.currentSize > objAdaptation.mobilAdaptation"
         :to="`/post/NaN`" 
@@ -261,6 +269,11 @@
       <div v-else></div>
     </div>
   </div>
+  <ModalAddMaterial 
+    v-if="objModal.activeMaterialModal"
+    @closeModal="(close) => objModal.activeMaterialModal = close"
+    :activeModal="objModal.activeMaterialModal"/>
+
   <ModalAddWork 
     v-if="objModal.activeWorkModal"
     @closeModal="(close) => objModal.activeWorkModal = close"

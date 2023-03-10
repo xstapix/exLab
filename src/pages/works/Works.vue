@@ -5,10 +5,18 @@
   import { getWorkStore } from '@/stores/workStore'
   import { getApi } from '@/shared/API/api.js'
 
-  import { reactive } from 'vue'
+  import { reactive, defineAsyncComponent } from 'vue'
  
   import './style.css'
   import './media-style.css'
+
+  const ModalAddMaterial = defineAsyncComponent(
+    () => import('@/components/ModalAddMaterial/ModalAddMaterial.vue')
+  )
+
+  const ModalAddWork = defineAsyncComponent(
+    () => import('@/components/modalAddWork/ModalAddWork.vue')
+  )
   
   const useWorkStore = getWorkStore()
   const api = getApi()
@@ -18,6 +26,11 @@
   const objParamsPage = reactive({
     page: 1,
     idLastMaterial: null
+  })
+
+  const objModal = reactive({
+    activeMaterialModal: false,
+    activeWorkModal: false
   })
 
   setWorks()
@@ -36,7 +49,9 @@
 
 <template>
   <div class="DF">
-    <SideBar/>
+    <SideBar
+      @showMaterialModal="(active) => objModal.activeMaterialModal = active"
+      @showWorkModal="(active) => objModal.activeWorkModal = active"/>
     <section v-if="useWorkStore.data.works" class="works-body">
       <div class="works-content">
         <router-link :to="`/works/${item.id}`" v-for="item in useWorkStore.data.works" 
@@ -48,4 +63,13 @@
       <VButtonShowMore @click="handlerShowMore"/>
     </section>
   </div>
+  <ModalAddMaterial 
+    v-if="objModal.activeMaterialModal"
+    @closeModal="(close) => objModal.activeMaterialModal = close"
+    :activeModal="objModal.activeMaterialModal"/>
+
+  <ModalAddWork 
+    v-if="objModal.activeWorkModal"
+    @closeModal="(close) => objModal.activeWorkModal = close"
+    :activeModal="objModal.activeWorkModal"/>
 </template>

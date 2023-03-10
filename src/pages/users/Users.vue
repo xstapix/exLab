@@ -7,11 +7,19 @@
 
   import VButtonShowMore from '@/components/VButtonShowMore/VButtonShowMore.vue'
   
-  import { reactive } from 'vue'
+  import { reactive, defineAsyncComponent } from 'vue'
   import { useRouter } from 'vue-router'
 
   import './style.css'
   import './media-style.css'
+  
+  const ModalAddMaterial = defineAsyncComponent(
+    () => import('@/components/ModalAddMaterial/ModalAddMaterial.vue')
+  )
+
+  const ModalAddWork = defineAsyncComponent(
+    () => import('@/components/modalAddWork/ModalAddWork.vue')
+  )
 
   window.scrollTo(0,0);
 
@@ -39,6 +47,11 @@
     starArrow: false,
     levelArrow: false,
     inClubArrow: false
+  })
+
+  const objModal = reactive({
+    activeMaterialModal: false,
+    activeWorkModal: false
   })
 
   setState()
@@ -88,7 +101,9 @@
 </script>
 <template>
   <div class="DF">
-    <SideBar/>
+    <SideBar
+      @showMaterialModal="(active) => objModal.activeMaterialModal = active"
+      @showWorkModal="(active) => objModal.activeWorkModal = active"/>
     <section class="users_body">
       <div class="stark_rating DF AIC">
         <p class="stark_rating-text">Pейтинг старков</p>
@@ -122,11 +137,11 @@
         
       <div class="table_body DF AIC">
         <div class="table_body-num">1</div>
-        <a href="#" class="table_body-img">
+        <router-link :to="`/users/${1}`" class="table_body-img">
           <img src="https://kronadev.ru/local/templates/kronaclub/build/img/avatar2.png" alt="">
-        </a>
+        </router-link>
         <div class="table_body-name">
-          <a href="" class="table_body-name_text">v.sarafannikov</a>
+          <router-link :to="`/users/${1}`" class="table_body-name_text">v.sarafannikov</router-link>
           <div class="table_body-name_stark">ультрамариновый старк</div>
         </div>
         <div class="table_body-info DF">
@@ -179,11 +194,11 @@
       </div>
       <div class="table_body DF AIC">
         <div class="table_body-num">1</div>
-        <a href="#" class="table_body-img">
+        <router-link :to="`/users/${1}`" class="table_body-img">
           <img src="https://kronadev.ru/local/templates/kronaclub/build/img/avatar2.png" alt="">
-        </a>
+        </router-link>
         <div class="table_body-name">
-          <a href="" class="table_body-name_text">v.sarafannikov</a>
+          <router-link :to="`/users/${1}`" class="table_body-name_text">v.sarafannikov</router-link>
           <div class="table_body-name_stark">ультрамариновый старк</div>
         </div>
         <div class="table_body-info DF">
@@ -237,4 +252,13 @@
       <VButtonShowMore @click="handlerShowMore"/>
     </section>
   </div>
+  <ModalAddMaterial 
+    v-if="objModal.activeMaterialModal"
+    @closeModal="(close) => objModal.activeMaterialModal = close"
+    :activeModal="objModal.activeMaterialModal"/>
+
+  <ModalAddWork 
+    v-if="objModal.activeWorkModal"
+    @closeModal="(close) => objModal.activeWorkModal = close"
+    :activeModal="objModal.activeWorkModal"/>
 </template>

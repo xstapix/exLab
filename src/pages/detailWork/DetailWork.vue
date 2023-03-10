@@ -1,12 +1,22 @@
 <script setup>
   import { getApi } from '@/shared/API/api.js'
+
+  import SideBar from '@/components/SideBar/SideBar.vue'
   
   import { useRoute, useRouter } from 'vue-router'
-  import { reactive } from 'vue'
+  import { reactive, defineAsyncComponent } from 'vue'
 
   import './style.css'
   import './media-style.css'
   import '@/components/Materials/style.css'
+  
+  const ModalAddMaterial = defineAsyncComponent(
+    () => import('@/components/ModalAddMaterial/ModalAddMaterial.vue')
+  )
+
+  const ModalAddWork = defineAsyncComponent(
+    () => import('@/components/modalAddWork/ModalAddWork.vue')
+  )
 
   window.scrollTo(0,0);
 
@@ -19,6 +29,11 @@
     renderKey: 0
   })
 
+  const objModal = reactive({
+    activeMaterialModal: false,
+    activeWorkModal: false
+  })
+
   setDetailWork(null, route.params.workId)
 
   async function setDetailWork(direction, workId) {
@@ -29,6 +44,7 @@
     } else {
       objWork.work = await api.getDetailWork(`${workId}`)
     }
+    console.log(objWork.work);
   }
 
   const handlerNextWork = () => {
@@ -57,6 +73,9 @@
 </script>
 
 <template>
+  <SideBar
+    @showMaterialModal="(active) => objModal.activeMaterialModal = active"
+    @showWorkModal="(active) => objModal.activeWorkModal = active"/>
   <section v-if="objWork.work" :key="objWork.renderKey" class="detail-work_active" >
     <div v-if="objWork.work.prev" class="detail-work_arrow-left" @click="handlerPrewWork" >
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M22 14L16 20L22 26" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -67,7 +86,6 @@
     <div class="DF FDC detail-work_content">
       <div v-if="objWork.work.fromLesson.type" class="detail-work_plug">
         <div class="detail-work_box">
-          <p class="detail-work_fromLesson">Работа к уроку</p>
           <div class="detail-work_post-preview">
             <div class="DF AIC">
               <div class="post_info_author">
@@ -84,6 +102,10 @@
             <a class="post-preview-title">{{ objWork.work.fromLesson.title }}</a>
           </div>
         </div>
+        <div class="detail-work_img-body">
+          <img :src="objWork.work.imgFull" class="detail-work_img" alt="">
+        </div>
+        <p class="detail-work_fromAccount">Другие работы к уроку</p>
       </div>
       <div v-if="objWork.work.fromAccount.type">
         <a href="/" class="DF AIC detail-work_author-info">
@@ -101,8 +123,8 @@
         <div class="detail-work_img-body">
           <img :src="objWork.work.imgFull" class="detail-work_img" alt="">
         </div>
+        <p class="detail-work_fromAccount">Работы пользователя</p>
       </div>
-      <p class="detail-work_fromAccount">Работы пользователя</p>
       <div class="more_work DF FWW">
         <div v-for="work in objWork.work.more_work" class="more_work-item">
           <div class="more_work-item_bg" :style="{backgroundImage: `url(${work.img_preview})`}"></div>
@@ -110,4 +132,13 @@
       </div>
     </div>
   </section>
+  <ModalAddMaterial 
+    v-if="objModal.activeMaterialModal"
+    @closeModal="(close) => objModal.activeMaterialModal = close"
+    :activeModal="objModal.activeMaterialModal"/>
+
+  <ModalAddWork 
+    v-if="objModal.activeWorkModal"
+    @closeModal="(close) => objModal.activeWorkModal = close"
+    :activeModal="objModal.activeWorkModal"/>
 </template>

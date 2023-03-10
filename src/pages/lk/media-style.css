@@ -1,11 +1,12 @@
 @media (max-width: 1330px) {
-    .profile_info{
+    .profile_info {
         height: 100%;
     }
-    .info-yourData_block:nth-child(2){
+    .info-yourData_block:nth-child(2) {
         margin: 40px 0 0;
     }
 }
+
 @media (max-width: 1000px) {
     .profile_preview {
         position: static;
@@ -15,14 +16,12 @@
         padding: 74px 24px 74px;
     }
     .profile_info {
+        width: 100%;
         margin: 0;
         padding: 74px 24px 74px;
     }
     .satellites-body {
         grid-template-columns: repeat(auto-fit, minmax(332px, 1fr));
-    }
-    .profile_preview-link {
-        margin: 30px 0 0;
     }
 }
 

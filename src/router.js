@@ -14,6 +14,16 @@ export default createRouter({
                 import ('@/pages/users/Users.vue')
         },
         {
+            path: '/users/:userId',
+            component: () =>
+                import ('@/pages/detailUserProfile/detailUserProfile.vue')
+        },
+        {
+            path: '/users/:userId/works/:workId',
+            component: () =>
+                import ('@/pages/detailWork/DetailWork.vue')
+        },
+        {
             path: '/payclub',
             component: () =>
                 import ('@/pages/payClub/PayClub.vue')
@@ -37,11 +47,6 @@ export default createRouter({
             path: '/works/:workId',
             component: () =>
                 import ('@/pages/detailWork/DetailWork.vue')
-        },
-        {
-            path: '/users/:userId',
-            component: () =>
-                import ('@/pages/detailUserProfile/detailUserProfile.vue')
         },
         {
             path: '/materials/:link',

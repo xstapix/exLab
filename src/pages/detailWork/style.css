@@ -61,7 +61,7 @@
 }
 
 .detail-work_author-info {
-    margin: 0 0 7px 0;
+    margin: 0 0 25px 0;
 }
 
 .detail-work_author {
@@ -105,19 +105,12 @@
 
 .detail-work_fromLesson,
 .detail-work_fromAccount {
+    margin: 80px 0 0;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 32px;
     line-height: 130%;
-    letter-spacing: -.02em;
-    color: #000;
-}
-
-.detail-work_fromLesson {
-    margin: 0 0 15px;
-}
-
-.detail-work_fromAccount {
-    margin: 15px 0 0;
+    letter-spacing: -.04em;
+    color: #181818;
 }
 
 .detail-work_post-preview {

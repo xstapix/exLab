@@ -18,6 +18,7 @@
   import './style.css'
   import './media-style.css'
   import '@/components/materials/style.css'
+  import '@/pages/detailUserProfile/style.css'
   
   const ModalAddMaterial = defineAsyncComponent(
     () => import('@/components/ModalAddMaterial/ModalAddMaterial.vue')
@@ -161,6 +162,9 @@
                 <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#343437"></circle></svg>
               </div>
             </div>
+            <div class="profile_preview-link">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M21.0295 18.9706C20.4835 18.4248 19.743 18.1182 18.9709 18.1182C18.1988 18.1182 17.4583 18.4248 16.9122 18.9706L14.8529 21.0293C14.3068 21.5754 14 22.316 14 23.0883C14 23.8606 14.3068 24.6012 14.8529 25.1473C15.3989 25.6934 16.1396 26.0002 16.9119 26.0002C17.6841 26.0002 18.4248 25.6934 18.9709 25.1473L20.0002 24.118" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18.9707 21.0293C19.5168 21.5752 20.2573 21.8818 21.0294 21.8818C21.8015 21.8818 22.542 21.5752 23.088 21.0293L25.1474 18.9707C25.6935 18.4246 26.0002 17.6839 26.0002 16.9117C26.0002 16.1394 25.6935 15.3987 25.1474 14.8527C24.6013 14.3066 23.8606 13.9998 23.0884 13.9998C22.3161 13.9998 21.5755 14.3066 21.0294 14.8527L20 15.882" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </div>
           </div>
           <div class="profile_preview-name">
             <p class="profile_preview-name_text">{{objAuth.user.account.name}}</p>
@@ -176,16 +180,44 @@
             <div 
               class="profile_preview-tabs_item" 
               :class="{tabs_item_active: objProfileTabs.data}"
-              @click="handlerProfileTabs(false, true)">Данные</div>
+              @click="handlerProfileTabs(false, true)">Достижения</div>
           </div>
-          <div v-if="objProfileTabs.card" class="profile_preview-card DF FDC JCC AIC">
-            <p class="profile_preview-card_text">Загрузите видео о себе для посетителей вашей страницы.</p>
-            <p class="profile_preview-card_text card_text-tip">(mp4, прямоугольный формат 16:9, до 1 минуты)</p>
-            <div>
-              <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20.156" cy="20.2919" r="20" fill="white"></circle><path d="M20.156 15.2919V25.2919M15.156 20.2919H25.156" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <div v-if="objProfileTabs.card">
+            <div class="profile_preview-card DF FDC JCC AIC">
+              <p class="profile_preview-card_text">Загрузите видео о себе для посетителей вашей страницы.</p>
+              <p class="profile_preview-card_text card_text-tip">(mp4, прямоугольный формат 16:9, до 1 минуты)</p>
+              <div>
+                <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20.156" cy="20.2919" r="20" fill="white"></circle><path d="M20.156 15.2919V25.2919M15.156 20.2919H25.156" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+            </div>
+            <div class="profile_preview-about_you">{{ objAuth.user.account.about_you }}</div>
+            <div class="detail_user-data">
+              <div v-if="objAuth.user.account.birthday" class="user-data_item DF AIC">
+                <div class="user-data_item-icon">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M20.0002 16V17.6667V16ZM14.6668 21V25.3333C14.6668 25.5101 14.7371 25.6797 14.8621 25.8047C14.9871 25.9298 15.1567 26 15.3335 26H24.6668C24.8436 26 25.0132 25.9298 25.1382 25.8047C25.2633 25.6797 25.3335 25.5101 25.3335 25.3333V21H14.6668ZM13.3335 19.3233C13.3335 18.884 13.508 18.4626 13.8187 18.1519C14.1294 17.8412 14.5508 17.6667 14.9902 17.6667H25.0102C25.2277 17.6666 25.4432 17.7094 25.6442 17.7927C25.8452 17.8759 26.0279 17.998 26.1817 18.1518C26.3355 18.3056 26.4576 18.4883 26.5408 18.6893C26.6241 18.8903 26.6669 19.1058 26.6668 19.3233V19.416C26.6668 19.7196 26.5759 20.0162 26.4057 20.2675C26.2356 20.5189 25.994 20.7136 25.7122 20.8263C25.5761 20.8808 25.4297 20.9051 25.2833 20.8975C25.1369 20.8899 24.9939 20.8506 24.8642 20.7823L24.7502 20.7223C24.5874 20.6367 24.4063 20.5919 24.2223 20.5919C24.0384 20.5919 23.8573 20.6367 23.6945 20.7223C23.5318 20.8079 23.3507 20.8527 23.1668 20.8527C22.983 20.8527 22.8019 20.8079 22.6392 20.7223C22.4764 20.6367 22.2953 20.5919 22.1113 20.5919C21.9274 20.5919 21.7463 20.6367 21.5835 20.7223C21.4207 20.808 21.2396 20.8528 21.0557 20.8528C20.8717 20.8528 20.6906 20.808 20.5278 20.7223C20.3651 20.6367 20.184 20.592 20.0002 20.592C19.8163 20.592 19.6352 20.6367 19.4725 20.7223C19.3097 20.808 19.1286 20.8528 18.9447 20.8528C18.7607 20.8528 18.5796 20.808 18.4168 20.7223C18.2541 20.6367 18.0729 20.5919 17.889 20.5919C17.7051 20.5919 17.5239 20.6367 17.3612 20.7223C17.1984 20.8079 17.0174 20.8527 16.8335 20.8527C16.6496 20.8527 16.4685 20.8079 16.3058 20.7223C16.1431 20.6367 15.9619 20.5919 15.778 20.5919C15.5941 20.5919 15.4129 20.6367 15.2502 20.7223L15.1362 20.7823C15.0065 20.8506 14.8635 20.8898 14.7172 20.8974C14.5708 20.905 14.4246 20.8808 14.2885 20.8263C14.0067 20.7137 13.7651 20.5191 13.5949 20.2679C13.4247 20.0166 13.3336 19.7202 13.3335 19.4167V19.3233Z" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21.0001 14.6667C20.7334 13.3333 20.0001 13.3333 20.0001 13.3333C20.0001 13.3333 19.2668 13.3333 19.0001 14.6667C18.6668 16.3333 21.3334 16.3333 21.0001 14.6667Z" stroke="black" stroke-width="1.33333"></path></svg>
+                </div>
+                <div class="user-data_item-text">{{ objAuth.user.account.birthday }}</div>
+              </div>
+              <div v-if="objAuth.user.account.country.name || objAuth.user.account.city" class="user-data_item DF AIC">
+                <div class="user-data_item-icon">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M20 20.7461C21.103 20.7461 22 19.8491 22 18.7461C22 17.6431 21.103 16.7461 20 16.7461C18.897 16.7461 18 17.6431 18 18.7461C18 19.8491 18.897 20.7461 20 20.7461ZM20 17.7461C20.5515 17.7461 21 18.1946 21 18.7461C21 19.2976 20.5515 19.7461 20 19.7461C19.4485 19.7461 19 19.2976 19 18.7461C19 18.1946 19.4485 17.7461 20 17.7461Z" fill="black"></path><path d="M20 17.7461C20.5515 17.7461 21 18.1946 21 18.7461C21 19.2976 20.5515 19.7461 20 19.7461C19.4485 19.7461 19 19.2976 19 18.7461C19 18.1946 19.4485 17.7461 20 17.7461Z" fill="black"></path><path d="M19.565 27.6067C19.6919 27.6974 19.844 27.7461 20 27.7461C20.156 27.7461 20.3081 27.6974 20.435 27.6067C20.663 27.4455 26.0217 23.5762 25.9999 18.7461C25.9999 15.4379 23.3082 12.7461 20 12.7461C16.6918 12.7461 14.0001 15.4379 14.0001 18.7424C13.9783 23.5762 19.337 27.4455 19.565 27.6067ZM20 14.2461C22.4817 14.2461 24.5 16.2644 24.5 18.7499C24.5157 22.0784 21.209 25.0672 20 26.0475C18.7918 25.0664 15.4843 22.0769 15.5 18.7461C15.5 16.2644 17.5183 14.2461 20 14.2461Z" fill="black"></path></svg>
+                </div>
+                <div class="user-data_item-text">{{ objAuth.user.account.country.name }}/{{ objAuth.user.account.city }}</div>
+              </div>
+              <a v-if="objAuth.user.account.tg_account.tg_name" href="https://t.me/va_lera_01" target="_blank" class="user-data_item DF AIC">
+                <div class="user-data_item-icon">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M25.8064 14.4363C25.8064 14.4363 27.1015 13.9313 26.9936 15.1578C26.9576 15.6628 26.6339 17.4303 26.382 19.3421L25.5186 25.0053C25.5186 25.0053 25.4467 25.8349 24.7991 25.9792C24.1516 26.1235 23.1803 25.4742 23.0004 25.3299C22.8565 25.2217 20.3023 23.5985 19.4029 22.8049C19.151 22.5885 18.8632 22.1556 19.4388 21.6506L23.2162 18.0435C23.6479 17.6106 24.0796 16.6006 22.2809 17.8271L17.2444 21.2539C17.2444 21.2539 16.6688 21.6146 15.5895 21.2899L13.2511 20.5685C13.2511 20.5685 12.3877 20.0274 13.8627 19.4863C17.4602 17.791 21.8852 16.0595 25.8064 14.4363Z" fill="black"></path></svg>
+                </div>
+                <div class="user-data_item-text">{{ objAuth.user.account.tg_account.tg_name }}</div>
+              </a>
+              <div v-if="objAuth.user.account.email.email_text" class="DF AIC">
+                <div class="user-data_item-icon">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M24.6668 14.5667H15.3335C14.7765 14.5667 14.2424 14.7879 13.8486 15.1817C13.4547 15.5756 13.2335 16.1097 13.2335 16.6667V23.3333C13.2335 23.8903 13.4547 24.4244 13.8486 24.8182C14.2424 25.2121 14.7765 25.4333 15.3335 25.4333H24.6668C25.2238 25.4333 25.7579 25.2121 26.1518 24.8182C26.5456 24.4244 26.7668 23.8903 26.7668 23.3333V16.6667C26.7668 16.1097 26.5456 15.5756 26.1518 15.1817C25.7579 14.7879 25.2238 14.5667 24.6668 14.5667ZM20.0002 19.0416L16.08 16.1H23.9203L20.0002 19.0416ZM15.3335 23.9C15.1832 23.9 15.0391 23.8403 14.9328 23.734C14.8265 23.6277 14.7668 23.4836 14.7668 23.3333V17.0333L19.5402 20.6133C19.6729 20.7129 19.8343 20.7667 20.0002 20.7667C20.166 20.7667 20.3275 20.7129 20.4602 20.6133L25.2335 17.0333V23.3333C25.2335 23.4836 25.1738 23.6277 25.0675 23.734C24.9613 23.8403 24.8171 23.9 24.6668 23.9H15.3335Z" fill="black" stroke="black" stroke-width="0.2"></path></svg>
+                </div>
+                <div class="user-data_item-text">{{ objAuth.user.account.email.email_text }}</div>
+              </div>
             </div>
           </div>
-          <div v-if="objProfileTabs.card" class="profile_preview-about_you">{{ objAuth.user.account.about_you }}</div>
           <div v-if="objProfileTabs.data" class="profile_preview-data DF FWW">
             <profilePrevieDataBox
               text="уровень звездности"
@@ -232,9 +264,6 @@
               value="1300₽"
               tip="Ваша базовая стоимость подписки без учета скидок и других бонусов"/>
           </div>
-        </div>
-        <div class="profile_preview-link">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="white"></circle><path d="M21.0295 18.9706C20.4835 18.4248 19.743 18.1182 18.9709 18.1182C18.1988 18.1182 17.4583 18.4248 16.9122 18.9706L14.8529 21.0293C14.3068 21.5754 14 22.316 14 23.0883C14 23.8606 14.3068 24.6012 14.8529 25.1473C15.3989 25.6934 16.1396 26.0002 16.9119 26.0002C17.6841 26.0002 18.4248 25.6934 18.9709 25.1473L20.0002 24.118" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18.9707 21.0293C19.5168 21.5752 20.2573 21.8818 21.0294 21.8818C21.8015 21.8818 22.542 21.5752 23.088 21.0293L25.1474 18.9707C25.6935 18.4246 26.0002 17.6839 26.0002 16.9117C26.0002 16.1394 25.6935 15.3987 25.1474 14.8527C24.6013 14.3066 23.8606 13.9998 23.0884 13.9998C22.3161 13.9998 21.5755 14.3066 21.0294 14.8527L20 15.882" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
         </div>
       </div>
       <div v-if="windowSizeStore.objAdaptive.mobile" class="profile_preview-modil DF FDC JCC">
@@ -345,11 +374,11 @@
             <li @click="handlerNav(false, true, false)" 
               class="profile_info-nav-paragraph"
               id="satellites"
-              :class="objNav.satellites ? 'paragraph_active' : ''">Ваши спутники</li>
+              :class="objNav.satellites ? 'paragraph_active' : ''">Ваши материалы</li>
             <li @click="handlerNav(false, false, true)" 
               class="profile_info-nav-paragraph"
               id="yourData"
-              :class="objNav.yourData ? 'paragraph_active' : ''">Данные</li>
+              :class="objNav.yourData ? 'paragraph_active' : ''">Настройки</li>
           </ul>
         </nav>
         <div v-if="objNav.portfolio" class="profile-body">

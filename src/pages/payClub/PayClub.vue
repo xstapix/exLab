@@ -2,10 +2,18 @@
   import { getAuthStore } from '@/stores/authStore' 
   import SideBar from '@/components/SideBar/SideBar.vue'
 
-  import { reactive } from 'vue';
+  import { reactive, defineAsyncComponent } from 'vue';
 
   import './style.css'
   import './media-style.css'
+
+  const ModalAddMaterial = defineAsyncComponent(
+    () => import('@/components/ModalAddMaterial/ModalAddMaterial.vue')
+  )
+
+  const ModalAddWork = defineAsyncComponent(
+    () => import('@/components/modalAddWork/ModalAddWork.vue')
+  )
   
   window.scrollTo(0,0);
 
@@ -16,6 +24,10 @@
     totalPrice: 1300
   })
   
+  const objModal = reactive({
+    activeMaterialModal: false,
+    activeWorkModal: false
+  })
 
   const handlerSelect = (e) => {
     switch(e.target.value) {
@@ -53,7 +65,9 @@
 
 <template>
   <div class="DF">
-    <SideBar/>
+    <SideBar
+      @showMaterialModal="(active) => objModal.activeMaterialModal = active"
+      @showWorkModal="(active) => objModal.activeWorkModal = active"/>
     <div class="pay-wrapper">
       <div v-if="authStore.data.auth" class="pay-body">
         <p class="pay-body_title">Клуб. Оплата подписки</p>
@@ -107,4 +121,13 @@
       </div>
     </div>
   </div>
+  <ModalAddMaterial 
+    v-if="objModal.activeMaterialModal"
+    @closeModal="(close) => objModal.activeMaterialModal = close"
+    :activeModal="objModal.activeMaterialModal"/>
+
+  <ModalAddWork 
+    v-if="objModal.activeWorkModal"
+    @closeModal="(close) => objModal.activeWorkModal = close"
+    :activeModal="objModal.activeWorkModal"/>
 </template>
