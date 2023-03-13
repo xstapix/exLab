@@ -5,7 +5,7 @@
   import '@/pages/detailWork/style.css'
 
   const props = defineProps({
-    postViewed: Object
+    comments: Array
   }) 
 
   const objNewComm = reactive({

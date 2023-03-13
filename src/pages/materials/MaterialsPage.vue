@@ -18,8 +18,8 @@
     () => import('@/components/modalAddWork/ModalAddWork.vue')
   )
 
-  const ModalBlockedPost = defineAsyncComponent(
-    () => import('@/components/ModalBlockedPost/ModalBlockedPost.vue')
+  const ModalBlockedMaterial = defineAsyncComponent(
+    () => import('@/components/ModalBlockedMaterial/ModalBlockedMaterial.vue')
   )
   
   window.scrollTo(0,0);
@@ -61,7 +61,7 @@
     @closeModal="(close) => objModal.activeWorkModal = close"
     :activeModal="objModal.activeWorkModal"/>
     
-  <ModalBlockedPost
+  <ModalBlockedMaterial
     v-if="objModal.activeModalBlocked"
     @closeModal="(close) => objModal.activeModalBlocked = close"
     :activeModal="objModal.activeModalBlocked"/>

@@ -70,6 +70,8 @@
 
     objWork.renderKey++
   }
+
+  console.log(objWork.work);
 </script>
 
 <template>
@@ -127,7 +129,7 @@
       </div>
       <div class="more_work DF FWW">
         <div v-for="work in objWork.work.more_work" class="more_work-item">
-          <div class="more_work-item_bg" :style="{backgroundImage: `url(${work.img_preview})`}"></div>
+          <div class="more_work-item_bg" :class="{item_bg_active: work.id === objWork.work.id}" :style="{backgroundImage: `url(${work.img_preview})`}"></div>
         </div>
       </div>
     </div>

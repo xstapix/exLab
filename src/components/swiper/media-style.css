@@ -5,4 +5,7 @@
     .swiper {
         width: 100%;
     }
+    .carousel {
+        margin-top: 50px;
+    }
 }

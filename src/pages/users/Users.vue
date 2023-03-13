@@ -5,7 +5,7 @@
   import { getUserStore } from '@/stores/userStore' 
   import { getWindowSizeStore } from '@/stores/windowSizeStore' 
 
-  import VButtonShowMore from '@/components/VButtonShowMore/VButtonShowMore.vue'
+  import VButtonShowMore from '@/ui/VButtonShowMore/VButtonShowMore.vue'
   
   import { reactive, defineAsyncComponent } from 'vue'
   import { useRouter } from 'vue-router'
@@ -40,7 +40,7 @@
   const objParamsPage = reactive({
     selectedPeriod: 'month',
     page: 1,
-    idLastUser: 0
+    idLastUser: null
   })
 
   const odjSortArrow = reactive({
@@ -54,10 +54,10 @@
     activeWorkModal: false
   })
 
-  setState()
+  setObjUsers()
 
-  async function setState() {
-    objUsers.users = await api.getUsers()
+  async function setObjUsers() {
+    objUsers.users = await api.getUsers(objParamsPage)
   }
 
   const handlerSort = (sortBy) => {
@@ -84,7 +84,7 @@
     }
   }
 
-  async function handlerSelectText() {
+  async function handlerSelectPeriod() {
     if (objParamsPage.selectedPeriod === 'month') {
       objParamsPage.selectedPeriod = 'all'
     } else objParamsPage.selectedPeriod = 'month'
@@ -111,8 +111,8 @@
           <p class="stark_rating-select_text">{{ objParamsPage.selectedPeriod == 'month' ? 'За месяц' : 'За все время' }}</p>
           <div :class="objSelect.activeSelect ? 'stark_rating-select_arrow_down' :  'stark_rating-select_arrow_up'"></div>
           <div v-if="objSelect.activeSelect" class="stark_rating-selectActive_options">
-            <p class="stark_rating-select_text" @click="handlerSelectText">За месяц</p>
-            <p class="stark_rating-select_text text_options_margin" @click="handlerSelectText">За все время</p>
+            <p class="stark_rating-select_text" @click="handlerSelectPeriod">За месяц</p>
+            <p class="stark_rating-select_text text_options_margin" @click="handlerSelectPeriod">За все время</p>
           </div>
         </div>
       </div>
@@ -124,13 +124,13 @@
           <div class="table-head-title">Звезды</div>
           <div :class="odjSortArrow.starArrow ? 'stark_rating-select_arrow_up' : 'stark_rating-select_arrow_down'"></div>
         </div>
-        <div class="DF AIC table_head-item" @click="handlerSort('star')">
+        <div class="DF AIC table_head-item" @click="handlerSort('level')">
           <div class="table-head-title">Уровень</div>
-          <div :class="odjSortArrow.starArrow ? 'stark_rating-select_arrow_up' : 'stark_rating-select_arrow_down'"></div>
+          <div :class="odjSortArrow.levelArrow ? 'stark_rating-select_arrow_up' : 'stark_rating-select_arrow_down'"></div>
         </div>
-        <div class="DF AIC table_head-item" @click="handlerSort('star')">
+        <div class="DF AIC table_head-item" @click="handlerSort()">
           <div class="table-head-title">В клубе</div>
-          <div :class="odjSortArrow.starArrow ? 'stark_rating-select_arrow_up' : 'stark_rating-select_arrow_down'"></div>
+          <div :class="odjSortArrow.inClubArrow ? 'stark_rating-select_arrow_up' : 'stark_rating-select_arrow_down'"></div>
         </div>
         <div class="table_head-item">База старка</div>
       </div>
@@ -175,15 +175,6 @@
             <a href="#" 
               class="table_body-data_works_preview"
               :style="{backgroundImage: `url('https://kronadev.ru/upload/resize_cache/iblock/d46/500_500_2/usnz4na8cb4wckn52kk7t1hn8mq29g4u.jpg')`}"></a>
-            <a href="#" 
-            class="table_body-data_works_preview"
-            :style="{backgroundImage: `url('https://kronadev.ru/upload/resize_cache/iblock/d46/500_500_2/usnz4na8cb4wckn52kk7t1hn8mq29g4u.jpg')`}"></a>
-            <a href="#" 
-            class="table_body-data_works_preview"
-            :style="{backgroundImage: `url('https://kronadev.ru/upload/resize_cache/iblock/d46/500_500_2/usnz4na8cb4wckn52kk7t1hn8mq29g4u.jpg')`}"></a>
-            <a href="#" 
-            class="table_body-data_works_preview"
-            :style="{backgroundImage: `url('https://kronadev.ru/upload/resize_cache/iblock/d46/500_500_2/usnz4na8cb4wckn52kk7t1hn8mq29g4u.jpg')`}"></a>
           </div>
           <a href="#" 
             class="table_body-data_works_more DF AIC JCC">

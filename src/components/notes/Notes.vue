@@ -4,27 +4,36 @@
   import './style.css'
   import './media-style.css'
 
+  const props = defineProps({
+    notes: Array
+  })
+
   const objNote = reactive({
     activeAddNote: false,
     newNoteText: '',
-    arrAllNotes: []
+    arrAllNotes: props.notes,
+    editNoteText: ''
   })
-
+  
   const handlerAddNote = () => {
     const date = new Date().toLocaleDateString()
     const time = [new Date().getHours(), new Date().getMinutes(), new Date().getSeconds()].join(':')
+    
+    if (objNote.newNoteText) { 
+      objNote.arrAllNotes.unshift({
+        text: objNote.newNoteText,
+        date: `${date}, ${time}`
+      })
+    }
 
-    objNote.arrAllNotes.unshift({
-      text: objNote.newNoteText,
-      date: `${date}, ${time}`
-    })
     objNote.activeAddNote = false
     objNote.newNoteText = ''
   }
 
   const handlerUpdateNote = (index) => {
     objNote.arrAllNotes[index].editing = false
-    objNote.arrAllNotes[index].text = objNote.newNoteText
+    console.log(objNote.editNoteText);
+    objNote.arrAllNotes[index].text = objNote.editNoteText
   }
 
   const handlerRemoveNote = (index) => {
@@ -33,8 +42,12 @@
   }
 
   const handlerEditingNote = (index) => {
+    for (let note in objNote.arrAllNotes) {
+      objNote.arrAllNotes[note].editing = false;
+    }
+
     objNote.arrAllNotes[index].editing = true
-    objNote.newNoteText = objNote.arrAllNotes[index].text 
+    objNote.editNoteText = objNote.arrAllNotes[index].text 
   }
 </script>
 
@@ -59,7 +72,7 @@
       <div v-else class="single_post-new_notes_box">
         <div 
           class="single_post-new_notes_input" 
-          @input="(e) => {objNote.newNoteText = e.target.textContent}"
+          @input="(e) => {objNote.editNoteText = e.target.textContent}"
           contenteditable>
           {{ objNote.arrAllNotes[index].text }}
         </div>

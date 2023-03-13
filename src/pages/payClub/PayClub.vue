@@ -84,7 +84,7 @@
           :disabled="authStore.data.user.account.email ? 'true' : 'false'" 
           class="pay-body_input" 
           :class="authStore.data.user.account.email ? 'input_disabled' : ''"
-          v-model="authStore.data.user.account.email" 
+          v-model="authStore.data.user.account.email.email_text" 
           placeholder="Введите email">
         <select class="pay-body_select" @change="handlerSelect">
           <option value="1">1 месяц (30 дней) = 1300₽</option>

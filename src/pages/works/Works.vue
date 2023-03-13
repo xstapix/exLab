@@ -1,6 +1,6 @@
 <script setup>
   import SideBar from '@/components/SideBar/SideBar.vue'
-  import VButtonShowMore from '@/components/VButtonShowMore/VButtonShowMore.vue'
+  import VButtonShowMore from '@/ui/VButtonShowMore/VButtonShowMore.vue'
 
   import { getWorkStore } from '@/stores/workStore'
   import { getApi } from '@/shared/API/api.js'

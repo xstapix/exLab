@@ -6,7 +6,7 @@
 
   import SideBar from '@/components/SideBar/SideBar.vue'
   import Carousel from '@/components/Swiper/Carousel.vue'
-  import TheNotes from '@/components/Notes/TheNotes.vue'
+  import Notes from '@/components/Notes/Notes.vue'
 
   import { getAuthStore } from '@/stores/authStore' 
   import { useStore } from '@/stores/postStore'
@@ -14,7 +14,7 @@
 
   import './style.css'
   import './media-style.css'
-  import '@/components/ModalBlockedPost/style.css'
+  import '@/components/ModalBlockedMaterial/style.css'
 
   const UsefulMaterials = defineAsyncComponent(
     () => import('@/components/UsefulMaterials/UsefulMaterials.vue')
@@ -234,17 +234,20 @@
             <p class="single_post-content_title">Марафон по социальным сетям. Готовим аккаунт к продвижению</p>
             <p v-if="authStore.data.auth" class="single_post-content_main_text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum id quibusdam eveniet sunt quas accusantium repellendus ullam nesciunt iure exercitationem, sit reprehenderit ratione officiis impedit doloremque expedita debitis nam vitae. Дайджест материалов за январь 2023</p>
           </div>
-          <TheNotes 
+          <Notes 
             v-if="authStore.data.auth && windowSizeStore.objAdaptive.currentSize < objAdaptation.deskAdaptation"
-            id="notes"/>
+            id="notes"
+            :notes="[]"/>
           <UsefulMaterials
             v-if="authStore.data.auth"
             id="useful"
             :key="objPost.renderKey"
-            :postViewed="objPost.postViewed"/>
+            :comments="[]"/>
           <WorkForLesson
             v-if="authStore.data.auth"
-            id="work"/>
+            id="work"
+            :works="[]"
+            @showWorkModal="(active) => objModal.activeWorkModal = active"/>
           <Carousel 
             v-if="authStore.data.auth"
             :key="objPost.renderKey" 
@@ -258,7 +261,9 @@
             </div>
           </div>
         </div>
-        <TheNotes v-if="authStore.data.auth && windowSizeStore.objAdaptive.currentSize > objAdaptation.deskAdaptation"/>
+        <Notes 
+          v-if="authStore.data.auth && windowSizeStore.objAdaptive.currentSize > objAdaptation.deskAdaptation"
+          :notes="[]"/>
       </div>
       <router-link v-if="route.params.id != postsStore.data.posts.length - 1 && windowSizeStore.objAdaptive.currentSize > objAdaptation.mobilAdaptation"
         :to="`/post/NaN`" 

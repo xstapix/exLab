@@ -1,18 +1,31 @@
 {
-    "posts": [{
+    "detailmaterials": [{
         "id": 0,
+        "author_img": "",
+        "type": "",
         "date": "",
         "time": "",
-        "type": {
-            "name": "",
+        "text": "",
+        "notes": [{
+            "date": "",
+            "text": ""
+        }],
+        "useful_materials": [{
+            "author": {
+                "img": "",
+                "name": "",
+                "stark": "",
+                "level": ""
+            },
+            "text": "",
+            "date": "",
+            "time": ""
+        }],
+        "works": [{
             "img": ""
-        },
-        "author": {
-            "img": ""
-        },
-        "title": "",
-        "description": "",
-        "mainContent": ""
+        }],
+        "next": true,
+        "prev": true
     }],
     "user": {
         "id": "1",
@@ -34,27 +47,19 @@
 
     "works": [{
         "id": 0,
-        "img": "",
-        "fromLesson": {
-            "type": false,
-            "idPost": "",
-            "date": "",
-            "time": "",
-            "typePost": {
-                "name": "",
-                "img": ""
-            },
-            "author": {
-                "img": ""
-            },
-            "title": ""
-        },
-        "fromAccount": {
-            "type": true,
-            "userName": "",
-            "img": "",
-            "stark": "",
-            "level": ""
-        }
+        "img": "https://kronadev.ru/local/templates/kronaclub/build/img/avatar2.png",
+        "login": "xstapix",
+        "stark": "smoothies",
+        "star": "20",
+        "level": "21.0",
+        "line": "",
+        "point": "",
+        "time_in_club": "18",
+        "country": "SGP",
+        "city": "VRN",
+        "works": [{
+            "id": "1",
+            "preview_img": "https://kronadev.ru/upload/resize_cache/iblock/d46/500_500_2/usnz4na8cb4wckn52kk7t1hn8mq29g4u.jpg"
+        }]
     }]
 }

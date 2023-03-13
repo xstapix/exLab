@@ -4,7 +4,7 @@
   import { getParamsPageStore } from '@/stores/paramsPageStore'
   import { getWindowSizeStore } from '@/stores/windowSizeStore' 
 
-  import VButtonShowMore from '@/components/VButtonShowMore/VButtonShowMore.vue'
+  import VButtonShowMore from '@/ui/VButtonShowMore/VButtonShowMore.vue'
   import Filter from '@/components/TagFilter/Filter.vue'
   
   import { getApi } from '@/shared/API/api.js'

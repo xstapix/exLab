@@ -1,71 +1,77 @@
-.media_width{
-  width: 336px;
+.carousel {
+    margin-top: 80px;
 }
+
+.media_width {
+    width: 336px;
+}
+
 .swiper {
-  width: 680px;
-  overflow: hidden;
+    width: 680px;
+    overflow: hidden;
 }
 
 .swiper-wrapper {
-  display: flex;
+    display: flex;
 }
 
 .swiper_navigation {
-  margin: 16px 0 0;
+    margin: 16px 0 0;
 }
 
 .swiper_navigation_arrows-body {
-  position: relative;
+    position: relative;
 }
 
 .nextArrow {
-  position: relative;
-  z-index: 10;
-  width: 40px;
-  height: 40px;
-  background-color: white;
-  border-radius: 50%;
-  cursor: pointer;
+    position: relative;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .prevArrow {
-  position: relative;
-  z-index: 10;
-  width: 40px;
-  height: 40px;
-  margin: 0 10px 0 0;
-  background-color: white;
-  border-radius: 50%;
-  cursor: pointer;
+    position: relative;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    margin: 0 10px 0 0;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .nextArrow::after {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin: auto 13px;
-  border: solid #000000;
-  border-width: 0 2px 2px 0;
-  transform: rotate(-43deg);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: auto 13px;
+    border: solid #000000;
+    border-width: 0 2px 2px 0;
+    transform: rotate(-43deg);
 }
+
 .prevArrow::after {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin: auto 17px;
-  border: solid #000000;
-  border-width: 0 2px 2px 0;
-  transform: rotate(140deg);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: auto 17px;
+    border: solid #000000;
+    border-width: 0 2px 2px 0;
+    transform: rotate(140deg);
 }
