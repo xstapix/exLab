@@ -84,6 +84,7 @@
 
 .post_info_author-img {
     max-height: 100%;
+    border-radius: 50%;
 }
 
 .post_info_type {

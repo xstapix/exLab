@@ -38,14 +38,13 @@
   async function handlerTag(tagId, index) {
     if (index === 0) {
       for (let item in objMaterials.arrTags) {
-        if (objMaterials.arrTags[item].active) {
-          objMaterials.arrTags[item].active = false
-        }
+        objMaterials.arrTags[item].active = false
         paramsPageStore.changeActiveTags([])
       }
       objMaterials.arrTags[0].active = true
-    
-      postsStore.changePostsList(objMaterials.arrPosts)
+
+      const newMaterials = await api.getMaterials(paramsPageStore.objParamsPage)
+      objMaterials.arrPosts = JSON.parse(JSON.stringify(newMaterials))
     } else {
       objMaterials.arrTags[index].active = !objMaterials.arrTags[index].active
       if (!objMaterials.arrTags[index].active) {
@@ -57,7 +56,7 @@
         paramsPageStore.changeActiveTags([...expandOriginalActiveTags, tagId])
         objMaterials.arrTags[0].active = false
       }
-      if (paramsPageStore.objParamsPage.active_tags.length == 0) {
+      if (paramsPageStore.objParamsPage.active_tags.length === 0) {
         objMaterials.arrTags[0].active = true
         postsStore.changePostsList(objMaterials.arrPosts)
       } 

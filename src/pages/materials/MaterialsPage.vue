@@ -30,7 +30,7 @@
     paramsPageStore.objParamsPage.page = 1
     paramsPageStore.objParamsPage.active_tags = []
     paramsPageStore.objParamsPage.search = ''
-    paramsPageStore.objParamsPage.id_last_material = 0
+    paramsPageStore.objParamsPage.date_last_material = ''
     paramsPageStore.objParamsPage.toggle_favorite = false
     paramsPageStore.objParamsPage.toggle_unfinished = false
   }) 

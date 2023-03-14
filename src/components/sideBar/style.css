@@ -15,7 +15,6 @@
 .sidebar_top-item {
     position: relative;
     display: block;
-    margin: 4px 0 0;
     cursor: pointer;
 }
 
@@ -192,6 +191,7 @@
 .add_post-work {
     width: 55px;
     height: 40px;
+    margin-top: 4px;
     cursor: pointer;
 }
 
@@ -199,90 +199,99 @@
     max-width: 100%;
 }
 
-.sidebar-photo{
+.sidebar-photo {
     position: relative;
     width: 40px;
     height: 40px;
     margin: 4px auto 0;
 }
 
-.sidebar-photo_line-item{
+.sidebar-photo_line-item {
     position: absolute;
     width: 18px;
     height: 19px;
 }
 
-.sidebar-photo_line-item svg{
+.sidebar-photo_line-item svg {
     width: 18px;
     height: 19px;
 }
 
-.sidebar-photo_line-item:nth-child(1){
+.sidebar-photo_line-item:nth-child(1) {
     top: 0;
     right: 0;
 }
-.sidebar-photo_line-item:nth-child(2){
+
+.sidebar-photo_line-item:nth-child(2) {
     bottom: 0;
     right: 0;
 }
-.sidebar-photo_line-item:nth-child(3){
+
+.sidebar-photo_line-item:nth-child(3) {
     bottom: 0;
     left: 0;
 }
-.sidebar-photo_line-item:nth-child(4){
+
+.sidebar-photo_line-item:nth-child(4) {
     top: 0;
     left: 0;
 }
 
-.sidebar-photo_point-item{
+.sidebar-photo_point-item {
     position: absolute;
     width: 2px;
     height: 2px;
 }
 
-.sidebar-photo_point-item svg{
+.sidebar-photo_point-item svg {
     width: 2px;
     height: 2px;
 }
 
-.sidebar-photo_point-item:nth-child(1){
+.sidebar-photo_point-item:nth-child(1) {
     right: 0;
     top: 5px;
 }
 
-.sidebar-photo_point-item:nth-child(2){
+.sidebar-photo_point-item:nth-child(2) {
     bottom: 14px;
     right: 19px;
 }
-.sidebar-photo_point-item:nth-child(3){
+
+.sidebar-photo_point-item:nth-child(3) {
     top: 5px;
     left: 0;
 }
-.sidebar-photo_point-item:nth-child(4){
+
+.sidebar-photo_point-item:nth-child(4) {
     top: -14px;
     left: 19px;
 }
-.sidebar_birthday:hover>.birthday{
+
+.sidebar_birthday:hover>.birthday {
     display: flex;
 }
-.birthday{
+
+.birthday {
     position: absolute;
     cursor: default;
     top: -8px;
     left: 50px;
     display: none;
     align-items: center;
-    background: radial-gradient(98.69% 2927.46% at 1.31% 100%,#F53E1A 0%,#AA1DCC 59.34%,#2495FD 100%);
+    background: radial-gradient(98.69% 2927.46% at 1.31% 100%, #F53E1A 0%, #AA1DCC 59.34%, #2495FD 100%);
     padding: 8px 30px 8px 8px;
     width: 284px;
     border-radius: 8px;
 }
-.birthday svg{
-width: 40px;
-height: 40px;
-flex-shrink: 0;
+
+.birthday svg {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
 }
-.birthday p{
+
+.birthday p {
     margin: 0 0 0 8px;
     font-size: 14px;
     line-height: 15px;

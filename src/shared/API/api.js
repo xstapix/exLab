@@ -10,6 +10,8 @@ export const getApi = () => {
     const useWorkStore = getWorkStore()
     const authStore = getAuthStore()
 
+    const url = 'https://kronadev.ru/api_2/'
+
     async function getTags() {
         const tags = await axios.get('https://63385f16937ea77bfdbf1257.mockapi.io/kronaTags')
         postsStore.changeTagsList(tags.data)
@@ -19,7 +21,7 @@ export const getApi = () => {
 
     async function getMaterials(objParam) {
         objParam.method = 'getMaterialsPage'
-        const posts = await axios.post("https://kronadev.ru/api_2/", objParam)
+        const posts = await axios.post(url, objParam)
 
         postsStore.changePostsList(posts.data.materials)
         postsStore.changeNext(posts.data.next)
@@ -28,7 +30,7 @@ export const getApi = () => {
     }
 
     async function getDetailMaterial(currentPostId) {
-        const post = await axios.get(`https://63385f16937ea77bfdbf1257.mockapi.io/kronaPostsList/${currentPostId}`)
+        const post = await axios.get(`https://63385f16937ea77bfdbf1257.mockapi.io/kronaPostsList/${1}`)
 
         return post.data
     }
@@ -101,7 +103,7 @@ export const getApi = () => {
     }
 
     async function sendWork(formData) {
-        const answer = await axios.post("https://kronadev.ru/api_2/", formData)
+        const answer = await axios.post(url, formData)
 
         return answer
     }

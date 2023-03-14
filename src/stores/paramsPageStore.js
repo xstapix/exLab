@@ -10,7 +10,7 @@ export const getParamsPageStore = defineStore('getParamsPageStore', () => {
         page: 1,
         active_tags: [],
         search: '',
-        id_last_material: 0,
+        date_last_material: '',
         toggle_favorite: false,
         toggle_unfinished: false
     })
@@ -28,7 +28,8 @@ export const getParamsPageStore = defineStore('getParamsPageStore', () => {
     }
 
     const changeLastId = () => {
-        objParamsPage.id_last_material = postsStore.data.posts[postsStore.data.posts.length - 1].id
+        objParamsPage.date_last_material = postsStore.data.posts[postsStore.data.posts.length - 1].date
+        console.log(objParamsPage);
     }
 
     const changeToggleFavorite = () => {

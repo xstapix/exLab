@@ -1,5 +1,6 @@
 .post-body {
     width: 100%;
+    min-height: 100vh;
     margin-left: 56px;
     background-color: #E5E5E5;
 }
@@ -61,7 +62,13 @@
 .single_post-body {
     width: 730px;
     min-height: 100vh;
-    padding: 70px 24px;
+    padding: 40px 24px;
+    flex-shrink: 0;
+}
+
+.preview_blocked_material {
+    width: 730px;
+    padding: 40px 24px;
     flex-shrink: 0;
 }
 
